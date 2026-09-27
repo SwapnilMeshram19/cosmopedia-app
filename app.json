@@ -1,0 +1,92 @@
+{
+  "expo": {
+    "name": "Cosmopedia",
+    "slug": "cosmopedia",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#07080c",
+    "ios": {
+      "bundleIdentifier": "com.sam.cosmopedia",
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Cosmopedia uses your location to show which planets are visible tonight and how far the ISS is from you.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.sam.cosmopedia",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#07080c"
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "POST_NOTIFICATIONS",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_VISUAL_USER_SELECTED",
+        "android.permission.READ_MEDIA_IMAGES"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 160,
+          "resizeMode": "contain",
+          "backgroundColor": "#07080c"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Cosmopedia uses your location to show which planets are visible tonight and how far the ISS is from you."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#f0b46a"
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Cosmopedia saves space images to your photos.",
+          "savePhotosPermission": "Cosmopedia saves space images and wallpapers to your photos.",
+          "isAccessMediaLocationEnabled": false,
+          "granularPermissions": [
+            "photo"
+          ]
+        }
+      ],
+      "expo-font",
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-1294432140413899~2920845178",
+          "iosAppId": "ca-app-pub-3940256099942544~1458287256",
+          "delayAppMeasurementInit": true
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "749cf8cb-96b3-4b4b-8c29-195193c795d8"
+      }
+    }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-1294432140413899~2920845178",
+    "ios_app_id": "ca-app-pub-3940256099942544~1458287256",
+    "delay_app_measurement_init": true,
+    "android_sdk": "classic"
+  }
+}
