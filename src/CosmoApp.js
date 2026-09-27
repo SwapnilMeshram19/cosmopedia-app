@@ -20,7 +20,7 @@ import { LS } from './storage';
 import { makeTheme } from './theme';
 import { ThemeCtx } from './components/ui';
 import { saveImage } from './imageSave';
-import { adsAvailable, isRewardedBusy, showRewarded, showInterstitial, openAdInspector, AD_DEBUG, setForceTestAds, usingTestAds } from './ads';
+import { adsAvailable, showRewarded, showInterstitial, openAdInspector, AD_DEBUG, setForceTestAds, usingTestAds } from './ads';
 import ErrorBoundary from './components/ErrorBoundary';
 import * as Notify from './notify';
 import { ShareCard } from './components/ShareCard';
@@ -175,11 +175,9 @@ export default class CosmoApp extends React.Component {
       return hd.replace(/^http:/, 'https:');
     } catch (e) { return w.src; }
   }
-  // Downloads the HD image and saves it to the gallery (share sheet as fallback).
-  async fetchHd() {
-    const w = this.state.wall; if (!w) { this.setState({ dlBusy: false }); return; }
+  // Downloads the HD image for wallpaper `w` and saves it to the gallery (share sheet as fallback).
+  async fetchHd(w) {
     const X = this.txt();
-    this.setState({ dlBusy: true });
     this.showToast(X.tDlStart);
     try {
       const hd = await this.resolveHd(w);
@@ -187,16 +185,41 @@ export default class CosmoApp extends React.Component {
       const where = await saveImage(hd);
       if (where === 'gallery') this.showToast(X.tDlDone);
     } catch (e) { this.showToast(X.tDlFail); }
-    finally { this.setState({ dlBusy: false }); }
   }
-  // Save button: one ad per wallpaper, then free re-downloads; taps while busy are ignored.
-  downloadWall() {
-    const s = this.state, w = s.wall, ads = PROPS.showAds ?? true;
-    if (!w || s.dlBusy || s.inter || isRewardedBusy()) return;
-    const key = w.nasa_id || w.src;
-    if (!ads || s.unlocked[key]) { this.fetchHd(); return; }
+
+  // Resolves true when the user earned the reward, false if they closed the ad early.
+  // Falls back to the in-app countdown when no real ad is available / fills.
+  watchReward(kind) {
+    return new Promise((resolve) => {
+      const fallback = () => { this.interResolve = resolve; this.startInter(5, kind); };
+      if (!adsAvailable()) return fallback();
+      let settled = false;
+      const done = (v) => { settled = true; resolve(v); };
+      const started = showRewarded(() => done(true), () => { settled = true; fallback(); }, () => done(false));
+      if (started === false && !settled) resolve(false); // another ad already running
+    });
+  }
+
+  // Save button. A synchronous lock (this.dlLock, not React state) blocks every extra tap
+  // from the first tap until the ad has finished AND the HD image is saved.
+  // One ad per wallpaper per session; re-saving the same one is free.
+  async downloadWall() {
+    if (this.dlLock) return;
+    const w = this.state.wall; if (!w) return;
+    this.dlLock = true;
     this.setState({ dlBusy: true });
-    this.triggerReward('wall');
+    try {
+      const key = w.nasa_id || w.src, ads = PROPS.showAds ?? true;
+      if (ads && !this.state.unlocked[key]) {
+        const ok = await this.watchReward('wall');
+        if (!ok) return;
+        this.setState((st) => ({ unlocked: { ...st.unlocked, [key]: true } }));
+      }
+      await this.fetchHd(w);
+    } finally {
+      this.dlLock = false;
+      this.setState({ dlBusy: false });
+    }
   }
   bump(d) { const st = { ...this.state.stats }; Object.entries(d).forEach(([k, v]) => { st[k] = (st[k] || 0) + v; }); this.setState({ stats: st }); LS.set('cosmo_stats', st); }
   showToast(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: null }), 2600); }
@@ -234,18 +257,21 @@ export default class CosmoApp extends React.Component {
     const tries = { ...l.tries, [l.cur]: [...t, i] }; this.setLv({ ...l, tries });
     if (i === q[2]) { if (!t.length) this.bump({ xp: this.state.qLevel }); if (l.cur === 4) this.finishLevel(tries); }
   }
-  closeInter() { this.applyReward(this.state.reward); this.setState({ inter: false, reward: null }); }
+  closeInter() {
+    const s = this.state; if (!s.inter || (s.reward && s.interN > 0)) return; // ignore double taps / early taps
+    const r = s.reward, res = this.interResolve; this.interResolve = null;
+    this.setState({ inter: false, reward: null });
+    if (res) res(true); else this.applyReward(r);
+  }
   applyReward(r) {
     const s = this.state;
     if (r === 'hint') { const l = this.lv(), q = this.curQ(); if (q) { const tried = l.tries[l.cur] || []; const wrong = [0, 1, 2, 3].filter((x) => x !== q[2] && !tried.includes(x)); const g = rng(s.qs.day * 7 + l.cur); wrong.sort(() => g() - 0.5); this.setLv({ ...l, hints: { ...(l.hints || {}), [l.cur]: wrong.slice(0, 2) } }); } }
     if (r === 'skip') { const l = this.lv(), q = this.curQ(); if (q) { const tries = { ...l.tries, [l.cur]: [-1, q[2]] }; this.setLv({ ...l, tries, cur: l.cur + 1 }); if (l.cur === 4) this.finishLevel(tries); } }
-    if (r === 'wall') { const w = this.state.wall; if (w) this.setState((st) => ({ unlocked: { ...st.unlocked, [w.nasa_id || w.src]: true } })); this.fetchHd(); }
   }
   triggerReward(kind) {
     // Real rewarded video in a dev/production build; simulated countdown in Expo Go or if no ad fills.
     if (adsAvailable()) {
-      // If the user closes the ad early, unlock the Save button again (no download).
-      showRewarded(() => this.applyReward(kind), () => this.startInter(5, kind), () => { if (kind === 'wall') this.setState({ dlBusy: false }); });
+      showRewarded(() => this.applyReward(kind), () => this.startInter(5, kind));
       return;
     }
     this.startInter(5, kind);
@@ -476,7 +502,7 @@ export default class CosmoApp extends React.Component {
       solar, solarViews: [['orbits', tx.liveOrbits], ['sizes', tx.sizeCmp]].map(([id, label]) => ({ key: id, label, active: s.solarView === id, pick: () => this.setState({ solarView: id }) })),
       wallThemes: WALL_THEMES.map(([l]) => ({ key: l, label: l, active: s.wallTheme === l, pick: () => { this.setState({ wallTheme: l }); this.loadWalls(l); } })),
       walls: (s.walls[s.wallTheme] || []).map((w) => ({ src: w.src, key: w.nasa_id || w.src, open: () => this.setState({ wall: w }) })), wallsLoading: !s.walls[s.wallTheme],
-      wall: W ? { src: W.src, title: W.title, hd: W.hd, dlBusy: s.dlBusy, dlLabel: s.dlBusy ? tx.dlBusy : (ads && !s.unlocked[W.nasa_id || W.src] ? tx.dlAd : tx.dl), download: () => this.downloadWall(), openHd: () => this.openUrl(W.hd), view: () => this.setState({ lightbox: { items: [{ src: W.hd || W.src, fallback: W.src, title: W.title }], index: 0 } }) } : null,
+      wall: W ? { src: W.src, title: W.title, hd: W.hd, dlBusy: s.dlBusy, dlLabel: s.dlBusy ? tx.dlBusy : (ads && !s.unlocked[W.nasa_id || W.src] ? tx.dlAd : tx.dl), dlDisabled: s.dlBusy, download: () => { if (!s.dlBusy) this.downloadWall(); }, openHd: () => this.openUrl(W.hd), view: () => this.setState({ lightbox: { items: [{ src: W.hd || W.src, fallback: W.src, title: W.title }], index: 0 } }) } : null,
       closeWall: () => this.setState({ wall: null }),
       weight: {
         kg: String(s.kg), onKg: (t) => { this.setState({ kg: t }); LS.set('cosmo_kg', t); },

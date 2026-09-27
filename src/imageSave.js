@@ -23,7 +23,7 @@ function cleanup(file) { try { if (file && file.exists) file.delete(); } catch (
 // If gallery access isn't available (denied, or limited in Expo Go), falls back to the
 // share sheet, where the user can pick "Save image" / Files / Drive.
 // Returns 'gallery' or 'share'. Throws if the download itself fails.
-export async function saveImage(url) {
+async function doSave(url) {
   const { uri, mime, file } = await download(url);
   try {
     const ML = require('expo-media-library/legacy');
@@ -46,3 +46,12 @@ export async function shareImage(url) {
   const { uri, mime } = await download(url);
   await Sharing.shareAsync(uri, { mimeType: mime, dialogTitle: 'Share image' });
 }
+
+// Single-flight: while a save is running, extra calls get the same promise (no duplicate downloads).
+let inflight = null;
+export function saveImage(url) {
+  if (inflight) return inflight;
+  inflight = doSave(url).finally(() => { inflight = null; });
+  return inflight;
+}
+export const isSaving = () => !!inflight;

@@ -81,8 +81,8 @@ export function showRewarded(onReward, onFail, onCancel) {
   const subs = [];
   const release = () => { done = true; rewardedBusy = false; subs.forEach((u) => u && u()); clearTimeout(to); };
   const finish = (ok) => { if (done) return; release(); ok ? onReward() : (onFail && onFail()); };
-  const to = setTimeout(() => { log('rewarded timeout (no ad in 10s)'); finish(false); }, 10000);
-  subs.push(ad.addAdEventListener(GMA.RewardedAdEventType.LOADED, () => { log('rewarded loaded'); clearTimeout(to); ad.show().catch((e) => { log('rewarded show error', errText(e)); finish(false); }); }));
+  let to = setTimeout(() => { log('rewarded timeout (no ad in 10s)'); finish(false); }, 10000);
+  subs.push(ad.addAdEventListener(GMA.RewardedAdEventType.LOADED, () => { log('rewarded loaded'); clearTimeout(to); to = setTimeout(() => { log('rewarded: no close event, releasing'); finish(earned); }, 120000); ad.show().catch((e) => { log('rewarded show error', errText(e)); finish(false); }); }));
   subs.push(ad.addAdEventListener(GMA.RewardedAdEventType.EARNED_REWARD, () => { log('reward earned'); earned = true; }));
   subs.push(ad.addAdEventListener(GMA.AdEventType.CLOSED, () => { if (earned) finish(true); else { log('rewarded closed early'); release(); if (onCancel) onCancel(); } }));
   subs.push(ad.addAdEventListener(GMA.AdEventType.ERROR, (e) => { log('rewarded error', errText(e)); finish(false); }));
@@ -109,9 +109,21 @@ export const bannerEnabled = () => !!GMA && !!unit('banner');
 
 // Shows a rewarded ad, then runs `action`. If ads aren't available or no ad loads,
 // the action still runs so users are never blocked. Closing the ad early cancels it.
-export function withReward(action) {
-  if (!GMA || !unit('reward')) return action();
-  showRewarded(action, action);
+// Locked: while one reward+action flow is running, further calls are ignored.
+let flowBusy = false;
+export async function withReward(action) {
+  if (flowBusy || rewardedBusy) return;
+  flowBusy = true;
+  try {
+    if (GMA && unit('reward')) {
+      const ok = await new Promise((res) => {
+        const started = showRewarded(() => res(true), () => res(true), () => res(false));
+        if (started === false) res(true);
+      });
+      if (!ok) return;
+    }
+    await action();
+  } finally { flowBusy = false; }
 }
 
 // Placeholder only while developing in Expo Go (where AdMob can't run).
