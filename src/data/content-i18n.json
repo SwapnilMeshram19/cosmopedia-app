@@ -1,0 +1,4700 @@
+{
+    "es": {
+        "sun": {
+            "name": "El Sol",
+            "tagline": "Nuestra estrella",
+            "facts": [
+                [
+                    "Tipo",
+                    "Enana amarilla G2V"
+                ],
+                [
+                    "Edad",
+                    "4.600 millones de años"
+                ],
+                [
+                    "Diámetro",
+                    "1,39 millones de km"
+                ],
+                [
+                    "Temp. superficie",
+                    "5.500 °C"
+                ],
+                [
+                    "Temp. núcleo",
+                    "15 millones °C"
+                ],
+                [
+                    "Luz a la Tierra",
+                    "8 min 20 s"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "El Sol es una estrella de mediana edad en el centro del Sistema Solar. Contiene el 99,86 % de su masa y su gravedad mantiene en órbita todo, desde Mercurio hasta la lejana nube de Oort."
+                ],
+                [
+                    "Cómo brilla",
+                    "En el núcleo, la fusión nuclear convierte unos 600 millones de toneladas de hidrógeno en helio cada segundo. Esa energía tarda hasta 170.000 años en llegar a la superficie y luego cruza hasta la Tierra en poco más de 8 minutos."
+                ],
+                [
+                    "Estructura",
+                    "La energía sale por la zona radiativa y luego por la convectiva. La superficie visible es la fotosfera; encima están la cromosfera y la corona, que, curiosamente, está a más de un millón de °C."
+                ],
+                [
+                    "Actividad solar",
+                    "El Sol sigue un ciclo magnético de unos 11 años. En su máximo abundan manchas, fulguraciones y eyecciones de masa coronal, que pueden afectar a satélites y redes eléctricas y crean auroras en la Tierra."
+                ],
+                [
+                    "Futuro",
+                    "Dentro de unos 5.000 millones de años agotará el hidrógeno del núcleo y se convertirá en gigante roja, quizá tragándose Mercurio, Venus y tal vez la Tierra. Terminará como una enana blanca que se enfría lentamente."
+                ]
+            ],
+            "dyk": [
+                "Dentro del Sol cabrían 1,3 millones de Tierras.",
+                "La sonda Parker se ha acercado más que ninguna nave, a unos 6 millones de km de su superficie.",
+                "El Sol es en realidad blanco; parece amarillo por la atmósfera terrestre."
+            ]
+        },
+        "proxima": {
+            "name": "Próxima Centauri",
+            "tagline": "La estrella más cercana al Sol",
+            "facts": [
+                [
+                    "Tipo",
+                    "Enana roja (M5.5)"
+                ],
+                [
+                    "Distancia",
+                    "4,24 años luz"
+                ],
+                [
+                    "Masa",
+                    "12 % del Sol"
+                ],
+                [
+                    "Temp. superficie",
+                    "~2.700 °C"
+                ],
+                [
+                    "Planetas",
+                    "Al menos 2"
+                ],
+                [
+                    "Constelación",
+                    "Centauro"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Próxima Centauri es una enana roja pequeña y fría del sistema triple Alfa Centauri. Es la estrella conocida más cercana al Sol, pero demasiado tenue para verse a simple vista."
+                ],
+                [
+                    "Planetas",
+                    "Próxima b es un planeta de masa parecida a la Tierra en la zona habitable, donde podría existir agua líquida. Da una vuelta a su estrella cada 11,2 días."
+                ],
+                [
+                    "Una estrella inquieta",
+                    "Próxima es una estrella fulgurante que a veces aumenta mucho de brillo. Esas llamaradas podrían arrancar la atmósfera de sus planetas, así que su habitabilidad es incierta."
+                ]
+            ],
+            "dyk": [
+                "Su luz tarda más de 4 años en llegarnos.",
+                "A la velocidad de la Voyager 1 tardaríamos más de 70.000 años en llegar.",
+                "Las enanas rojas como Próxima pueden brillar billones de años."
+            ]
+        },
+        "sirius": {
+            "name": "Sirio",
+            "tagline": "La estrella más brillante del cielo nocturno",
+            "facts": [
+                [
+                    "Tipo",
+                    "A1V + enana blanca"
+                ],
+                [
+                    "Distancia",
+                    "8,6 años luz"
+                ],
+                [
+                    "Brillo",
+                    "25 veces el Sol"
+                ],
+                [
+                    "Masa",
+                    "2 veces el Sol"
+                ],
+                [
+                    "Constelación",
+                    "Can Mayor"
+                ],
+                [
+                    "Apodo",
+                    "Estrella Perro"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Sirio brilla tanto porque es luminosa y está cerca. En realidad es un sistema doble: Sirio A es una estrella blanca y caliente, y Sirio B una tenue enana blanca."
+                ],
+                [
+                    "Historia",
+                    "Los antiguos egipcios basaron su calendario en la salida de Sirio justo antes del amanecer, que anunciaba la crecida anual del Nilo. La expresión “días de canícula” también viene de ella."
+                ],
+                [
+                    "Sirio B",
+                    "Sirio B fue la primera enana blanca descubierta: tiene casi la masa del Sol en una esfera del tamaño de la Tierra."
+                ]
+            ],
+            "dyk": [
+                "Solo la Luna, Venus, Júpiter y a veces Marte brillan más que Sirio.",
+                "Sirio se está acercando poco a poco a nosotros.",
+                "Una cucharadita de Sirio B pesaría varias toneladas."
+            ]
+        },
+        "betelgeuse": {
+            "name": "Betelgeuse",
+            "tagline": "Una supergigante roja cerca de su final",
+            "facts": [
+                [
+                    "Tipo",
+                    "Supergigante roja"
+                ],
+                [
+                    "Constelación",
+                    "Orión"
+                ],
+                [
+                    "Distancia",
+                    "~550 años luz"
+                ],
+                [
+                    "Radio",
+                    "~700 soles"
+                ],
+                [
+                    "Edad",
+                    "~10 millones de años"
+                ],
+                [
+                    "Destino",
+                    "Supernova"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Betelgeuse marca el hombro de Orión. Si estuviera en el lugar del Sol, su superficie llegaría más allá de la órbita de Marte."
+                ],
+                [
+                    "El Gran Oscurecimiento",
+                    "A finales de 2019 y principios de 2020 bajó a un 40 % de su brillo habitual. Los astrónomos vieron que había expulsado una enorme nube de polvo que tapó su luz temporalmente."
+                ],
+                [
+                    "Supernova en camino",
+                    "Betelgeuse está cerca del final de su vida y estallará como supernova en algún momento de los próximos 100.000 años. Se verá de día durante semanas, pero está demasiado lejos para dañar la Tierra."
+                ]
+            ],
+            "dyk": [
+                "Betelgeuse es tan joven que los dinosaurios ya se habían extinguido cuando se formó.",
+                "Su nombre viene del árabe y suele traducirse como “la mano del gigante”.",
+                "Es una de las pocas estrellas cuya superficie pueden distinguir los telescopios."
+            ]
+        },
+        "neutron": {
+            "name": "Estrellas de neutrones",
+            "tagline": "Las estrellas más densas del universo",
+            "facts": [
+                [
+                    "Diámetro",
+                    "~20 km"
+                ],
+                [
+                    "Masa",
+                    "1,4–2 soles"
+                ],
+                [
+                    "Giro",
+                    "Hasta 716 veces/s"
+                ],
+                [
+                    "Origen",
+                    "Supernovas"
+                ],
+                [
+                    "Campo magnético",
+                    "Billones de veces el terrestre"
+                ],
+                [
+                    "Primera detectada",
+                    "1967"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Cuando una estrella masiva explota, su núcleo puede colapsar en una estrella de neutrones: un objeto del tamaño de una ciudad pero más pesado que el Sol, tan comprimido que protones y electrones se funden en neutrones."
+                ],
+                [
+                    "Púlsares",
+                    "Muchas giran muy rápido y barren el espacio con haces de radiación, como faros. Jocelyn Bell Burnell descubrió el primer púlsar en 1967."
+                ],
+                [
+                    "Kilonovas",
+                    "Cuando dos estrellas de neutrones chocan, emiten ondas gravitacionales y forjan elementos pesados como oro y platino, algo confirmado con la colisión detectada en 2017."
+                ]
+            ],
+            "dyk": [
+                "Un terrón de azúcar de estrella de neutrones pesaría unos mil millones de toneladas.",
+                "Los magnetares son las estrellas de neutrones con los campos magnéticos más intensos.",
+                "El oro de tus joyas pudo formarse en un choque de estrellas de neutrones."
+            ]
+        },
+        "mercury": {
+            "name": "Mercurio",
+            "tagline": "El planeta más pequeño y rápido",
+            "facts": [
+                [
+                    "Distancia",
+                    "0,39 UA"
+                ],
+                [
+                    "Año",
+                    "88 días"
+                ],
+                [
+                    "Día",
+                    "176 días terrestres"
+                ],
+                [
+                    "Diámetro",
+                    "4.879 km"
+                ],
+                [
+                    "Lunas",
+                    "0"
+                ],
+                [
+                    "Temperaturas",
+                    "−180 a 430 °C"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Mercurio es el planeta más pequeño y el más cercano al Sol. Recorre su órbita más rápido que ningún otro, por eso lleva el nombre del mensajero de los dioses romanos."
+                ],
+                [
+                    "Superficie",
+                    "Su superficie gris y llena de cráteres se parece a la de nuestra Luna. Sin apenas atmósfera que retenga el calor, pasa de días abrasadores a noches heladas."
+                ],
+                [
+                    "Interior",
+                    "Tiene un enorme núcleo de hierro que ocupa cerca del 85 % de su radio. Su débil campo magnético indica que parte del núcleo sigue fundido."
+                ],
+                [
+                    "Exploración",
+                    "La Mariner 10 lo sobrevoló en 1974–75; MESSENGER lo orbitó de 2011 a 2015 y halló hielo en cráteres polares en sombra. La misión europeo-japonesa BepiColombo está en camino."
+                ]
+            ],
+            "dyk": [
+                "Mercurio se encoge al enfriarse su núcleo, lo que arruga su superficie.",
+                "Desde Mercurio el Sol se vería tres veces más grande que desde la Tierra.",
+                "Pese a ser el más cercano al Sol, no es el más caliente: lo es Venus."
+            ]
+        },
+        "venus": {
+            "name": "Venus",
+            "tagline": "El planeta más caliente",
+            "facts": [
+                [
+                    "Distancia",
+                    "0,72 UA"
+                ],
+                [
+                    "Año",
+                    "225 días"
+                ],
+                [
+                    "Día",
+                    "243 días terrestres"
+                ],
+                [
+                    "Temp. superficie",
+                    "465 °C"
+                ],
+                [
+                    "Presión",
+                    "92 veces la terrestre"
+                ],
+                [
+                    "Lunas",
+                    "0"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Venus tiene casi el tamaño de la Tierra y a menudo se le llama su gemelo, pero es un mundo infernal con una presión aplastante y calor capaz de fundir el plomo."
+                ],
+                [
+                    "Atmósfera",
+                    "Una densa atmósfera de dióxido de carbono atrapa el calor con un efecto invernadero desbocado. Nubes de ácido sulfúrico reflejan la luz y lo convierten en el planeta más brillante de nuestro cielo."
+                ],
+                [
+                    "Giro extraño",
+                    "Venus gira al revés que la mayoría de planetas y tan despacio que su día dura más que su año."
+                ],
+                [
+                    "Exploración",
+                    "Las sondas soviéticas Venera enviaron las primeras imágenes de su superficie antes de sucumbir al calor. El radar de Magellan lo cartografió en los 90; DAVINCI y VERITAS vendrán después."
+                ]
+            ],
+            "dyk": [
+                "En Venus el Sol sale por el oeste.",
+                "Sus nubes dan la vuelta al planeta en solo 4 días.",
+                "Venus tiene más volcanes que cualquier otro planeta."
+            ]
+        },
+        "earth": {
+            "name": "La Tierra",
+            "tagline": "El único mundo conocido con vida",
+            "facts": [
+                [
+                    "Distancia",
+                    "1 UA"
+                ],
+                [
+                    "Año",
+                    "365,25 días"
+                ],
+                [
+                    "Día",
+                    "23 h 56 min"
+                ],
+                [
+                    "Diámetro",
+                    "12.742 km"
+                ],
+                [
+                    "Lunas",
+                    "1"
+                ],
+                [
+                    "Agua en superficie",
+                    "71 %"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "La Tierra es el tercer planeta desde el Sol y el único lugar donde sabemos que existe vida. Es el planeta más denso del Sistema Solar."
+                ],
+                [
+                    "Atmósfera y agua",
+                    "Una atmósfera de nitrógeno y oxígeno y océanos líquidos mantienen el clima estable. La tectónica de placas recicla la corteza y regula el carbono durante millones de años."
+                ],
+                [
+                    "Escudo magnético",
+                    "El hierro fundido en movimiento del núcleo externo genera un campo magnético que desvía el viento solar y protege la atmósfera y la vida."
+                ],
+                [
+                    "Vista desde el espacio",
+                    "Imágenes como “Salida de la Tierra” (1968) y el “Punto azul pálido” (1990) cambiaron cómo vemos el planeta e inspiraron el movimiento ecologista."
+                ]
+            ],
+            "dyk": [
+                "La Tierra no es una esfera perfecta: se ensancha en el ecuador.",
+                "Su rotación se está frenando poco a poco.",
+                "En inglés es el único planeta que no lleva nombre de un dios."
+            ]
+        },
+        "mars": {
+            "name": "Marte",
+            "tagline": "El Planeta Rojo",
+            "facts": [
+                [
+                    "Distancia",
+                    "1,52 UA"
+                ],
+                [
+                    "Año",
+                    "687 días"
+                ],
+                [
+                    "Día",
+                    "24 h 37 min"
+                ],
+                [
+                    "Diámetro",
+                    "6.779 km"
+                ],
+                [
+                    "Lunas",
+                    "2"
+                ],
+                [
+                    "Gravedad",
+                    "38 % de la Tierra"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Marte es un desierto frío. El polvo de óxido de hierro le da su color rojizo. Tiene estaciones, casquetes polares y tormentas de polvo que pueden cubrir todo el planeta."
+                ],
+                [
+                    "Puntos destacados",
+                    "Olympus Mons es el volcán más alto del Sistema Solar, con unos 22 km de altura. Valles Marineris es un sistema de cañones de unos 4.000 km."
+                ],
+                [
+                    "Agua y vida",
+                    "Antiguos lechos de ríos, deltas y minerales muestran que Marte tuvo agua líquida. Los róveres buscan en lagos antiguos señales de vida microbiana pasada."
+                ],
+                [
+                    "Exploración",
+                    "Marte ha recibido más misiones que cualquier otro planeta. Curiosity y Perseverance exploran hoy su superficie; Perseverance recoge muestras para un futuro retorno a la Tierra."
+                ]
+            ],
+            "dyk": [
+                "Marte sufre las tormentas de polvo más grandes del Sistema Solar.",
+                "Sus atardeceres se ven azules.",
+                "Sus dos pequeñas lunas se llaman Fobos y Deimos, es decir, miedo y pánico."
+            ]
+        },
+        "jupiter": {
+            "name": "Júpiter",
+            "tagline": "El rey de los planetas",
+            "facts": [
+                [
+                    "Distancia",
+                    "5,2 UA"
+                ],
+                [
+                    "Año",
+                    "11,9 años"
+                ],
+                [
+                    "Día",
+                    "9 h 56 min"
+                ],
+                [
+                    "Diámetro",
+                    "139.820 km"
+                ],
+                [
+                    "Lunas",
+                    "95"
+                ],
+                [
+                    "Tipo",
+                    "Gigante gaseoso"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Júpiter es el planeta más grande, con más masa que todos los demás juntos, y está hecho sobre todo de hidrógeno y helio."
+                ],
+                [
+                    "La Gran Mancha Roja",
+                    "Esta tormenta gigante es más ancha que la Tierra y lleva rugiendo al menos 350 años, aunque se está reduciendo."
+                ],
+                [
+                    "Interior",
+                    "En las profundidades, la presión convierte el hidrógeno en un metal conductor, lo que crea el campo magnético más fuerte de todos los planetas."
+                ],
+                [
+                    "Exploración",
+                    "Pioneer, Voyager, Galileo y ahora Juno han estudiado Júpiter. Juno reveló ciclones agrupados en los polos y un núcleo “difuso”. Europa Clipper y JUICE de la ESA se dirigen a sus lunas."
+                ]
+            ],
+            "dyk": [
+                "Júpiter tiene el día más corto de todos los planetas.",
+                "Tiene anillos tenues, vistos por primera vez por la Voyager 1.",
+                "Su gravedad ayuda a proteger a los planetas interiores de algunos cometas."
+            ]
+        },
+        "saturn": {
+            "name": "Saturno",
+            "tagline": "La joya de los anillos",
+            "facts": [
+                [
+                    "Distancia",
+                    "9,5 UA"
+                ],
+                [
+                    "Año",
+                    "29,4 años"
+                ],
+                [
+                    "Día",
+                    "10 h 33 min"
+                ],
+                [
+                    "Diámetro",
+                    "116.460 km"
+                ],
+                [
+                    "Lunas",
+                    "146"
+                ],
+                [
+                    "Densidad",
+                    "Menor que el agua"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Saturno es el segundo planeta más grande y el menos denso. Su espectacular sistema de anillos se ve incluso con un telescopio pequeño."
+                ],
+                [
+                    "Los anillos",
+                    "Se extienden hasta 280.000 km pero a menudo solo tienen unos 10 m de espesor. Están hechos de innumerables trozos de hielo de agua y podrían ser mucho más jóvenes que el planeta."
+                ],
+                [
+                    "El hexágono",
+                    "Una extraña corriente en forma de hexágono rodea el polo norte de Saturno; cada lado es más largo que el diámetro de la Tierra."
+                ],
+                [
+                    "Exploración",
+                    "Cassini–Huygens orbitó Saturno de 2004 a 2017, dejó caer una sonda en Titán y terminó sumergiéndose en la atmósfera del planeta."
+                ]
+            ],
+            "dyk": [
+                "Saturno tiene más lunas conocidas que cualquier otro planeta.",
+                "Sus anillos están cayendo lentamente sobre el planeta.",
+                "Los vientos cerca del ecuador alcanzan 1.800 km/h."
+            ]
+        },
+        "uranus": {
+            "name": "Urano",
+            "tagline": "El gigante de hielo tumbado",
+            "facts": [
+                [
+                    "Distancia",
+                    "19,2 UA"
+                ],
+                [
+                    "Año",
+                    "84 años"
+                ],
+                [
+                    "Día",
+                    "17 h 14 min"
+                ],
+                [
+                    "Inclinación",
+                    "98°"
+                ],
+                [
+                    "Lunas",
+                    "28"
+                ],
+                [
+                    "Temp. mínima",
+                    "−224 °C"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Urano es un gigante de hielo hecho sobre todo de agua, metano y amoníaco alrededor de un pequeño núcleo rocoso. El metano le da su color azul verdoso pálido."
+                ],
+                [
+                    "Tumbado de lado",
+                    "Urano gira sobre un costado, probablemente por una colisión antigua. Cada polo pasa unos 42 años de luz solar continua seguidos de 42 años de oscuridad."
+                ],
+                [
+                    "Descubrimiento",
+                    "William Herschel lo descubrió en 1781: fue el primer planeta hallado con telescopio."
+                ],
+                [
+                    "Exploración",
+                    "Solo la Voyager 2 lo ha visitado, en 1986. Una misión orbitadora dedicada es una prioridad para el futuro."
+                ]
+            ],
+            "dyk": [
+                "Urano tiene la atmósfera más fría de todos los planetas.",
+                "Sus lunas llevan nombres de personajes de Shakespeare y Pope.",
+                "Tiene 13 anillos tenues conocidos."
+            ]
+        },
+        "neptune": {
+            "name": "Neptuno",
+            "tagline": "El mundo más ventoso",
+            "facts": [
+                [
+                    "Distancia",
+                    "30,1 UA"
+                ],
+                [
+                    "Año",
+                    "165 años"
+                ],
+                [
+                    "Día",
+                    "16 h 6 min"
+                ],
+                [
+                    "Diámetro",
+                    "49.244 km"
+                ],
+                [
+                    "Lunas",
+                    "16"
+                ],
+                [
+                    "Viento",
+                    "2.100 km/h"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Neptuno es el planeta más lejano del Sol, un gigante de hielo azul intenso con los vientos más rápidos del Sistema Solar."
+                ],
+                [
+                    "Hallado con matemáticas",
+                    "En 1846 se predijo su posición a partir de perturbaciones en la órbita de Urano, y se encontró casi exactamente allí."
+                ],
+                [
+                    "Tritón",
+                    "Su luna más grande orbita al revés y tiene géiseres de nitrógeno; puede que Neptuno la capturara del cinturón de Kuiper."
+                ],
+                [
+                    "Exploración",
+                    "La Voyager 2 lo sobrevoló en 1989 y vio la Gran Mancha Oscura, una tormenta del tamaño de la Tierra que luego desapareció."
+                ]
+            ],
+            "dyk": [
+                "Neptuno completó su primera órbita desde su descubrimiento en 2011.",
+                "Irradia más calor del que recibe del Sol.",
+                "La luz del Sol tarda unas 4 horas en llegar hasta allí."
+            ]
+        },
+        "pluto": {
+            "name": "Plutón",
+            "tagline": "El querido planeta enano",
+            "facts": [
+                [
+                    "Distancia",
+                    "39,5 UA"
+                ],
+                [
+                    "Año",
+                    "248 años"
+                ],
+                [
+                    "Diámetro",
+                    "2.377 km"
+                ],
+                [
+                    "Lunas",
+                    "5"
+                ],
+                [
+                    "Clase",
+                    "Planeta enano"
+                ],
+                [
+                    "Descubierto",
+                    "1930"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Plutón es el mayor objeto conocido del cinturón de Kuiper. Clyde Tombaugh lo descubrió en 1930 y fue el noveno planeta hasta 2006."
+                ],
+                [
+                    "Por qué lo reclasificaron",
+                    "La Unión Astronómica Internacional decidió que un planeta debe despejar su vecindario orbital, algo que Plutón comparte con muchos otros cuerpos helados."
+                ],
+                [
+                    "El corazón",
+                    "En 2015 New Horizons reveló Sputnik Planitia, un vasto glaciar de nitrógeno con forma de corazón, junto con montañas de hielo de agua y una fina atmósfera azulada."
+                ]
+            ],
+            "dyk": [
+                "Plutón es más pequeño que la Luna de la Tierra.",
+                "Su luna Caronte es tan grande que ambos orbitan un punto en el espacio entre ellos.",
+                "Una niña de 11 años, Venetia Burney, sugirió el nombre Plutón."
+            ]
+        },
+        "moon": {
+            "name": "La Luna",
+            "tagline": "La compañera constante de la Tierra",
+            "facts": [
+                [
+                    "Distancia",
+                    "384.400 km"
+                ],
+                [
+                    "Órbita",
+                    "27,3 días"
+                ],
+                [
+                    "Diámetro",
+                    "3.474 km"
+                ],
+                [
+                    "Gravedad",
+                    "16,6 % de la Tierra"
+                ],
+                [
+                    "Edad",
+                    "~4.500 millones de años"
+                ],
+                [
+                    "Visitantes",
+                    "12 humanos"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "La Luna es el único satélite natural de la Tierra y la quinta luna más grande del Sistema Solar. Estabiliza la inclinación terrestre, lo que hace más estable nuestro clima."
+                ],
+                [
+                    "Origen",
+                    "La teoría principal dice que un cuerpo del tamaño de Marte, llamado Tea, chocó con la joven Tierra y los restos formaron la Luna."
+                ],
+                [
+                    "Mareas y bloqueo",
+                    "Su gravedad levanta las mareas oceánicas de la Tierra. Está bloqueada por marea, así que siempre vemos la misma cara."
+                ],
+                [
+                    "Exploración",
+                    "Los astronautas del Apolo caminaron sobre ella entre 1969 y 1972. Misiones de China, India y otros países han aterrizado desde entonces; con Artemisa, la NASA planea volver a enviar personas."
+                ]
+            ],
+            "dyk": [
+                "La Luna se aleja de la Tierra unos 3,8 cm cada año.",
+                "Las huellas en la Luna pueden durar millones de años.",
+                "La cara oculta no está oscura: recibe la misma cantidad de luz solar."
+            ]
+        },
+        "io": {
+            "name": "Ío",
+            "tagline": "El mundo más volcánico",
+            "facts": [
+                [
+                    "Orbita",
+                    "Júpiter"
+                ],
+                [
+                    "Diámetro",
+                    "3.643 km"
+                ],
+                [
+                    "Volcanes activos",
+                    "~400"
+                ],
+                [
+                    "Órbita",
+                    "1,8 días"
+                ],
+                [
+                    "Superficie",
+                    "Azufre"
+                ],
+                [
+                    "Descubierta",
+                    "1610"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Ío es la más interna de las cuatro grandes lunas de Júpiter y el cuerpo volcánicamente más activo del Sistema Solar."
+                ],
+                [
+                    "Por qué tan activa",
+                    "La flexión de marea de Júpiter y las lunas vecinas Europa y Ganímedes amasan el interior de Ío y generan calor suficiente para fundir roca."
+                ],
+                [
+                    "Superficie",
+                    "Lagos de lava y depósitos de azufre pintan Ío de amarillo, naranja y rojo; algunas columnas volcánicas se elevan 400 km hacia el espacio."
+                ]
+            ],
+            "dyk": [
+                "Galileo descubrió Ío en 1610.",
+                "Sus volcanes reconstruyen constantemente toda la luna, por lo que apenas tiene cráteres.",
+                "Juno ha volado cerca y fotografiado volcanes en erupción."
+            ]
+        },
+        "europa": {
+            "name": "Europa",
+            "tagline": "Un océano bajo el hielo",
+            "facts": [
+                [
+                    "Orbita",
+                    "Júpiter"
+                ],
+                [
+                    "Diámetro",
+                    "3.122 km"
+                ],
+                [
+                    "Capa de hielo",
+                    "15–25 km"
+                ],
+                [
+                    "Profundidad del océano",
+                    "60–150 km"
+                ],
+                [
+                    "Órbita",
+                    "3,5 días"
+                ],
+                [
+                    "Misión",
+                    "Europa Clipper"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Europa es algo más pequeña que nuestra Luna. Está cubierta por una brillante corteza de hielo cruzada por grietas rojizas."
+                ],
+                [
+                    "Océano oculto",
+                    "Bajo el hielo se cree que hay un océano salado con casi el doble de agua que todos los océanos de la Tierra juntos. El calor de la flexión de marea lo mantiene líquido."
+                ],
+                [
+                    "¿Vida?",
+                    "Con agua, energía química y los ingredientes adecuados, Europa es uno de los mejores lugares para buscar vida más allá de la Tierra."
+                ],
+                [
+                    "Exploración",
+                    "Europa Clipper, de la NASA, se lanzó en 2024 y hará decenas de sobrevuelos cercanos para estudiar el hielo y el océano."
+                ]
+            ],
+            "dyk": [
+                "Hubble pudo haber visto plumas de agua saliendo de Europa.",
+                "Su superficie es una de las más lisas del Sistema Solar.",
+                "La radiación cerca de Europa sería letal para una persona en un día."
+            ]
+        },
+        "ganymede": {
+            "name": "Ganímedes",
+            "tagline": "La luna más grande del Sistema Solar",
+            "facts": [
+                [
+                    "Orbita",
+                    "Júpiter"
+                ],
+                [
+                    "Diámetro",
+                    "5.268 km"
+                ],
+                [
+                    "Más grande que",
+                    "Mercurio"
+                ],
+                [
+                    "Órbita",
+                    "7,2 días"
+                ],
+                [
+                    "Campo magnético",
+                    "Sí"
+                ],
+                [
+                    "Misión",
+                    "JUICE"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Ganímedes es más grande que el planeta Mercurio. Es la única luna conocida que genera su propio campo magnético."
+                ],
+                [
+                    "Océano subsuperficial",
+                    "Hubble observó que las auroras de Ganímedes se balanceaban, lo que sugiere un océano salado bajo su corteza helada."
+                ],
+                [
+                    "Exploración",
+                    "La misión JUICE de la ESA se lanzó en 2023 y será la primera nave en orbitar una luna que no sea la nuestra."
+                ]
+            ],
+            "dyk": [
+                "Si orbitara el Sol, Ganímedes contaría como planeta.",
+                "Tiene tenues auroras.",
+                "Su superficie mezcla terreno antiguo y oscuro con regiones brillantes y estriadas."
+            ]
+        },
+        "titan": {
+            "name": "Titán",
+            "tagline": "Un mundo de lagos de metano",
+            "facts": [
+                [
+                    "Orbita",
+                    "Saturno"
+                ],
+                [
+                    "Diámetro",
+                    "5.150 km"
+                ],
+                [
+                    "Presión",
+                    "1,5× la terrestre"
+                ],
+                [
+                    "Temp. superficie",
+                    "−179 °C"
+                ],
+                [
+                    "Líquidos",
+                    "Metano, etano"
+                ],
+                [
+                    "Misión",
+                    "Dragonfly"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Titán es la luna más grande de Saturno y la única con una atmósfera densa. También es el único mundo, además de la Tierra, con líquido estable en su superficie."
+                ],
+                [
+                    "El tiempo",
+                    "En Titán el metano hace el papel que el agua en la Tierra: forma nubes, cae como lluvia, talla ríos y llena lagos y mares cerca de los polos."
+                ],
+                [
+                    "Exploración",
+                    "La sonda Huygens de la ESA aterrizó allí en 2005, el aterrizaje más lejano jamás hecho. El helicóptero Dragonfly de la NASA se lanzará en 2028."
+                ]
+            ],
+            "dyk": [
+                "En Titán podrías volar batiendo unas alas atadas a ti.",
+                "Su atmósfera es sobre todo nitrógeno, como la terrestre.",
+                "Titán es más grande que el planeta Mercurio."
+            ]
+        },
+        "enceladus": {
+            "name": "Encélado",
+            "tagline": "La luna de los géiseres",
+            "facts": [
+                [
+                    "Orbita",
+                    "Saturno"
+                ],
+                [
+                    "Diámetro",
+                    "504 km"
+                ],
+                [
+                    "Reflectividad",
+                    "~99 %"
+                ],
+                [
+                    "Plumas",
+                    "Polo sur"
+                ],
+                [
+                    "Océano",
+                    "Global"
+                ],
+                [
+                    "Descubierto por",
+                    "Cassini"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Encélado es una luna helada pequeña y muy brillante que refleja casi toda la luz solar que recibe, uno de los objetos más blancos del Sistema Solar."
+                ],
+                [
+                    "Géiseres",
+                    "Cassini halló chorros de vapor de agua y hielo saliendo de fracturas cerca del polo sur, que alimentan el anillo E de Saturno."
+                ],
+                [
+                    "Habitabilidad",
+                    "Cassini voló a través de las plumas y detectó sales, moléculas orgánicas y señales de actividad hidrotermal, ingredientes clave para la vida."
+                ]
+            ],
+            "dyk": [
+                "Encélado cabría dentro del Reino Unido.",
+                "Es uno de los principales objetivos en la búsqueda de vida.",
+                "Sus plumas alcanzan cientos de km de altura."
+            ]
+        },
+        "comets": {
+            "name": "Cometas",
+            "tagline": "Bolas de nieve sucia del borde del Sistema Solar",
+            "facts": [
+                [
+                    "Compuestos de",
+                    "Hielo, polvo, roca"
+                ],
+                [
+                    "Núcleo",
+                    "1–50 km"
+                ],
+                [
+                    "Cola",
+                    "Millones de km"
+                ],
+                [
+                    "Origen",
+                    "Cinturón de Kuiper, nube de Oort"
+                ],
+                [
+                    "Famoso",
+                    "Cometa Halley"
+                ],
+                [
+                    "Próximo Halley",
+                    "2061"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Los cometas son restos de la formación del Sistema Solar: mezclas congeladas de hielo, polvo y roca."
+                ],
+                [
+                    "Colas",
+                    "Cerca del Sol, el hielo pasa directamente a gas, formando una coma brillante y dos colas: una de polvo, curva, y una de iones que apunta siempre en dirección opuesta al Sol."
+                ],
+                [
+                    "Exploración",
+                    "Rosetta, de la ESA, orbitó el cometa 67P y posó la sonda Philae en 2014. Deep Impact, de la NASA, disparó un proyectil contra el cometa Tempel 1."
+                ]
+            ],
+            "dyk": [
+                "Las colas de los cometas siempre apuntan en dirección opuesta al Sol.",
+                "Los cometas pudieron traer parte del agua de la Tierra.",
+                "El cometa Halley aparece cada 76 años aproximadamente."
+            ]
+        },
+        "asteroids": {
+            "name": "Cinturón de asteroides",
+            "tagline": "Rocas sobrantes entre Marte y Júpiter",
+            "facts": [
+                [
+                    "Ubicación",
+                    "2,2–3,2 UA"
+                ],
+                [
+                    "Mayor",
+                    "Ceres (940 km)"
+                ],
+                [
+                    "Objetos",
+                    "Millones"
+                ],
+                [
+                    "Masa total",
+                    "~3 % de la Luna"
+                ],
+                [
+                    "Tipos",
+                    "C, S, M"
+                ],
+                [
+                    "Misiones",
+                    "Dawn, Psyche"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "El cinturón principal de asteroides está entre Marte y Júpiter; la gravedad de Júpiter impidió que estas rocas formaran un planeta."
+                ],
+                [
+                    "No está abarrotado",
+                    "A pesar de los millones de asteroides, el cinturón está en su mayoría vacío; las naves lo cruzan sin tener que esquivar nada."
+                ],
+                [
+                    "Defensa planetaria",
+                    "En 2022 la sonda DART de la NASA impactó el asteroide Dimorphos y cambió su órbita con éxito, la primera prueba de desviar un asteroide."
+                ]
+            ],
+            "dyk": [
+                "Ceres es un planeta enano y podría tener agua salada.",
+                "La misión Psyche visita un asteroide rico en metales.",
+                "Se han traído muestras de los asteroides Ryugu y Bennu."
+            ]
+        },
+        "meteors": {
+            "name": "Lluvias de meteoros",
+            "tagline": "Estrellas fugaces con calendario",
+            "facts": [
+                [
+                    "Causa",
+                    "Restos de cometas"
+                ],
+                [
+                    "Velocidad",
+                    "11–72 km/s"
+                ],
+                [
+                    "Se queman a",
+                    "~100 km"
+                ],
+                [
+                    "La mejor",
+                    "Perseidas (agosto)"
+                ],
+                [
+                    "También",
+                    "Gemínidas (diciembre)"
+                ],
+                [
+                    "Meteorito",
+                    "El que llega al suelo"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Las lluvias de meteoros ocurren cuando la Tierra atraviesa estelas de polvo dejadas por cometas; las partículas se queman en la atmósfera como estelas de luz."
+                ],
+                [
+                    "Términos",
+                    "En el espacio es un meteoroide; al brillar en el aire, meteoro; y si un trozo llega al suelo, meteorito."
+                ],
+                [
+                    "Cómo verlas",
+                    "Ve a un lugar oscuro, deja que tus ojos se adapten 20 minutos y mira una amplia zona del cielo. Las mejores horas suelen ser después de medianoche."
+                ]
+            ],
+            "dyk": [
+                "La mayoría de meteoros son más pequeños que un grano de arena.",
+                "Las Gemínidas provienen de un asteroide, 3200 Faetón.",
+                "Toneladas de polvo espacial caen sobre la Tierra cada día."
+            ]
+        },
+        "milkyway": {
+            "name": "Vía Láctea",
+            "tagline": "Nuestra propia galaxia",
+            "facts": [
+                [
+                    "Tipo",
+                    "Espiral barrada"
+                ],
+                [
+                    "Diámetro",
+                    "~100.000 años luz"
+                ],
+                [
+                    "Estrellas",
+                    "100.000–400.000 millones"
+                ],
+                [
+                    "Edad",
+                    "~13.600 millones de años"
+                ],
+                [
+                    "Núcleo",
+                    "Sagitario A*"
+                ],
+                [
+                    "Órbita del Sol",
+                    "230 millones de años"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "La Vía Láctea es una galaxia espiral barrada. El Sol está a unos 26.000 años luz del centro, en un brazo menor llamado Espolón de Orión."
+                ],
+                [
+                    "Centro",
+                    "En el núcleo está Sagitario A*, un agujero negro unas 4 millones de veces más masivo que el Sol, fotografiado por el Telescopio del Horizonte de Sucesos en 2022."
+                ],
+                [
+                    "Vecindario",
+                    "La Vía Láctea pertenece al Grupo Local de más de 80 galaxias y está absorbiendo poco a poco varias galaxias enanas."
+                ]
+            ],
+            "dyk": [
+                "En noches oscuras se ve como una franja de luz: es el disco de la galaxia visto desde dentro.",
+                "Está rodeada por un halo invisible de materia oscura.",
+                "La sonda Gaia ha cartografiado casi 2.000 millones de sus estrellas."
+            ]
+        },
+        "andromeda": {
+            "name": "Andrómeda",
+            "tagline": "Nuestra vecina grande más cercana",
+            "facts": [
+                [
+                    "Catálogo",
+                    "M31"
+                ],
+                [
+                    "Distancia",
+                    "2,5 millones de años luz"
+                ],
+                [
+                    "Diámetro",
+                    "~220.000 años luz"
+                ],
+                [
+                    "Estrellas",
+                    "~1 billón"
+                ],
+                [
+                    "Tipo",
+                    "Espiral"
+                ],
+                [
+                    "Fusión",
+                    "~4.500 millones de años"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Andrómeda es la galaxia más grande del Grupo Local y el objeto más lejano visible a simple vista."
+                ],
+                [
+                    "Prueba de otras galaxias",
+                    "En los años 20, Edwin Hubble midió la distancia a Andrómeda, demostrando que está muy fuera de la Vía Láctea y que el universo contiene otras galaxias."
+                ],
+                [
+                    "Rumbo de colisión",
+                    "Andrómeda se acerca a unos 110 km/s. En miles de millones de años ambas se fusionarán en una gran galaxia elíptica, a veces apodada “Milkomeda”."
+                ]
+            ],
+            "dyk": [
+                "En el cielo parece seis veces más ancha que la Luna llena, pero es muy tenue.",
+                "La luz que ves salió hace 2,5 millones de años.",
+                "Las estrellas casi nunca chocan durante las fusiones de galaxias."
+            ]
+        },
+        "sombrero": {
+            "name": "Galaxia del Sombrero",
+            "tagline": "Una espiral con forma de sombrero",
+            "facts": [
+                [
+                    "Catálogo",
+                    "M104"
+                ],
+                [
+                    "Distancia",
+                    "~30 millones de años luz"
+                ],
+                [
+                    "Diámetro",
+                    "~50.000 años luz"
+                ],
+                [
+                    "Constelación",
+                    "Virgo"
+                ],
+                [
+                    "Agujero negro",
+                    "~1.000 millones de soles"
+                ],
+                [
+                    "Rasgo",
+                    "Banda de polvo"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Vemos el Sombrero casi de perfil. Un brillante bulbo central y un anillo oscuro de polvo le dan aspecto de sombrero de ala ancha."
+                ],
+                [
+                    "La vista de Webb",
+                    "En infrarrojo, Webb muestra el anillo de polvo lleno de grumos y detalle, mientras el bulbo brillante se atenúa."
+                ]
+            ],
+            "dyk": [
+                "Se puede ver con telescopios pequeños de aficionado.",
+                "Su agujero negro central es de los más pesados entre galaxias cercanas.",
+                "Alberga unos 2.000 cúmulos globulares."
+            ]
+        },
+        "whirlpool": {
+            "name": "Galaxia del Remolino",
+            "tagline": "Una espiral clásica de diseño perfecto",
+            "facts": [
+                [
+                    "Catálogo",
+                    "M51"
+                ],
+                [
+                    "Distancia",
+                    "~31 millones de años luz"
+                ],
+                [
+                    "Compañera",
+                    "NGC 5195"
+                ],
+                [
+                    "Constelación",
+                    "Canes Venatici"
+                ],
+                [
+                    "Tipo",
+                    "Espiral"
+                ],
+                [
+                    "Descubierta",
+                    "1773"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "El Remolino es famosa por sus dos brazos espirales bien definidos, salpicados de regiones rosadas de formación estelar."
+                ],
+                [
+                    "Interacción",
+                    "Una galaxia compañera menor, NGC 5195, tira de uno de los brazos, lo que probablemente afila el patrón espiral y desencadena nuevas estrellas."
+                ],
+                [
+                    "Historia",
+                    "En 1845 Lord Rosse dibujó su estructura espiral; fue la primera galaxia reconocida con esa forma."
+                ]
+            ],
+            "dyk": [
+                "Charles Messier la descubrió en 1773.",
+                "Se han visto varias supernovas recientes en ella.",
+                "La imagen del Hubble de M51 es una de sus más famosas."
+            ]
+        },
+        "orion": {
+            "name": "Nebulosa de Orión",
+            "tagline": "Un vivero de estrellas",
+            "facts": [
+                [
+                    "Catálogo",
+                    "M42"
+                ],
+                [
+                    "Distancia",
+                    "1.344 años luz"
+                ],
+                [
+                    "Ancho",
+                    "24 años luz"
+                ],
+                [
+                    "Edad",
+                    "~2 millones de años"
+                ],
+                [
+                    "Visible",
+                    "A simple vista"
+                ],
+                [
+                    "Núcleo",
+                    "Trapecio"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "La Nebulosa de Orión es la mayor región de formación estelar cercana a la Tierra; se ve como una mancha difusa en la espada de Orión."
+                ],
+                [
+                    "Nacimiento de estrellas",
+                    "Miles de estrellas jóvenes se están formando dentro; muchas están rodeadas de discos protoplanetarios donde podrían formarse planetas."
+                ],
+                [
+                    "El Trapecio",
+                    "Cuatro estrellas calientes y masivas en su centro iluminan el gas circundante y esculpen una cavidad en él."
+                ]
+            ],
+            "dyk": [
+                "Es uno de los objetos más fotografiados del cielo.",
+                "Webb halló extraños objetos con masa de Júpiter flotando libremente en su interior.",
+                "Forma parte de un complejo de nubes mucho mayor en Orión."
+            ]
+        },
+        "crab": {
+            "name": "Nebulosa del Cangrejo",
+            "tagline": "El resto de una supernova",
+            "facts": [
+                [
+                    "Catálogo",
+                    "M1"
+                ],
+                [
+                    "Explotó",
+                    "1054 d.C."
+                ],
+                [
+                    "Distancia",
+                    "6.500 años luz"
+                ],
+                [
+                    "Ancho",
+                    "~11 años luz"
+                ],
+                [
+                    "Núcleo",
+                    "Púlsar"
+                ],
+                [
+                    "Giro del púlsar",
+                    "30 veces/s"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "La Nebulosa del Cangrejo es el resto en expansión de una estrella que explotó como supernova; astrónomos chinos registraron la explosión en 1054 d.C."
+                ],
+                [
+                    "El púlsar",
+                    "Una estrella de neutrones que gira 30 veces por segundo alimenta la nebulosa y la hace brillar en todo el espectro, de ondas de radio a rayos gamma."
+                ],
+                [
+                    "Aún crece",
+                    "La nebulosa se expande a unos 1.500 km/s."
+                ]
+            ],
+            "dyk": [
+                "La supernova de 1054 fue visible de día durante 23 días.",
+                "Fue el primer objeto del catálogo de Charles Messier.",
+                "Sus filamentos entrelazados están llenos de elementos forjados en la estrella."
+            ]
+        },
+        "pillars": {
+            "name": "Los Pilares de la Creación",
+            "tagline": "Torres de gas y polvo",
+            "facts": [
+                [
+                    "Nebulosa",
+                    "Águila (M16)"
+                ],
+                [
+                    "Distancia",
+                    "6.500 años luz"
+                ],
+                [
+                    "Altura",
+                    "~4 años luz"
+                ],
+                [
+                    "Constelación",
+                    "Serpens"
+                ],
+                [
+                    "Primera imagen",
+                    "Hubble 1995"
+                ],
+                [
+                    "Revisitados",
+                    "Webb 2022"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Los Pilares de la Creación son columnas gigantes de gas frío y polvo dentro de la Nebulosa del Águila, donde nacen nuevas estrellas."
+                ],
+                [
+                    "Erosión",
+                    "La intensa luz de estrellas masivas cercanas está evaporando poco a poco los pilares, un proceso llamado fotoevaporación."
+                ],
+                [
+                    "La vista de Webb",
+                    "La imagen infrarroja de Webb en 2022 atravesó el polvo y mostró estrellas recién nacidas brillando como lava en las puntas de los pilares."
+                ]
+            ],
+            "dyk": [
+                "El pilar más alto mide unos 4 años luz.",
+                "La foto de Hubble de 1995 es una de las imágenes espaciales más famosas.",
+                "Las estrellas del interior tienen solo unos cientos de miles de años."
+            ]
+        },
+        "ring": {
+            "name": "Nebulosa del Anillo",
+            "tagline": "El anillo de humo de una estrella moribunda",
+            "facts": [
+                [
+                    "Catálogo",
+                    "M57"
+                ],
+                [
+                    "Tipo",
+                    "Nebulosa planetaria"
+                ],
+                [
+                    "Distancia",
+                    "~2.300 años luz"
+                ],
+                [
+                    "Constelación",
+                    "Lira"
+                ],
+                [
+                    "Centro",
+                    "Enana blanca"
+                ],
+                [
+                    "Edad",
+                    "~4.000 años"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "La Nebulosa del Anillo es una nebulosa planetaria, la envoltura brillante de gas expulsada por una estrella parecida al Sol al final de su vida."
+                ],
+                [
+                    "No son planetas",
+                    "El nombre “nebulosa planetaria” viene de telescopios antiguos, donde parecían redondas como planetas; no tienen nada que ver con ellos."
+                ],
+                [
+                    "Un adelanto",
+                    "Nuestro Sol probablemente creará una nebulosa parecida en unos 5.000 millones de años."
+                ]
+            ],
+            "dyk": [
+                "El anillo en realidad tiene forma más de dona o barril.",
+                "Webb reveló unos 20.000 grumos densos de gas en su interior.",
+                "Es fácil de encontrar con un telescopio de aficionado."
+            ]
+        },
+        "blackhole": {
+            "name": "Agujeros negros",
+            "tagline": "Donde gana la gravedad",
+            "facts": [
+                [
+                    "Primera imagen",
+                    "2019 (M87*)"
+                ],
+                [
+                    "Velocidad de escape",
+                    "Mayor que la luz"
+                ],
+                [
+                    "Tipos",
+                    "Estelares, supermasivos"
+                ],
+                [
+                    "Más cercano conocido",
+                    "Gaia BH1"
+                ],
+                [
+                    "Borde",
+                    "Horizonte de sucesos"
+                ],
+                [
+                    "Predichos por",
+                    "Relatividad general"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Un agujero negro es una región con gravedad tan intensa que nada, ni siquiera la luz, escapa una vez cruzado el horizonte de sucesos."
+                ],
+                [
+                    "Cómo se forman",
+                    "Los estelares se forman cuando colapsan estrellas muy masivas. Los supermasivos, de millones a miles de millones de masas solares, están en el centro de la mayoría de galaxias."
+                ],
+                [
+                    "Ver lo invisible",
+                    "Se detectan por sus efectos: discos brillantes de gas, estrellas que giran a su alrededor y ondas gravitacionales de fusiones, detectadas por primera vez por LIGO en 2015."
+                ]
+            ],
+            "dyk": [
+                "Cerca de un agujero negro el tiempo pasa más lento.",
+                "Stephen Hawking predijo que los agujeros negros se evaporan lentamente.",
+                "El agujero negro central de nuestra galaxia está a unos 26.000 años luz."
+            ]
+        },
+        "supernova": {
+            "name": "Supernovas",
+            "tagline": "Las mayores explosiones de estrellas",
+            "facts": [
+                [
+                    "Brillo",
+                    "Miles de millones de soles"
+                ],
+                [
+                    "Tipos",
+                    "Ia, II, Ib, Ic"
+                ],
+                [
+                    "Ritmo en la Vía Láctea",
+                    "~2 por siglo"
+                ],
+                [
+                    "Última vista aquí",
+                    "1604"
+                ],
+                [
+                    "Deja tras de sí",
+                    "Estrella de neutrones o agujero negro"
+                ],
+                [
+                    "Crea",
+                    "Elementos pesados"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Una supernova es la muerte explosiva de una estrella; durante semanas puede brillar más que toda una galaxia."
+                ],
+                [
+                    "Dos tipos principales",
+                    "Las estrellas masivas explotan cuando colapsa su núcleo. Una enana blanca puede explotar si acumula demasiada materia de una estrella compañera (Tipo Ia)."
+                ],
+                [
+                    "Materia estelar",
+                    "Las supernovas esparcen elementos como oxígeno, calcio y hierro por el espacio, que acaban en nuevas estrellas, planetas y personas."
+                ]
+            ],
+            "dyk": [
+                "Las supernovas Tipo Ia ayudaron a revelar que la expansión del universo se acelera.",
+                "La supernova 1987A fue la más cercana vista en tiempos modernos.",
+                "El hierro de tu sangre viene de estrellas que explotaron."
+            ]
+        },
+        "aurora": {
+            "name": "Auroras",
+            "tagline": "El espectáculo de luces de la Tierra",
+            "facts": [
+                [
+                    "Causa",
+                    "Viento solar"
+                ],
+                [
+                    "Altitud",
+                    "100–300 km"
+                ],
+                [
+                    "Verde",
+                    "Oxígeno"
+                ],
+                [
+                    "Rojo",
+                    "Oxígeno a gran altitud"
+                ],
+                [
+                    "Azul/morado",
+                    "Nitrógeno"
+                ],
+                [
+                    "También en",
+                    "Júpiter, Saturno"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Las auroras son cortinas de luz que se forman cuando partículas cargadas del Sol chocan con gases de la atmósfera superior terrestre."
+                ],
+                [
+                    "Dónde y cuándo",
+                    "Suelen aparecer en anillos alrededor de los polos magnéticos; en tormentas solares fuertes pueden verse mucho más lejos de los polos."
+                ],
+                [
+                    "Otros mundos",
+                    "Júpiter, Saturno, Urano y Neptuno tienen auroras, igual que lunas como Ganímedes."
+                ]
+            ],
+            "dyk": [
+                "Las luces del norte se llaman aurora boreal y las del sur, aurora austral.",
+                "Los astronautas de la ISS suelen sobrevolar auroras.",
+                "La fuerte tormenta solar de mayo de 2024 llevó auroras inusualmente lejos de los polos."
+            ]
+        },
+        "eclipse": {
+            "name": "Eclipses solares",
+            "tagline": "Cuando la Luna tapa el Sol",
+            "facts": [
+                [
+                    "Tipos",
+                    "Total, anular, parcial"
+                ],
+                [
+                    "Totalidad máxima",
+                    "~7,5 min"
+                ],
+                [
+                    "Frecuencia",
+                    "2–5 al año"
+                ],
+                [
+                    "Velocidad de la sombra",
+                    "~1.700 km/h"
+                ],
+                [
+                    "Coincidencia",
+                    "Sol 400× más grande, 400× más lejos"
+                ],
+                [
+                    "Se ve",
+                    "La corona"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Un eclipse solar ocurre cuando la Luna pasa entre el Sol y la Tierra y proyecta su sombra sobre nosotros."
+                ],
+                [
+                    "Una coincidencia cósmica",
+                    "El Sol es unas 400 veces más ancho que la Luna pero también unas 400 veces más lejano, así que se ven casi del mismo tamaño en el cielo."
+                ],
+                [
+                    "Seguridad",
+                    "Nunca mires el Sol sin gafas certificadas para eclipses; solo es seguro a simple vista durante el breve momento de totalidad."
+                ]
+            ],
+            "dyk": [
+                "Durante la totalidad se puede ver la corona del Sol.",
+                "El helio se descubrió en la luz del Sol durante un eclipse en 1868.",
+                "Dentro de millones de años dejarán de producirse eclipses totales."
+            ]
+        },
+        "bigbang": {
+            "name": "El Big Bang",
+            "tagline": "Cómo empezó el universo",
+            "facts": [
+                [
+                    "Cuándo",
+                    "Hace 13.800 millones de años"
+                ],
+                [
+                    "Primeros átomos",
+                    "~380.000 años después"
+                ],
+                [
+                    "Primeras estrellas",
+                    "~100–200 millones de años después"
+                ],
+                [
+                    "Evidencia",
+                    "CMB, expansión"
+                ],
+                [
+                    "Nombrado por",
+                    "Fred Hoyle"
+                ],
+                [
+                    "Sigue",
+                    "Expandiéndose"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "El Big Bang es la teoría científica de que el universo comenzó en un estado extremadamente caliente y denso hace unos 13.800 millones de años y desde entonces se expande."
+                ],
+                [
+                    "No fue una explosión",
+                    "No fue una explosión en el espacio: el propio espacio empezó a expandirse en todas partes a la vez."
+                ],
+                [
+                    "Evidencia",
+                    "Las galaxias que se alejan de nosotros, el fondo cósmico de microondas y las cantidades de hidrógeno y helio en el universo respaldan la teoría."
+                ]
+            ],
+            "dyk": [
+                "El término “Big Bang” se acuñó como broma.",
+                "Parte de la estática de los viejos televisores analógicos venía del resplandor del Big Bang.",
+                "Webb está viendo galaxias de solo unos cientos de millones de años después de aquel momento."
+            ]
+        },
+        "darkmatter": {
+            "name": "Materia oscura",
+            "tagline": "La mayoría invisible",
+            "facts": [
+                [
+                    "Parte de la materia",
+                    "~85 %"
+                ],
+                [
+                    "Parte del universo",
+                    "~27 %"
+                ],
+                [
+                    "Interactúa",
+                    "Solo por gravedad"
+                ],
+                [
+                    "Primer indicio",
+                    "Años 30 (Zwicky)"
+                ],
+                [
+                    "Evidencia",
+                    "Rotación de galaxias"
+                ],
+                [
+                    "Identidad",
+                    "Desconocida"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "La materia oscura es una sustancia invisible que no emite, absorbe ni refleja luz; solo la detectamos por su gravedad."
+                ],
+                [
+                    "Evidencia",
+                    "Las galaxias giran demasiado rápido para mantenerse unidas solo con materia visible, y los cúmulos de galaxias curvan la luz más de lo que su masa visible puede explicar."
+                ],
+                [
+                    "La búsqueda",
+                    "Los científicos buscan partículas de materia oscura con detectores subterráneos, aceleradores de partículas y telescopios como Euclid de la ESA."
+                ]
+            ],
+            "dyk": [
+                "Los estudios de rotación de galaxias de Vera Rubin fueron una evidencia clave.",
+                "La materia oscura podría estar atravesándote ahora mismo.",
+                "Sin ella, las galaxias quizá nunca se habrían formado."
+            ]
+        },
+        "darkenergy": {
+            "name": "Energía oscura",
+            "tagline": "Lo que acelera el universo",
+            "facts": [
+                [
+                    "Parte del universo",
+                    "~68 %"
+                ],
+                [
+                    "Descubierta",
+                    "1998"
+                ],
+                [
+                    "Premio Nobel",
+                    "2011"
+                ],
+                [
+                    "Efecto",
+                    "Acelera la expansión"
+                ],
+                [
+                    "Evidencia",
+                    "Supernovas Tipo Ia"
+                ],
+                [
+                    "Naturaleza",
+                    "Desconocida"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "En 1998 los astrónomos descubrieron que la expansión del universo se acelera en vez de frenarse. Su causa desconocida se llama energía oscura."
+                ],
+                [
+                    "¿Qué podría ser?",
+                    "Una idea es que es energía propia del espacio vacío, la “constante cosmológica” de Einstein. Estudios recientes sugieren que podría cambiar con el tiempo."
+                ],
+                [
+                    "El destino del universo",
+                    "Si la energía oscura sigue empujando, las galaxias lejanas acabarán desapareciendo de nuestra vista."
+                ]
+            ],
+            "dyk": [
+                "La energía oscura es la mayor parte del universo.",
+                "La expansión empezó a acelerarse hace unos 5.000 millones de años.",
+                "Nadie sabe realmente qué es."
+            ]
+        },
+        "exoplanets": {
+            "name": "Exoplanetas",
+            "tagline": "Mundos alrededor de otras estrellas",
+            "facts": [
+                [
+                    "Confirmados",
+                    "6.000+"
+                ],
+                [
+                    "Primero (estrella tipo Sol)",
+                    "1995"
+                ],
+                [
+                    "Métodos principales",
+                    "Tránsito, bamboleo"
+                ],
+                [
+                    "Principales cazadores",
+                    "Kepler, TESS"
+                ],
+                [
+                    "Más cercano",
+                    "Próxima b"
+                ],
+                [
+                    "Más común",
+                    "Supertierras"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Los exoplanetas orbitan estrellas distintas al Sol; probablemente la mayoría de estrellas tienen al menos uno."
+                ],
+                [
+                    "Cómo se encuentran",
+                    "Los telescopios buscan pequeñas caídas de brillo cuando un planeta pasa por delante de su estrella, o miden el bamboleo de una estrella al ser atraída por un planeta."
+                ],
+                [
+                    "Buscando vida",
+                    "Webb puede analizar la atmósfera de algunos exoplanetas, buscando agua, dióxido de carbono y posibles señales de vida."
+                ]
+            ],
+            "dyk": [
+                "Algunos exoplanetas orbitan dos soles, como Tatooine.",
+                "TRAPPIST-1 tiene siete planetas del tamaño de la Tierra.",
+                "Algunos “Júpiter calientes” rodean su estrella en menos de un día."
+            ]
+        },
+        "cmb": {
+            "name": "Fondo cósmico de microondas",
+            "tagline": "La luz más antigua del universo",
+            "facts": [
+                [
+                    "Emitido",
+                    "~380.000 años tras el Big Bang"
+                ],
+                [
+                    "Temperatura",
+                    "2,725 K"
+                ],
+                [
+                    "Descubierto",
+                    "1965"
+                ],
+                [
+                    "Cartografiado por",
+                    "COBE, WMAP, Planck"
+                ],
+                [
+                    "Nobel",
+                    "1978, 2006"
+                ],
+                [
+                    "Variaciones",
+                    "1 parte en 100.000"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "El fondo cósmico de microondas (CMB) es una tenue radiación que llena todo el cielo: el resplandor remanente del Big Bang."
+                ],
+                [
+                    "Descubrimiento",
+                    "Arno Penzias y Robert Wilson lo hallaron por accidente en 1965 mientras intentaban eliminar ruido de una antena de radio."
+                ],
+                [
+                    "Una foto de bebé",
+                    "Pequeñas variaciones de temperatura en el CMB son las semillas que luego formaron galaxias; Planck las cartografió con gran detalle."
+                ]
+            ],
+            "dyk": [
+                "Al principio se confundió con ruido de excrementos de palomas en la antena.",
+                "Es igual en todas direcciones con una diferencia de solo un 0,001 %.",
+                "Es la mejor evidencia del Big Bang."
+            ]
+        },
+        "iss": {
+            "name": "Estación Espacial",
+            "tagline": "El laboratorio orbital de la humanidad",
+            "facts": [
+                [
+                    "Lanzada",
+                    "1998"
+                ],
+                [
+                    "Habitada desde",
+                    "nov. 2000"
+                ],
+                [
+                    "Altitud",
+                    "~420 km"
+                ],
+                [
+                    "Velocidad",
+                    "28.000 km/h"
+                ],
+                [
+                    "Órbitas/día",
+                    "~16"
+                ],
+                [
+                    "Masa",
+                    "~420 toneladas"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "La Estación Espacial Internacional es un proyecto conjunto de EE. UU., Rusia, Europa, Japón y Canadá. Se habita sin interrupción desde noviembre de 2000."
+                ],
+                [
+                    "Ciencia",
+                    "Sus tripulaciones estudian cómo afecta la microgravedad al cuerpo humano, los materiales, las plantas y los fluidos, preparando misiones más largas."
+                ],
+                [
+                    "Futuro",
+                    "Se prevé retirar la ISS hacia 2030, cuando SpaceX la hará descender al océano. Se están construyendo estaciones comerciales para sustituirla."
+                ]
+            ],
+            "dyk": [
+                "Puedes ver la ISS desde la Tierra sin telescopio.",
+                "Sus tripulaciones ven unas 16 salidas de sol al día.",
+                "Tiene aproximadamente el tamaño de un campo de fútbol."
+            ]
+        },
+        "hubble": {
+            "name": "Telescopio Hubble",
+            "tagline": "El telescopio que cambió la astronomía",
+            "facts": [
+                [
+                    "Lanzado",
+                    "1990"
+                ],
+                [
+                    "Espejo",
+                    "2,4 m"
+                ],
+                [
+                    "Altitud",
+                    "~540 km"
+                ],
+                [
+                    "Misiones de servicio",
+                    "5"
+                ],
+                [
+                    "Observaciones",
+                    "1,6 millones+"
+                ],
+                [
+                    "Ve en",
+                    "UV, visible, IR cercano"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "El telescopio espacial Hubble orbita por encima de la borrosa atmósfera terrestre y ha captado algunas de las imágenes más famosas de la astronomía."
+                ],
+                [
+                    "Un inicio complicado",
+                    "Su espejo principal tenía un pequeño defecto; en 1993 los astronautas instalaron una óptica correctora, y cinco misiones del transbordador lo mantuvieron en funcionamiento."
+                ],
+                [
+                    "Descubrimientos",
+                    "Hubble ayudó a fijar la edad del universo, mostró que casi toda galaxia tiene un agujero negro supermasivo y contribuyó a descubrir la energía oscura."
+                ]
+            ],
+            "dyk": [
+                "Hubble lleva el nombre del astrónomo Edwin Hubble.",
+                "Viaja a unos 27.000 km/h.",
+                "Sus imágenes de Campo Profundo revelaron miles de galaxias en un trozo diminuto de cielo."
+            ]
+        },
+        "jwst": {
+            "name": "Telescopio James Webb",
+            "tagline": "Viendo las primeras galaxias",
+            "facts": [
+                [
+                    "Lanzado",
+                    "25 dic. 2021"
+                ],
+                [
+                    "Espejo",
+                    "6,5 m, 18 segmentos"
+                ],
+                [
+                    "Ubicación",
+                    "L2, 1,5 millones de km"
+                ],
+                [
+                    "Ve en",
+                    "Infrarrojo"
+                ],
+                [
+                    "Parasol",
+                    "Del tamaño de una pista de tenis"
+                ],
+                [
+                    "Socios",
+                    "NASA, ESA, CSA"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Webb es el telescopio espacial más potente jamás construido. Observa luz infrarroja para ver a través del polvo y hasta el universo primitivo."
+                ],
+                [
+                    "Ingeniería",
+                    "Su espejo de berilio recubierto de oro y su parasol de cinco capas tuvieron que desplegarse en el espacio; el parasol mantiene los instrumentos a unos −233 °C."
+                ],
+                [
+                    "Descubrimientos",
+                    "Webb ha hallado galaxias primitivas sorprendentemente brillantes, detectado dióxido de carbono en exoplanetas y tomado imágenes espectaculares de nebulosas y planetas."
+                ]
+            ],
+            "dyk": [
+                "El espejo de Webb tiene unas 6 veces más área que el del Hubble.",
+                "Orbita un punto en el espacio, no la Tierra.",
+                "Su primera imagen a todo color se publicó en julio de 2022."
+            ]
+        },
+        "voyager": {
+            "name": "Voyager 1",
+            "tagline": "El objeto humano más lejano",
+            "facts": [
+                [
+                    "Lanzada",
+                    "5 sep. 1977"
+                ],
+                [
+                    "Distancia",
+                    "> 165 UA"
+                ],
+                [
+                    "Velocidad",
+                    "~61.000 km/h"
+                ],
+                [
+                    "Estado",
+                    "Espacio interestelar"
+                ],
+                [
+                    "Retraso de señal",
+                    "~23 horas"
+                ],
+                [
+                    "Lleva",
+                    "El Disco de Oro"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "La Voyager 1 sobrevoló Júpiter y Saturno y siguió alejándose; en 2012 se convirtió en la primera nave en entrar en el espacio interestelar."
+                ],
+                [
+                    "Punto azul pálido",
+                    "En 1990 se giró y fotografió la Tierra desde 6.000 millones de km como un pequeño punto, imagen que Carl Sagan hizo famosa."
+                ],
+                [
+                    "Disco de Oro",
+                    "Lleva a bordo un disco chapado en oro con sonidos, música e imágenes de la Tierra, un mensaje para quien lo encuentre."
+                ]
+            ],
+            "dyk": [
+                "Su fuente de energía genera cada año menos electricidad.",
+                "Sus computadoras tienen unos 70 KB de memoria.",
+                "La Voyager 2 es la única sonda que ha visitado Urano y Neptuno."
+            ]
+        },
+        "apollo": {
+            "name": "Apolo 11",
+            "tagline": "Los primeros pasos en la Luna",
+            "facts": [
+                [
+                    "Lanzado",
+                    "16 jul. 1969"
+                ],
+                [
+                    "Aterrizó",
+                    "20 jul. 1969"
+                ],
+                [
+                    "Tripulación",
+                    "Armstrong, Aldrin, Collins"
+                ],
+                [
+                    "Lugar",
+                    "Mar de la Tranquilidad"
+                ],
+                [
+                    "Caminata lunar",
+                    "2,5 horas"
+                ],
+                [
+                    "Muestras",
+                    "21,5 kg"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "El Apolo 11 fue la primera misión en llevar humanos a la Luna, cumpliendo la meta que el presidente Kennedy fijó en 1961."
+                ],
+                [
+                    "El aterrizaje",
+                    "Neil Armstrong pilotó el módulo lunar Eagle más allá de un campo de rocas y aterrizó con solo unos 25 segundos de combustible restante."
+                ],
+                [
+                    "Legado",
+                    "Unos 600 millones de personas lo vieron en directo. Seis misiones Apolo aterrizaron en total y 12 astronautas caminaron sobre la Luna."
+                ]
+            ],
+            "dyk": [
+                "Su computadora de guía era mucho menos potente que una calculadora moderna.",
+                "Los astronautas dejaron un reflector que aún se usa para medir la distancia a la Luna.",
+                "Michael Collins orbitó solo mientras los otros caminaban por la superficie."
+            ]
+        },
+        "perseverance": {
+            "name": "Róver Perseverance",
+            "tagline": "En busca de vida antigua en Marte",
+            "facts": [
+                [
+                    "Aterrizó",
+                    "18 feb. 2021"
+                ],
+                [
+                    "Lugar",
+                    "Cráter Jezero"
+                ],
+                [
+                    "Masa",
+                    "1.025 kg"
+                ],
+                [
+                    "Energía",
+                    "Nuclear (MMRTG)"
+                ],
+                [
+                    "Ayudante",
+                    "Helicóptero Ingenuity"
+                ],
+                [
+                    "Objetivo",
+                    "Retorno de muestras"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Perseverance es el róver más avanzado de la NASA en Marte y explora el cráter Jezero, antiguo lecho de un lago."
+                ],
+                [
+                    "Muestras",
+                    "El róver recoge núcleos de roca en tubos sellados para que una futura misión pueda traerlos a la Tierra para su estudio."
+                ],
+                [
+                    "Ingenuity",
+                    "Su compañero, el helicóptero Ingenuity, hizo el primer vuelo motorizado en otro mundo y completó 72 vuelos."
+                ]
+            ],
+            "dyk": [
+                "Lleva micrófonos y ha grabado sonidos en Marte.",
+                "Su experimento MOXIE produjo oxígeno a partir del aire marciano.",
+                "Lleva un chip con 10,9 millones de nombres del público."
+            ]
+        },
+        "artemis": {
+            "name": "Programa Artemisa",
+            "tagline": "De vuelta a la Luna, para quedarse",
+            "facts": [
+                [
+                    "Agencia",
+                    "NASA + socios"
+                ],
+                [
+                    "Cohete",
+                    "SLS"
+                ],
+                [
+                    "Cápsula",
+                    "Orión"
+                ],
+                [
+                    "Artemisa I",
+                    "nov. 2022 (sin tripulación)"
+                ],
+                [
+                    "Artemisa II",
+                    "Sobrevuelo lunar tripulado"
+                ],
+                [
+                    "Objetivo",
+                    "Polo sur lunar"
+                ]
+            ],
+            "sections": [
+                [
+                    "Resumen",
+                    "Artemisa es el programa de la NASA para devolver humanos a la Luna y mantener una presencia duradera allí, como paso hacia Marte."
+                ],
+                [
+                    "Misiones",
+                    "Artemisa I probó el cohete SLS y la cápsula Orión alrededor de la Luna en 2022; Artemisa II llevará astronautas alrededor de la Luna, y Artemisa III intentará aterrizar cerca del polo sur."
+                ],
+                [
+                    "Gateway",
+                    "Se planea una pequeña estación en órbita lunar llamada Gateway como centro para tripulaciones y ciencia."
+                ]
+            ],
+            "dyk": [
+                "En la mitología griega, Artemisa es la hermana gemela de Apolo.",
+                "Artemisa planea llevar a la primera mujer a la Luna.",
+                "El polo sur podría tener hielo de agua en cráteres en sombra permanente."
+            ]
+        }
+    },
+    "hi": {
+        "sun": {
+            "name": "सूर्य",
+            "tagline": "हमारा अपना तारा",
+            "facts": [
+                [
+                    "प्रकार",
+                    "G2V पीला बौना तारा"
+                ],
+                [
+                    "आयु",
+                    "4.6 अरब वर्ष"
+                ],
+                [
+                    "व्यास",
+                    "13.9 लाख किमी"
+                ],
+                [
+                    "सतह का तापमान",
+                    "5,500 °C"
+                ],
+                [
+                    "केंद्र का तापमान",
+                    "1.5 करोड़ °C"
+                ],
+                [
+                    "पृथ्वी तक प्रकाश",
+                    "8 मिनट 20 सेकंड"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "सूर्य हमारे सौर मंडल के केंद्र में स्थित एक मध्यम आयु का तारा है। सौर मंडल का 99.86% द्रव्यमान इसी में है, और इसका गुरुत्व बुध से लेकर दूर ऊर्ट बादल तक सब कुछ कक्षा में बाँधे रखता है।"
+                ],
+                [
+                    "यह कैसे चमकता है",
+                    "केंद्र में नाभिकीय संलयन हर सेकंड लगभग 60 करोड़ टन हाइड्रोजन को हीलियम में बदलता है। यह ऊर्जा सतह तक पहुँचने में 1.7 लाख वर्ष तक लेती है, फिर सिर्फ़ 8 मिनट में पृथ्वी तक आ जाती है।"
+                ],
+                [
+                    "संरचना",
+                    "ऊर्जा विकिरण क्षेत्र और फिर संवहन क्षेत्र से बाहर आती है। दिखने वाली सतह प्रकाशमंडल है; उसके ऊपर वर्णमंडल और कोरोना हैं, जो अजीब तरह से सतह से भी गर्म (10 लाख °C से अधिक) है।"
+                ],
+                [
+                    "सौर गतिविधि",
+                    "सूर्य लगभग 11 वर्ष के चुंबकीय चक्र से गुज़रता है। चरम पर सौर धब्बे, सौर ज्वालाएँ और कोरोनल मास इजेक्शन आम हो जाते हैं, जो उपग्रहों और बिजली ग्रिड को प्रभावित कर सकते हैं और पृथ्वी पर ध्रुवीय ज्योति बनाते हैं।"
+                ],
+                [
+                    "भविष्य",
+                    "लगभग 5 अरब वर्ष बाद केंद्र की हाइड्रोजन खत्म होने पर सूर्य फूलकर लाल दानव बन जाएगा, और शायद बुध, शुक्र और पृथ्वी को निगल लेगा। अंत में यह धीरे-धीरे ठंडा होता श्वेत बौना बनेगा।"
+                ]
+            ],
+            "dyk": [
+                "सूर्य के अंदर लगभग 13 लाख पृथ्वियाँ समा सकती हैं।",
+                "पार्कर सोलर प्रोब सूर्य की सतह से लगभग 60 लाख किमी तक पहुँच चुका है, किसी भी यान से ज़्यादा पास।",
+                "असल में सूर्य सफ़ेद है; पृथ्वी के वायुमंडल के कारण पीला दिखता है।"
+            ]
+        },
+        "proxima": {
+            "name": "प्रॉक्सिमा सेंटॉरी",
+            "tagline": "सूर्य का सबसे नज़दीकी तारा",
+            "facts": [
+                [
+                    "प्रकार",
+                    "लाल बौना (M5.5)"
+                ],
+                [
+                    "दूरी",
+                    "4.24 प्रकाश वर्ष"
+                ],
+                [
+                    "द्रव्यमान",
+                    "सूर्य का 12%"
+                ],
+                [
+                    "सतह का तापमान",
+                    "~2,700 °C"
+                ],
+                [
+                    "ग्रह",
+                    "कम से कम 2"
+                ],
+                [
+                    "तारामंडल",
+                    "सेंटॉरस"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "प्रॉक्सिमा सेंटॉरी एक छोटा, ठंडा लाल बौना तारा है और अल्फ़ा सेंटॉरी त्रि-तारा प्रणाली का हिस्सा है। यह हमारे सूर्य का सबसे नज़दीकी ज्ञात तारा है, पर इतना धुँधला है कि बिना दूरबीन के नहीं दिखता।"
+                ],
+                [
+                    "ग्रह",
+                    "प्रॉक्सिमा b लगभग पृथ्वी जितने द्रव्यमान का ग्रह है, जो तारे के रहने योग्य क्षेत्र में है, जहाँ पानी तरल रह सकता है। यह हर 11.2 दिन में एक चक्कर लगाता है।"
+                ],
+                [
+                    "बेचैन तारा",
+                    "प्रॉक्सिमा एक फ़्लेयर तारा है जो कभी-कभी अचानक बहुत चमक उठता है। ये ज्वालाएँ पास के ग्रहों का वायुमंडल उड़ा सकती हैं, इसलिए वहाँ जीवन की संभावना अनिश्चित है।"
+                ]
+            ],
+            "dyk": [
+                "प्रॉक्सिमा का प्रकाश हम तक 4 साल से ज़्यादा में पहुँचता है।",
+                "वॉयेजर 1 की गति से वहाँ पहुँचने में 70,000 साल से ज़्यादा लगेंगे।",
+                "प्रॉक्सिमा जैसे लाल बौने खरबों वर्ष तक जल सकते हैं।"
+            ]
+        },
+        "sirius": {
+            "name": "सीरियस (व्याध)",
+            "tagline": "रात के आकाश का सबसे चमकीला तारा",
+            "facts": [
+                [
+                    "प्रकार",
+                    "A1V + श्वेत बौना"
+                ],
+                [
+                    "दूरी",
+                    "8.6 प्रकाश वर्ष"
+                ],
+                [
+                    "चमक",
+                    "सूर्य से 25 गुना"
+                ],
+                [
+                    "द्रव्यमान",
+                    "सूर्य का 2 गुना"
+                ],
+                [
+                    "तारामंडल",
+                    "बृहत् श्वान"
+                ],
+                [
+                    "उपनाम",
+                    "डॉग स्टार"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "सीरियस इतना चमकीला इसलिए दिखता है क्योंकि यह तेजस्वी भी है और पास भी। यह असल में एक युग्म तारा है: सीरियस A एक गर्म सफ़ेद तारा है और सीरियस B एक धुँधला श्वेत बौना साथी।"
+                ],
+                [
+                    "इतिहास",
+                    "प्राचीन मिस्रवासी अपना कैलेंडर भोर से ठीक पहले सीरियस के उगने पर रखते थे, जो नील नदी की वार्षिक बाढ़ का संकेत था। अंग्रेज़ी मुहावरा “dog days of summer” भी इसी से आया है।"
+                ],
+                [
+                    "सीरियस B",
+                    "सीरियस B खोजा गया पहला श्वेत बौना था। इसमें लगभग सूर्य जितना द्रव्यमान पृथ्वी जितनी गेंद में समाया है।"
+                ]
+            ],
+            "dyk": [
+                "सिर्फ़ चाँद, शुक्र, बृहस्पति और कभी-कभी मंगल ही सीरियस से ज़्यादा चमकते हैं।",
+                "सीरियस धीरे-धीरे हमारे पास आ रहा है।",
+                "सीरियस B का एक चम्मच पदार्थ कई टन वज़नी होगा।"
+            ]
+        },
+        "betelgeuse": {
+            "name": "बीटलजूस (आर्द्रा)",
+            "tagline": "अपने अंत के क़रीब एक लाल महादानव",
+            "facts": [
+                [
+                    "प्रकार",
+                    "लाल महादानव"
+                ],
+                [
+                    "तारामंडल",
+                    "मृग (ओरायन)"
+                ],
+                [
+                    "दूरी",
+                    "~550 प्रकाश वर्ष"
+                ],
+                [
+                    "त्रिज्या",
+                    "~700 सूर्य"
+                ],
+                [
+                    "आयु",
+                    "~1 करोड़ वर्ष"
+                ],
+                [
+                    "अंत",
+                    "सुपरनोवा"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "बीटलजूस मृग तारामंडल के कंधे पर है। अगर यह सूर्य की जगह होता, तो इसकी सतह मंगल की कक्षा से भी आगे तक फैल जाती।"
+                ],
+                [
+                    "महान मंदता",
+                    "2019 के अंत और 2020 की शुरुआत में बीटलजूस की चमक घटकर लगभग 40% रह गई। खगोलविदों ने पाया कि तारे ने धूल का विशाल बादल छोड़ा था, जिसने कुछ समय के लिए इसकी रोशनी रोक दी।"
+                ],
+                [
+                    "आने वाला सुपरनोवा",
+                    "बीटलजूस अपने जीवन के अंत के क़रीब है। अगले 1 लाख वर्षों में कभी भी यह सुपरनोवा बनकर फटेगा और हफ़्तों तक दिन में भी दिखेगा, पर यह पृथ्वी को नुकसान पहुँचाने के लिए बहुत दूर है।"
+                ]
+            ],
+            "dyk": [
+                "बीटलजूस इतना नया है कि इसके बनने से बहुत पहले डायनासोर विलुप्त हो चुके थे।",
+                "इसका नाम अरबी से आया है, जिसका अर्थ अक्सर “दानव का हाथ” बताया जाता है।",
+                "यह उन गिने-चुने तारों में है जिनकी सतह दूरबीनें अलग से देख पाती हैं।"
+            ]
+        },
+        "neutron": {
+            "name": "न्यूट्रॉन तारे",
+            "tagline": "ब्रह्मांड के सबसे घने तारे",
+            "facts": [
+                [
+                    "व्यास",
+                    "~20 किमी"
+                ],
+                [
+                    "द्रव्यमान",
+                    "1.4–2 सूर्य"
+                ],
+                [
+                    "घूर्णन",
+                    "सेकंड में 716 बार तक"
+                ],
+                [
+                    "बनते हैं",
+                    "सुपरनोवा से"
+                ],
+                [
+                    "चुंबकीय क्षेत्र",
+                    "पृथ्वी से खरबों गुना"
+                ],
+                [
+                    "पहली खोज",
+                    "1967"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "जब कोई विशाल तारा फटता है, तो उसका केंद्र सिकुड़कर न्यूट्रॉन तारा बन सकता है। यह एक शहर जितना बड़ा पर सूर्य से भारी पिंड है, जिसमें पदार्थ इतना दबा है कि प्रोटॉन और इलेक्ट्रॉन मिलकर न्यूट्रॉन बन जाते हैं।"
+                ],
+                [
+                    "पल्सर",
+                    "कई न्यूट्रॉन तारे तेज़ी से घूमते हैं और प्रकाशस्तंभ की तरह विकिरण की किरणें अंतरिक्ष में घुमाते हैं। पहला पल्सर 1967 में जॉसलिन बेल बर्नेल ने खोजा।"
+                ],
+                [
+                    "किलोनोवा",
+                    "जब दो न्यूट्रॉन तारे टकराते हैं, तो गुरुत्वीय तरंगें निकलती हैं और सोना-प्लैटिनम जैसे भारी तत्व बनते हैं। 2017 में पहली बार पकड़ी गई टक्कर से इसकी पुष्टि हुई।"
+                ]
+            ],
+            "dyk": [
+                "न्यूट्रॉन तारे के चीनी के एक टुकड़े जितने हिस्से का वज़न लगभग 1 अरब टन होगा।",
+                "मैग्नेटार सबसे शक्तिशाली चुंबकीय क्षेत्र वाले न्यूट्रॉन तारे हैं।",
+                "आपके गहनों का सोना शायद न्यूट्रॉन तारों की टक्कर में बना था।"
+            ]
+        },
+        "mercury": {
+            "name": "बुध",
+            "tagline": "सबसे छोटा और सबसे तेज़ ग्रह",
+            "facts": [
+                [
+                    "दूरी",
+                    "0.39 AU"
+                ],
+                [
+                    "वर्ष",
+                    "88 दिन"
+                ],
+                [
+                    "दिन",
+                    "176 पृथ्वी दिन"
+                ],
+                [
+                    "व्यास",
+                    "4,879 किमी"
+                ],
+                [
+                    "चंद्रमा",
+                    "0"
+                ],
+                [
+                    "तापमान",
+                    "−180 से 430 °C"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "बुध सबसे छोटा और सूर्य का सबसे नज़दीकी ग्रह है। यह किसी भी अन्य ग्रह से तेज़ चक्कर लगाता है, इसीलिए इसका अंग्रेज़ी नाम रोमन संदेशवाहक देवता पर रखा गया।"
+                ],
+                [
+                    "सतह",
+                    "इसकी धूसर, गड्ढों से भरी सतह हमारे चाँद जैसी है। गर्मी रोकने के लिए लगभग कोई वायुमंडल न होने से दिन बेहद गर्म और रातें बेहद ठंडी होती हैं।"
+                ],
+                [
+                    "आंतरिक भाग",
+                    "बुध का लौह केंद्र बहुत बड़ा है, जो इसकी त्रिज्या का लगभग 85% है। इसका कमज़ोर चुंबकीय क्षेत्र बताता है कि केंद्र का कुछ हिस्सा अब भी पिघला है।"
+                ],
+                [
+                    "खोज यात्राएँ",
+                    "मैरिनर 10 (1974–75) पास से गुज़रा, MESSENGER ने 2011–2015 तक परिक्रमा की और ध्रुवों के छायादार गड्ढों में बर्फ़ पाई। यूरोप-जापान का BepiColombo रास्ते में है।"
+                ]
+            ],
+            "dyk": [
+                "केंद्र ठंडा होने से बुध सिकुड़ रहा है, जिससे सतह पर झुर्रियाँ पड़ती हैं।",
+                "बुध से सूर्य पृथ्वी की तुलना में तीन गुना बड़ा दिखेगा।",
+                "सूर्य के सबसे पास होकर भी यह सबसे गर्म ग्रह नहीं है; शुक्र है।"
+            ]
+        },
+        "venus": {
+            "name": "शुक्र",
+            "tagline": "सबसे गर्म ग्रह",
+            "facts": [
+                [
+                    "दूरी",
+                    "0.72 AU"
+                ],
+                [
+                    "वर्ष",
+                    "225 दिन"
+                ],
+                [
+                    "दिन",
+                    "243 पृथ्वी दिन"
+                ],
+                [
+                    "सतह का तापमान",
+                    "465 °C"
+                ],
+                [
+                    "दबाव",
+                    "पृथ्वी का 92 गुना"
+                ],
+                [
+                    "चंद्रमा",
+                    "0"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "शुक्र लगभग पृथ्वी जितना बड़ा है और अक्सर पृथ्वी का जुड़वाँ कहलाता है, पर यह कुचल देने वाले दबाव और सीसा पिघलाने वाली गर्मी वाली नारकीय दुनिया है।"
+                ],
+                [
+                    "वायुमंडल",
+                    "घना कार्बन-डाइऑक्साइड वायुमंडल अनियंत्रित ग्रीनहाउस प्रभाव से गर्मी रोकता है। सल्फ़्यूरिक एसिड के बादल सूर्य का प्रकाश लौटाते हैं, जिससे यह हमारे आकाश का सबसे चमकीला ग्रह बनता है।"
+                ],
+                [
+                    "अजीब घूर्णन",
+                    "शुक्र ज़्यादातर ग्रहों के उलट दिशा में और इतना धीरे घूमता है कि इसका एक दिन इसके वर्ष से भी लंबा है।"
+                ],
+                [
+                    "खोज यात्राएँ",
+                    "सोवियत वेनेरा यानों ने गर्मी से ख़राब होने से पहले सतह की पहली तस्वीरें भेजीं। 1990 के दशक में NASA के मैजेलन ने रडार से इसका नक़्शा बनाया; DAVINCI और VERITAS मिशन आगे आएँगे।"
+                ]
+            ],
+            "dyk": [
+                "शुक्र पर सूर्य पश्चिम में उगता है।",
+                "इसके बादल सिर्फ़ 4 दिन में पूरे ग्रह का चक्कर लगा लेते हैं।",
+                "शुक्र पर किसी भी ग्रह से ज़्यादा ज्वालामुखी हैं।"
+            ]
+        },
+        "earth": {
+            "name": "पृथ्वी",
+            "tagline": "जीवन वाली एकमात्र ज्ञात दुनिया",
+            "facts": [
+                [
+                    "दूरी",
+                    "1 AU"
+                ],
+                [
+                    "वर्ष",
+                    "365.25 दिन"
+                ],
+                [
+                    "दिन",
+                    "23 घं 56 मि"
+                ],
+                [
+                    "व्यास",
+                    "12,742 किमी"
+                ],
+                [
+                    "चंद्रमा",
+                    "1"
+                ],
+                [
+                    "सतह पर पानी",
+                    "71%"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "पृथ्वी सूर्य से तीसरा ग्रह है और एकमात्र जगह जहाँ जीवन ज्ञात है। यह सौर मंडल का सबसे घना ग्रह है।"
+                ],
+                [
+                    "वायुमंडल और पानी",
+                    "नाइट्रोजन-ऑक्सीजन वायुमंडल और तरल महासागर जलवायु को स्थिर रखते हैं। प्लेट विवर्तनिकी पर्पटी को पुनर्चक्रित करती है और लाखों वर्षों में कार्बन को नियंत्रित करती है।"
+                ],
+                [
+                    "चुंबकीय कवच",
+                    "बाहरी केंद्र में बहता पिघला लोहा चुंबकीय क्षेत्र बनाता है, जो सौर हवा को मोड़कर वायुमंडल और जीवन की रक्षा करता है।"
+                ],
+                [
+                    "अंतरिक्ष से",
+                    "“अर्थराइज़” (1968) और “पेल ब्लू डॉट” (1990) जैसी तस्वीरों ने ग्रह के प्रति लोगों का नज़रिया बदला और पर्यावरण आंदोलन को प्रेरित किया।"
+                ]
+            ],
+            "dyk": [
+                "पृथ्वी पूरी गोल नहीं है; भूमध्य रेखा पर उभरी हुई है।",
+                "पृथ्वी का घूमना धीरे-धीरे धीमा हो रहा है।",
+                "अंग्रेज़ी में पृथ्वी ही एकमात्र ग्रह है जिसका नाम किसी देवता पर नहीं है।"
+            ]
+        },
+        "mars": {
+            "name": "मंगल",
+            "tagline": "लाल ग्रह",
+            "facts": [
+                [
+                    "दूरी",
+                    "1.52 AU"
+                ],
+                [
+                    "वर्ष",
+                    "687 दिन"
+                ],
+                [
+                    "दिन",
+                    "24 घं 37 मि"
+                ],
+                [
+                    "व्यास",
+                    "6,779 किमी"
+                ],
+                [
+                    "चंद्रमा",
+                    "2"
+                ],
+                [
+                    "गुरुत्व",
+                    "पृथ्वी का 38%"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "मंगल एक ठंडा रेगिस्तानी ग्रह है जिसे आयरन-ऑक्साइड धूल जंग जैसा रंग देती है। यहाँ मौसम, ध्रुवीय बर्फ़ और पूरे ग्रह को ढकने वाले धूल के तूफ़ान होते हैं।"
+                ],
+                [
+                    "प्रमुख स्थल",
+                    "ओलंपस मॉन्स सौर मंडल का सबसे ऊँचा ज्वालामुखी (~22 किमी) है, और वैलेस मैरिनेरिस लगभग 4,000 किमी लंबी घाटी प्रणाली है।"
+                ],
+                [
+                    "पानी और जीवन",
+                    "सूखी नदी घाटियाँ, डेल्टा और खनिज बताते हैं कि मंगल पर कभी तरल पानी था। रोवर प्राचीन झीलों की तलहटी में सूक्ष्म जीवन के निशान खोज रहे हैं।"
+                ],
+                [
+                    "खोज यात्राएँ",
+                    "मंगल पर किसी भी ग्रह से ज़्यादा मिशन भेजे गए हैं। आज क्यूरियोसिटी और पर्सिवियरेंस सतह पर घूम रहे हैं; पर्सिवियरेंस पृथ्वी पर लाने के लिए नमूने जमा कर रहा है।"
+                ]
+            ],
+            "dyk": [
+                "मंगल पर सौर मंडल के सबसे बड़े धूल के तूफ़ान आते हैं।",
+                "मंगल पर सूर्यास्त नीला दिखता है।",
+                "इसके दो छोटे चंद्रमा फ़ोबोस और डीमोस हैं, यानी भय और आतंक।"
+            ]
+        },
+        "jupiter": {
+            "name": "बृहस्पति",
+            "tagline": "ग्रहों का राजा",
+            "facts": [
+                [
+                    "दूरी",
+                    "5.2 AU"
+                ],
+                [
+                    "वर्ष",
+                    "11.9 वर्ष"
+                ],
+                [
+                    "दिन",
+                    "9 घं 56 मि"
+                ],
+                [
+                    "व्यास",
+                    "1,39,820 किमी"
+                ],
+                [
+                    "चंद्रमा",
+                    "95"
+                ],
+                [
+                    "प्रकार",
+                    "गैस दानव"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "बृहस्पति सबसे बड़ा ग्रह है, बाक़ी सभी ग्रहों के कुल द्रव्यमान से दोगुने से भी ज़्यादा, और मुख्यतः हाइड्रोजन व हीलियम से बना है।"
+                ],
+                [
+                    "ग्रेट रेड स्पॉट",
+                    "यह विशाल तूफ़ान पृथ्वी से भी चौड़ा है और कम से कम 350 वर्षों से चल रहा है, हालाँकि अब छोटा हो रहा है।"
+                ],
+                [
+                    "आंतरिक भाग",
+                    "भीतर गहरे दबाव से हाइड्रोजन धात्विक बन जाती है और बिजली का संचालन करती है, जिससे किसी भी ग्रह का सबसे शक्तिशाली चुंबकीय क्षेत्र बनता है।"
+                ],
+                [
+                    "खोज यात्राएँ",
+                    "पायोनियर, वॉयेजर, गैलीलियो और अब जूनो ने बृहस्पति का अध्ययन किया। जूनो ने ध्रुवों पर चक्रवातों के समूह और एक “धुँधला” केंद्र खोजा। यूरोपा क्लिपर और ESA का JUICE इसके चंद्रमाओं की ओर जा रहे हैं।"
+                ]
+            ],
+            "dyk": [
+                "बृहस्पति का दिन सभी ग्रहों में सबसे छोटा है।",
+                "इसके धुँधले वलय हैं, जिन्हें पहली बार वॉयेजर 1 ने देखा।",
+                "इसका गुरुत्व भीतरी ग्रहों को कुछ धूमकेतुओं से बचाने में मदद करता है।"
+            ]
+        },
+        "saturn": {
+            "name": "शनि",
+            "tagline": "वलयों वाला रत्न",
+            "facts": [
+                [
+                    "दूरी",
+                    "9.5 AU"
+                ],
+                [
+                    "वर्ष",
+                    "29.4 वर्ष"
+                ],
+                [
+                    "दिन",
+                    "10 घं 33 मि"
+                ],
+                [
+                    "व्यास",
+                    "1,16,460 किमी"
+                ],
+                [
+                    "चंद्रमा",
+                    "146"
+                ],
+                [
+                    "घनत्व",
+                    "पानी से कम"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "शनि दूसरा सबसे बड़ा और सबसे कम घना ग्रह है। इसके शानदार वलय छोटी दूरबीन से भी दिख जाते हैं।"
+                ],
+                [
+                    "वलय",
+                    "वलय 2.8 लाख किमी तक फैले हैं पर अक्सर सिर्फ़ ~10 मीटर मोटे हैं। ये अनगिनत बर्फ़ के टुकड़ों से बने हैं और शायद ग्रह से काफ़ी नए हैं।"
+                ],
+                [
+                    "षट्भुज",
+                    "शनि के उत्तरी ध्रुव के चारों ओर एक रहस्यमय छह-भुजाओं वाली जेट धारा है, जिसकी हर भुजा पृथ्वी के व्यास से लंबी है।"
+                ],
+                [
+                    "खोज यात्राएँ",
+                    "कैसिनी–हाइगेंस ने 2004–2017 तक शनि की परिक्रमा की, टाइटन पर एक प्रोब उतारा, और अंत में शनि के वायुमंडल में गोता लगाया।"
+                ]
+            ],
+            "dyk": [
+                "शनि के ज्ञात चंद्रमा किसी भी ग्रह से ज़्यादा हैं।",
+                "इसके वलय धीरे-धीरे ग्रह पर बरस रहे हैं।",
+                "भूमध्य रेखा के पास हवाएँ 1,800 किमी/घं तक पहुँचती हैं।"
+            ]
+        },
+        "uranus": {
+            "name": "अरुण (यूरेनस)",
+            "tagline": "करवट लेटा बर्फ़ीला दानव",
+            "facts": [
+                [
+                    "दूरी",
+                    "19.2 AU"
+                ],
+                [
+                    "वर्ष",
+                    "84 वर्ष"
+                ],
+                [
+                    "दिन",
+                    "17 घं 14 मि"
+                ],
+                [
+                    "अक्षीय झुकाव",
+                    "98°"
+                ],
+                [
+                    "चंद्रमा",
+                    "28"
+                ],
+                [
+                    "न्यूनतम तापमान",
+                    "−224 °C"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "अरुण एक बर्फ़ीला दानव है, जो छोटे चट्टानी केंद्र के चारों ओर पानी, मीथेन और अमोनिया की बर्फ़ से बना है। मीथेन इसे हल्का आसमानी रंग देती है।"
+                ],
+                [
+                    "करवट लेटा",
+                    "अरुण अपनी करवट पर घूमता है, शायद बहुत पहले की किसी विशाल टक्कर के कारण। हर ध्रुव पर लगभग 42 वर्ष लगातार धूप और फिर 42 वर्ष अँधेरा रहता है।"
+                ],
+                [
+                    "खोज",
+                    "1781 में विलियम हर्शेल ने इसे खोजा; यह दूरबीन से खोजा गया पहला ग्रह था।"
+                ],
+                [
+                    "खोज यात्राएँ",
+                    "केवल वॉयेजर 2 ही 1986 में इसके पास से गुज़रा है। एक समर्पित ऑर्बिटर भविष्य के मिशनों की प्राथमिकता है।"
+                ]
+            ],
+            "dyk": [
+                "अरुण का वायुमंडल सभी ग्रहों में सबसे ठंडा है।",
+                "इसके चंद्रमाओं के नाम शेक्सपियर और पोप के पात्रों पर हैं।",
+                "इसके 13 ज्ञात धुँधले वलय हैं।"
+            ]
+        },
+        "neptune": {
+            "name": "वरुण (नेपच्यून)",
+            "tagline": "सबसे तेज़ हवाओं वाली दुनिया",
+            "facts": [
+                [
+                    "दूरी",
+                    "30.1 AU"
+                ],
+                [
+                    "वर्ष",
+                    "165 वर्ष"
+                ],
+                [
+                    "दिन",
+                    "16 घं 6 मि"
+                ],
+                [
+                    "व्यास",
+                    "49,244 किमी"
+                ],
+                [
+                    "चंद्रमा",
+                    "16"
+                ],
+                [
+                    "हवा की गति",
+                    "2,100 किमी/घं"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "वरुण सूर्य से सबसे दूर का ग्रह है, गहरा नीला बर्फ़ीला दानव, जिस पर सौर मंडल की सबसे तेज़ हवाएँ चलती हैं।"
+                ],
+                [
+                    "गणित से खोजा गया",
+                    "1846 में खगोलविदों ने अरुण की कक्षा में हलचल से वरुण की स्थिति का अनुमान लगाया और लगभग वहीं इसे पाया।"
+                ],
+                [
+                    "ट्राइटन",
+                    "इसका सबसे बड़ा चंद्रमा उल्टी दिशा में परिक्रमा करता है और इस पर नाइट्रोजन के गीज़र हैं; शायद इसे काइपर बेल्ट से पकड़ा गया था।"
+                ],
+                [
+                    "खोज यात्राएँ",
+                    "1989 में वॉयेजर 2 पास से गुज़रा और ग्रेट डार्क स्पॉट देखा, पृथ्वी जितना बड़ा तूफ़ान जो बाद में ग़ायब हो गया।"
+                ]
+            ],
+            "dyk": [
+                "खोज के बाद वरुण ने अपनी पहली परिक्रमा 2011 में पूरी की।",
+                "यह सूर्य से मिलने वाली गर्मी से ज़्यादा गर्मी छोड़ता है।",
+                "सूर्य का प्रकाश इस तक लगभग 4 घंटे में पहुँचता है।"
+            ]
+        },
+        "pluto": {
+            "name": "प्लूटो (यम)",
+            "tagline": "सबका प्यारा बौना ग्रह",
+            "facts": [
+                [
+                    "दूरी",
+                    "39.5 AU"
+                ],
+                [
+                    "वर्ष",
+                    "248 वर्ष"
+                ],
+                [
+                    "व्यास",
+                    "2,377 किमी"
+                ],
+                [
+                    "चंद्रमा",
+                    "5"
+                ],
+                [
+                    "श्रेणी",
+                    "बौना ग्रह"
+                ],
+                [
+                    "खोज",
+                    "1930"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "प्लूटो काइपर बेल्ट का सबसे बड़ा ज्ञात पिंड है। 1930 में क्लाइड टॉमबॉ ने इसे खोजा और 2006 तक यह नौवाँ ग्रह माना जाता था।"
+                ],
+                [
+                    "पुनर्वर्गीकरण क्यों",
+                    "अंतरराष्ट्रीय खगोलीय संघ ने तय किया कि ग्रह को अपनी कक्षा का आसपास साफ़ करना चाहिए, जबकि प्लूटो अपना क्षेत्र कई बर्फ़ीले पिंडों के साथ साझा करता है।"
+                ],
+                [
+                    "दिल",
+                    "2015 में न्यू होराइज़न्स ने स्पुतनिक प्लैनिशिया दिखाया, नाइट्रोजन बर्फ़ का विशाल दिल-आकार ग्लेशियर, साथ ही पानी की बर्फ़ के पहाड़ और नीला धुंधला वायुमंडल।"
+                ]
+            ],
+            "dyk": [
+                "प्लूटो पृथ्वी के चाँद से छोटा है।",
+                "इसका चंद्रमा शैरन इतना बड़ा है कि दोनों बीच के एक बिंदु के चारों ओर घूमते हैं।",
+                "प्लूटो नाम 11 साल की एक लड़की, वेनेशिया बर्नी ने सुझाया था।"
+            ]
+        },
+        "moon": {
+            "name": "चंद्रमा",
+            "tagline": "पृथ्वी का हमेशा का साथी",
+            "facts": [
+                [
+                    "दूरी",
+                    "3,84,400 किमी"
+                ],
+                [
+                    "परिक्रमा",
+                    "27.3 दिन"
+                ],
+                [
+                    "व्यास",
+                    "3,474 किमी"
+                ],
+                [
+                    "गुरुत्व",
+                    "पृथ्वी का 16.6%"
+                ],
+                [
+                    "आयु",
+                    "~4.5 अरब वर्ष"
+                ],
+                [
+                    "आगंतुक",
+                    "12 मनुष्य"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "चंद्रमा पृथ्वी का एकमात्र प्राकृतिक उपग्रह और सौर मंडल का पाँचवाँ सबसे बड़ा चंद्रमा है। यह पृथ्वी के झुकाव को स्थिर रखता है, जिससे हमारी जलवायु स्थिर रहती है।"
+                ],
+                [
+                    "उत्पत्ति",
+                    "प्रमुख सिद्धांत के अनुसार मंगल के आकार का पिंड थिया युवा पृथ्वी से टकराया और मलबा जुड़कर चंद्रमा बना।"
+                ],
+                [
+                    "ज्वार और लॉकिंग",
+                    "चंद्रमा का गुरुत्व पृथ्वी पर महासागरीय ज्वार उठाता है। यह ज्वारीय रूप से बँधा है, इसलिए हमें हमेशा एक ही चेहरा दिखता है।"
+                ],
+                [
+                    "खोज यात्राएँ",
+                    "1969–1972 के बीच अपोलो यात्री इस पर चले। चीन, भारत और अन्य देशों के मिशन भी उतर चुके हैं; NASA का आर्टेमिस मनुष्यों को फिर भेजेगा।"
+                ]
+            ],
+            "dyk": [
+                "चंद्रमा हर साल पृथ्वी से लगभग 3.8 सेमी दूर जाता है।",
+                "चंद्रमा पर पैरों के निशान लाखों वर्ष रह सकते हैं।",
+                "चंद्रमा का पिछला हिस्सा अँधेरा नहीं है; उसे भी उतनी ही धूप मिलती है।"
+            ]
+        },
+        "io": {
+            "name": "आयो",
+            "tagline": "सबसे ज्वालामुखीय दुनिया",
+            "facts": [
+                [
+                    "परिक्रमा",
+                    "बृहस्पति"
+                ],
+                [
+                    "व्यास",
+                    "3,643 किमी"
+                ],
+                [
+                    "सक्रिय ज्वालामुखी",
+                    "~400"
+                ],
+                [
+                    "परिक्रमा समय",
+                    "1.8 दिन"
+                ],
+                [
+                    "सतह",
+                    "गंधक"
+                ],
+                [
+                    "खोज",
+                    "1610"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "आयो बृहस्पति के चार बड़े चंद्रमाओं में सबसे भीतरी है और सौर मंडल का सबसे ज्वालामुखीय रूप से सक्रिय पिंड है।"
+                ],
+                [
+                    "इतना सक्रिय क्यों",
+                    "बृहस्पति और पड़ोसी चंद्रमाओं यूरोपा व गैनिमीड के ज्वारीय खिंचाव आयो के भीतर को गूँधते रहते हैं और चट्टान पिघलाने लायक गर्मी पैदा करते हैं।"
+                ],
+                [
+                    "सतह",
+                    "लावा झीलें और गंधक के जमाव आयो को पीला, नारंगी और लाल रंग देते हैं; कुछ ज्वालामुखीय फव्वारे अंतरिक्ष में 400 किमी तक उछलते हैं।"
+                ]
+            ],
+            "dyk": [
+                "1610 में गैलीलियो ने आयो की खोज की।",
+                "ज्वालामुखी लगातार पूरी सतह नई बनाते रहते हैं, इसलिए लगभग कोई गड्ढा नहीं है।",
+                "जूनो ने पास से फटते ज्वालामुखियों की तस्वीरें लीं।"
+            ]
+        },
+        "europa": {
+            "name": "यूरोपा",
+            "tagline": "बर्फ़ के नीचे महासागर",
+            "facts": [
+                [
+                    "परिक्रमा",
+                    "बृहस्पति"
+                ],
+                [
+                    "व्यास",
+                    "3,122 किमी"
+                ],
+                [
+                    "बर्फ़ की परत",
+                    "15–25 किमी"
+                ],
+                [
+                    "महासागर की गहराई",
+                    "60–150 किमी"
+                ],
+                [
+                    "परिक्रमा समय",
+                    "3.5 दिन"
+                ],
+                [
+                    "मिशन",
+                    "यूरोपा क्लिपर"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "यूरोपा हमारे चाँद से थोड़ा छोटा है और लालिमा लिए दरारों वाली चमकदार बर्फ़ की परत से ढका है।"
+                ],
+                [
+                    "छिपा महासागर",
+                    "बर्फ़ के नीचे खारा महासागर माना जाता है, जिसमें पृथ्वी के सभी महासागरों से लगभग दोगुना पानी है। ज्वारीय खिंचाव की गर्मी इसे तरल रखती है।"
+                ],
+                [
+                    "जीवन?",
+                    "पानी, रासायनिक ऊर्जा और सही तत्वों के कारण यूरोपा पृथ्वी से बाहर जीवन खोजने की सबसे अच्छी जगहों में है।"
+                ],
+                [
+                    "खोज यात्राएँ",
+                    "NASA का यूरोपा क्लिपर 2024 में लॉन्च हुआ और बर्फ़ व महासागर का अध्ययन करने के लिए दर्जनों बार पास से गुज़रेगा।"
+                ]
+            ],
+            "dyk": [
+                "हबल ने शायद यूरोपा से पानी के फव्वारे उठते देखे हैं।",
+                "इसकी सतह सौर मंडल की सबसे चिकनी सतहों में है।",
+                "यूरोपा के पास का विकिरण एक दिन में मनुष्य के लिए घातक होगा।"
+            ]
+        },
+        "ganymede": {
+            "name": "गैनिमीड",
+            "tagline": "सौर मंडल का सबसे बड़ा चंद्रमा",
+            "facts": [
+                [
+                    "परिक्रमा",
+                    "बृहस्पति"
+                ],
+                [
+                    "व्यास",
+                    "5,268 किमी"
+                ],
+                [
+                    "इससे बड़ा",
+                    "बुध"
+                ],
+                [
+                    "परिक्रमा समय",
+                    "7.2 दिन"
+                ],
+                [
+                    "चुंबकीय क्षेत्र",
+                    "हाँ"
+                ],
+                [
+                    "मिशन",
+                    "JUICE"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "गैनिमीड बुध ग्रह से भी बड़ा है और एकमात्र ज्ञात चंद्रमा है जो अपना चुंबकीय क्षेत्र बनाता है।"
+                ],
+                [
+                    "भीतरी महासागर",
+                    "हबल ने गैनिमीड की ध्रुवीय ज्योति को डगमगाते देखा, जो बर्फ़ीली पर्पटी के नीचे गहरे खारे महासागर का संकेत है।"
+                ],
+                [
+                    "खोज यात्राएँ",
+                    "ESA का JUICE मिशन 2023 में लॉन्च हुआ और हमारे चाँद के अलावा किसी चंद्रमा की परिक्रमा करने वाला पहला यान बनेगा।"
+                ]
+            ],
+            "dyk": [
+                "अगर गैनिमीड सूर्य की परिक्रमा करता, तो ग्रह कहलाता।",
+                "इस पर धुँधली ध्रुवीय ज्योति होती है।",
+                "इसकी सतह पर पुराने अँधेरे इलाक़े और चमकीले धारीदार क्षेत्र हैं।"
+            ]
+        },
+        "titan": {
+            "name": "टाइटन",
+            "tagline": "मीथेन झीलों की दुनिया",
+            "facts": [
+                [
+                    "परिक्रमा",
+                    "शनि"
+                ],
+                [
+                    "व्यास",
+                    "5,150 किमी"
+                ],
+                [
+                    "दबाव",
+                    "पृथ्वी का 1.5 गुना"
+                ],
+                [
+                    "सतह का तापमान",
+                    "−179 °C"
+                ],
+                [
+                    "तरल",
+                    "मीथेन, ईथेन"
+                ],
+                [
+                    "मिशन",
+                    "ड्रैगनफ़्लाई"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "टाइटन शनि का सबसे बड़ा चंद्रमा है, घने वायुमंडल वाला एकमात्र चंद्रमा, और पृथ्वी के अलावा एकमात्र दुनिया जहाँ सतह पर स्थिर तरल है।"
+                ],
+                [
+                    "मौसम",
+                    "टाइटन पर मीथेन वही करती है जो पृथ्वी पर पानी: बादल बनाती है, बरसती है, नदियाँ काटती है और ध्रुवों के पास झीलें व सागर भरती है।"
+                ],
+                [
+                    "खोज यात्राएँ",
+                    "2005 में ESA का हाइगेंस प्रोब यहाँ उतरा, अब तक की सबसे दूर की लैंडिंग। NASA का ड्रैगनफ़्लाई हेलिकॉप्टर 2028 में लॉन्च होगा।"
+                ]
+            ],
+            "dyk": [
+                "टाइटन पर आप पंख बाँधकर फड़फड़ाते हुए उड़ सकते हैं।",
+                "इसका वायुमंडल पृथ्वी की तरह मुख्यतः नाइट्रोजन है।",
+                "टाइटन बुध ग्रह से बड़ा है।"
+            ]
+        },
+        "enceladus": {
+            "name": "एन्सेलेडस",
+            "tagline": "गीज़र वाला चंद्रमा",
+            "facts": [
+                [
+                    "परिक्रमा",
+                    "शनि"
+                ],
+                [
+                    "व्यास",
+                    "504 किमी"
+                ],
+                [
+                    "परावर्तकता",
+                    "~99%"
+                ],
+                [
+                    "फव्वारे",
+                    "दक्षिणी ध्रुव"
+                ],
+                [
+                    "महासागर",
+                    "पूरे चंद्रमा में"
+                ],
+                [
+                    "खोजा",
+                    "कैसिनी ने"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "एन्सेलेडस एक छोटा, चमकीला बर्फ़ीला चंद्रमा है जो लगभग सारा सूर्य प्रकाश लौटा देता है, जिससे यह सौर मंडल के सबसे सफ़ेद पिंडों में है।"
+                ],
+                [
+                    "गीज़र",
+                    "कैसिनी ने दक्षिणी ध्रुव के पास “टाइगर स्ट्राइप” दरारों से पानी की भाप और बर्फ़ के फव्वारे पाए, जो शनि के E वलय को भरते हैं।"
+                ],
+                [
+                    "जीवन की संभावना",
+                    "फव्वारों से गुज़रते हुए कैसिनी ने लवण, कार्बनिक अणु और हाइड्रोथर्मल गतिविधि के संकेत पाए, जो जीवन के मुख्य तत्व हैं।"
+                ]
+            ],
+            "dyk": [
+                "एन्सेलेडस ब्रिटेन के अंदर समा जाएगा।",
+                "यह जीवन की खोज के शीर्ष लक्ष्यों में है।",
+                "इसके फव्वारे सतह से सैकड़ों किमी ऊपर जाते हैं।"
+            ]
+        },
+        "comets": {
+            "name": "धूमकेतु",
+            "tagline": "सौर मंडल के किनारे से आए मैले बर्फ़ के गोले",
+            "facts": [
+                [
+                    "बने हैं",
+                    "बर्फ़, धूल, चट्टान"
+                ],
+                [
+                    "नाभिक",
+                    "1–50 किमी"
+                ],
+                [
+                    "पूँछ की लंबाई",
+                    "लाखों किमी"
+                ],
+                [
+                    "स्रोत",
+                    "काइपर बेल्ट, ऊर्ट बादल"
+                ],
+                [
+                    "प्रसिद्ध",
+                    "हैली धूमकेतु"
+                ],
+                [
+                    "अगला हैली",
+                    "2061"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "धूमकेतु सौर मंडल के जन्म से बचे निर्माण खंड हैं, बर्फ़, धूल और चट्टान के जमे हुए मिश्रण।"
+                ],
+                [
+                    "पूँछ",
+                    "सूर्य के पास बर्फ़ सीधे गैस बन जाती है, जिससे चमकता कोमा और दो पूँछें बनती हैं: मुड़ी हुई धूल पूँछ और सूर्य से सीधे दूर जाती आयन पूँछ।"
+                ],
+                [
+                    "खोज यात्राएँ",
+                    "ESA के रोसेटा ने धूमकेतु 67P की परिक्रमा की और 2014 में फ़िले लैंडर उतारा। NASA के डीप इम्पैक्ट ने धूमकेतु टेम्पल 1 में एक प्रक्षेप्य दागा।"
+                ]
+            ],
+            "dyk": [
+                "धूमकेतु की पूँछ हमेशा सूर्य से दूर होती है।",
+                "शायद पृथ्वी का कुछ पानी धूमकेतु लाए थे।",
+                "हैली धूमकेतु लगभग हर 76 साल में आता है।"
+            ]
+        },
+        "asteroids": {
+            "name": "क्षुद्रग्रह पट्टी",
+            "tagline": "मंगल और बृहस्पति के बीच बची चट्टानें",
+            "facts": [
+                [
+                    "स्थान",
+                    "2.2–3.2 AU"
+                ],
+                [
+                    "सबसे बड़ा",
+                    "सेरेस (940 किमी)"
+                ],
+                [
+                    "पिंड",
+                    "लाखों"
+                ],
+                [
+                    "कुल द्रव्यमान",
+                    "चाँद का ~3%"
+                ],
+                [
+                    "प्रकार",
+                    "C, S, M"
+                ],
+                [
+                    "मिशन",
+                    "डॉन, साइकी"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "मुख्य क्षुद्रग्रह पट्टी मंगल और बृहस्पति के बीच है, जहाँ बृहस्पति के गुरुत्व ने चट्टानों को कभी ग्रह नहीं बनने दिया।"
+                ],
+                [
+                    "भीड़ नहीं",
+                    "लाखों क्षुद्रग्रहों के बावजूद पट्टी ज़्यादातर ख़ाली है; यान बिना बचे-बचाए इससे गुज़र जाते हैं।"
+                ],
+                [
+                    "ग्रह रक्षा",
+                    "2022 में NASA का DART यान क्षुद्रग्रह डिमॉर्फ़ोस से टकराया और उसकी कक्षा बदल दी, क्षुद्रग्रह मोड़ने का पहला परीक्षण।"
+                ]
+            ],
+            "dyk": [
+                "सेरेस एक बौना ग्रह है और इसमें खारा पानी हो सकता है।",
+                "साइकी मिशन धातु-समृद्ध क्षुद्रग्रह की ओर जा रहा है।",
+                "क्षुद्रग्रह रयुगु और बेनू के नमूने पृथ्वी पर लाए जा चुके हैं।"
+            ]
+        },
+        "meteors": {
+            "name": "उल्का वर्षा",
+            "tagline": "तय समय पर टूटते तारे",
+            "facts": [
+                [
+                    "कारण",
+                    "धूमकेतु का मलबा"
+                ],
+                [
+                    "गति",
+                    "11–72 किमी/से"
+                ],
+                [
+                    "जलते हैं",
+                    "~100 किमी पर"
+                ],
+                [
+                    "सबसे अच्छी",
+                    "पर्सिड्स (अगस्त)"
+                ],
+                [
+                    "और",
+                    "जेमिनिड्स (दिसंबर)"
+                ],
+                [
+                    "उल्कापिंड",
+                    "जो ज़मीन तक पहुँचे"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "उल्का वर्षा तब होती है जब पृथ्वी धूमकेतुओं की छोड़ी धूल की राह से गुज़रती है; कण वायुमंडल में जलकर रोशनी की लकीरें बनाते हैं।"
+                ],
+                [
+                    "शब्द",
+                    "अंतरिक्ष में यह उल्काभ है; हवा में चमकते हुए उल्का; और ज़मीन तक पहुँचे टुकड़े को उल्कापिंड कहते हैं।"
+                ],
+                [
+                    "कैसे देखें",
+                    "अँधेरी जगह जाएँ, 20 मिनट आँखों को अँधेरे का आदी होने दें और आकाश के बड़े हिस्से को देखें। आधी रात के बाद का समय सबसे अच्छा होता है।"
+                ]
+            ],
+            "dyk": [
+                "ज़्यादातर उल्का रेत के दाने से भी छोटे होते हैं।",
+                "जेमिनिड्स एक क्षुद्रग्रह, 3200 फ़ेथॉन, से आते हैं।",
+                "हर दिन टनों अंतरिक्ष धूल पृथ्वी पर गिरती है।"
+            ]
+        },
+        "milkyway": {
+            "name": "आकाशगंगा (मिल्की वे)",
+            "tagline": "हमारी अपनी आकाशगंगा",
+            "facts": [
+                [
+                    "प्रकार",
+                    "बार्ड सर्पिल"
+                ],
+                [
+                    "व्यास",
+                    "~1 लाख प्रकाश वर्ष"
+                ],
+                [
+                    "तारे",
+                    "100–400 अरब"
+                ],
+                [
+                    "आयु",
+                    "~13.6 अरब वर्ष"
+                ],
+                [
+                    "केंद्र",
+                    "सैजिटेरियस A*"
+                ],
+                [
+                    "सूर्य की परिक्रमा",
+                    "23 करोड़ वर्ष"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "आकाशगंगा एक बार्ड सर्पिल आकाशगंगा है। सूर्य इसके केंद्र से लगभग 26,000 प्रकाश वर्ष दूर, ओरायन स्पर नामक छोटी भुजा में है।"
+                ],
+                [
+                    "केंद्र",
+                    "केंद्र में सैजिटेरियस A* है, सूर्य से लगभग 40 लाख गुना भारी ब्लैक होल, जिसकी तस्वीर इवेंट होराइज़न टेलीस्कोप ने 2022 में ली।"
+                ],
+                [
+                    "पड़ोस",
+                    "आकाशगंगा 80 से अधिक आकाशगंगाओं के लोकल ग्रुप का हिस्सा है और धीरे-धीरे कई छोटी बौनी आकाशगंगाओं को निगल रही है।"
+                ]
+            ],
+            "dyk": [
+                "अँधेरी रातों में दिखने वाली रोशनी की पट्टी भीतर से देखी गई आकाशगंगा की डिस्क है।",
+                "आकाशगंगा डार्क मैटर के अदृश्य प्रभामंडल से घिरी है।",
+                "गाया यान ने इसके लगभग 2 अरब तारों का नक़्शा बनाया है।"
+            ]
+        },
+        "andromeda": {
+            "name": "एंड्रोमेडा",
+            "tagline": "हमारा सबसे नज़दीकी बड़ा पड़ोसी",
+            "facts": [
+                [
+                    "सूची",
+                    "M31"
+                ],
+                [
+                    "दूरी",
+                    "25 लाख प्रकाश वर्ष"
+                ],
+                [
+                    "व्यास",
+                    "~2.2 लाख प्रकाश वर्ष"
+                ],
+                [
+                    "तारे",
+                    "~1 खरब"
+                ],
+                [
+                    "प्रकार",
+                    "सर्पिल"
+                ],
+                [
+                    "विलय",
+                    "~4.5 अरब वर्ष में"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "एंड्रोमेडा लोकल ग्रुप की सबसे बड़ी आकाशगंगा है और नंगी आँखों से दिखने वाली सबसे दूर की वस्तु।"
+                ],
+                [
+                    "दूसरी आकाशगंगाओं का प्रमाण",
+                    "1920 के दशक में एडविन हबल ने एंड्रोमेडा की दूरी मापी, जिससे सिद्ध हुआ कि ब्रह्मांड में दूसरी आकाशगंगाएँ हैं।"
+                ],
+                [
+                    "टक्कर की राह",
+                    "एंड्रोमेडा लगभग 110 किमी/से से पास आ रही है। अरबों वर्षों में दोनों मिलकर एक विशाल दीर्घवृत्ताकार आकाशगंगा बन जाएँगी।"
+                ]
+            ],
+            "dyk": [
+                "आकाश में यह पूर्ण चंद्रमा से छह गुना चौड़ी है, पर बहुत धुँधली।",
+                "आप जो प्रकाश देखते हैं वह 25 लाख साल पहले निकला था।",
+                "आकाशगंगाओं के विलय में तारे लगभग कभी नहीं टकराते।"
+            ]
+        },
+        "sombrero": {
+            "name": "सोम्ब्रेरो आकाशगंगा",
+            "tagline": "टोपी जैसी सर्पिल आकाशगंगा",
+            "facts": [
+                [
+                    "सूची",
+                    "M104"
+                ],
+                [
+                    "दूरी",
+                    "~3 करोड़ प्रकाश वर्ष"
+                ],
+                [
+                    "व्यास",
+                    "~50,000 प्रकाश वर्ष"
+                ],
+                [
+                    "तारामंडल",
+                    "कन्या"
+                ],
+                [
+                    "ब्लैक होल",
+                    "~1 अरब सूर्य"
+                ],
+                [
+                    "विशेषता",
+                    "धूल की पट्टी"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "हम सोम्ब्रेरो को लगभग किनारे से देखते हैं। चमकीला केंद्रीय उभार और धूल का काला वलय इसे चौड़ी किनारी वाली टोपी जैसा बनाते हैं।"
+                ],
+                [
+                    "वेब का नज़रिया",
+                    "इन्फ़्रारेड में वेब धूल के वलय को गुच्छेदार और बारीक दिखाता है, जबकि चमकीला उभार फीका पड़ जाता है।"
+                ]
+            ],
+            "dyk": [
+                "यह छोटी घरेलू दूरबीनों से भी दिखती है।",
+                "इसका केंद्रीय ब्लैक होल पास की आकाशगंगाओं में सबसे भारी में है।",
+                "इसमें लगभग 2,000 गोलाकार तारा-गुच्छ हैं।"
+            ]
+        },
+        "whirlpool": {
+            "name": "व्हर्लपूल आकाशगंगा",
+            "tagline": "एक क्लासिक सर्पिल आकाशगंगा",
+            "facts": [
+                [
+                    "सूची",
+                    "M51"
+                ],
+                [
+                    "दूरी",
+                    "~3.1 करोड़ प्रकाश वर्ष"
+                ],
+                [
+                    "साथी",
+                    "NGC 5195"
+                ],
+                [
+                    "तारामंडल",
+                    "केन्स वेनाटिसी"
+                ],
+                [
+                    "प्रकार",
+                    "सर्पिल"
+                ],
+                [
+                    "खोज",
+                    "1773"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "व्हर्लपूल अपनी दो साफ़ सर्पिल भुजाओं के लिए प्रसिद्ध है, जिन पर गुलाबी तारा-निर्माण क्षेत्र हैं।"
+                ],
+                [
+                    "परस्पर क्रिया",
+                    "छोटी साथी आकाशगंगा NGC 5195 एक भुजा को खींच रही है, जिससे सर्पिल पैटर्न तीखा होता है और नए तारे बनते हैं।"
+                ],
+                [
+                    "इतिहास",
+                    "1845 में लॉर्ड रॉस ने इसकी सर्पिल संरचना का रेखाचित्र बनाया; यह सर्पिल के रूप में पहचानी गई पहली आकाशगंगा थी।"
+                ]
+            ],
+            "dyk": [
+                "1773 में चार्ल्स मेसियर ने इसे खोजा।",
+                "हाल के वर्षों में इसमें कई सुपरनोवा देखे गए हैं।",
+                "M51 की हबल तस्वीर उसकी सबसे प्रसिद्ध तस्वीरों में है।"
+            ]
+        },
+        "orion": {
+            "name": "ओरायन नीहारिका",
+            "tagline": "तारों की नर्सरी",
+            "facts": [
+                [
+                    "सूची",
+                    "M42"
+                ],
+                [
+                    "दूरी",
+                    "1,344 प्रकाश वर्ष"
+                ],
+                [
+                    "चौड़ाई",
+                    "24 प्रकाश वर्ष"
+                ],
+                [
+                    "आयु",
+                    "~20 लाख वर्ष"
+                ],
+                [
+                    "दिखती है",
+                    "नंगी आँखों से"
+                ],
+                [
+                    "केंद्रीय तारे",
+                    "ट्रेपेज़ियम"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "ओरायन नीहारिका पृथ्वी के सबसे पास का बड़ा तारा-निर्माण क्षेत्र है, जो मृग की तलवार में धुँधले धब्बे की तरह दिखती है।"
+                ],
+                [
+                    "तारों का जन्म",
+                    "इसके अंदर हज़ारों नए तारे बन रहे हैं; कई के चारों ओर ग्रह-निर्माणकारी डिस्क हैं।"
+                ],
+                [
+                    "ट्रेपेज़ियम",
+                    "इसके केंद्र के चार गर्म, विशाल तारे आसपास की गैस को रोशन करते हैं और एक गुहा बनाते हैं।"
+                ]
+            ],
+            "dyk": [
+                "यह आकाश की सबसे ज़्यादा फ़ोटो खींची गई वस्तुओं में है।",
+                "वेब ने इसमें बृहस्पति जितने भारी, स्वतंत्र तैरते अजीब पिंड पाए।",
+                "यह मृग में एक कहीं बड़े बादल समूह का हिस्सा है।"
+            ]
+        },
+        "crab": {
+            "name": "क्रैब नीहारिका",
+            "tagline": "एक सुपरनोवा का अवशेष",
+            "facts": [
+                [
+                    "सूची",
+                    "M1"
+                ],
+                [
+                    "विस्फोट",
+                    "1054 ई."
+                ],
+                [
+                    "दूरी",
+                    "6,500 प्रकाश वर्ष"
+                ],
+                [
+                    "चौड़ाई",
+                    "~11 प्रकाश वर्ष"
+                ],
+                [
+                    "केंद्र",
+                    "पल्सर"
+                ],
+                [
+                    "पल्सर घूर्णन",
+                    "30 बार/से"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "क्रैब नीहारिका उस तारे का फैलता मलबा है जो 1054 ई. में सुपरनोवा बनकर फटा था, जिसे चीनी खगोलविदों ने दर्ज किया।"
+                ],
+                [
+                    "पल्सर",
+                    "हर सेकंड 30 बार घूमता न्यूट्रॉन तारा नीहारिका को ऊर्जा देता है और इसे रेडियो से गामा किरणों तक चमकाता है।"
+                ],
+                [
+                    "अब भी फैल रही",
+                    "नीहारिका लगभग 1,500 किमी/से की गति से फैल रही है।"
+                ]
+            ],
+            "dyk": [
+                "1054 का सुपरनोवा 23 दिनों तक दिन में दिखा।",
+                "यह चार्ल्स मेसियर की सूची की पहली वस्तु थी।",
+                "इसके उलझे तंतु तारे में बने तत्वों से भरे हैं।"
+            ]
+        },
+        "pillars": {
+            "name": "सृष्टि के स्तंभ",
+            "tagline": "गैस और धूल की मीनारें",
+            "facts": [
+                [
+                    "नीहारिका",
+                    "ईगल (M16)"
+                ],
+                [
+                    "दूरी",
+                    "6,500 प्रकाश वर्ष"
+                ],
+                [
+                    "ऊँचाई",
+                    "~4 प्रकाश वर्ष"
+                ],
+                [
+                    "तारामंडल",
+                    "सर्पेंस"
+                ],
+                [
+                    "पहली तस्वीर",
+                    "हबल 1995"
+                ],
+                [
+                    "फिर से",
+                    "वेब 2022"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "सृष्टि के स्तंभ ईगल नीहारिका के अंदर ठंडी गैस और धूल के ऊँचे स्तंभ हैं, जहाँ नए तारे जन्म ले रहे हैं।"
+                ],
+                [
+                    "क्षरण",
+                    "पास के विशाल तारों का तीव्र प्रकाश धीरे-धीरे स्तंभों को उड़ा रहा है, जिसे फ़ोटो-वाष्पीकरण कहते हैं।"
+                ],
+                [
+                    "वेब का नज़रिया",
+                    "2022 में वेब की इन्फ़्रारेड तस्वीर ने धूल के पार देखकर स्तंभों के सिरों पर लाल चमकते नवजात तारे दिखाए।"
+                ]
+            ],
+            "dyk": [
+                "सबसे ऊँचा स्तंभ लगभग 4 प्रकाश वर्ष लंबा है।",
+                "हबल की 1995 की तस्वीर अब तक की सबसे प्रसिद्ध अंतरिक्ष तस्वीरों में है।",
+                "अंदर के तारे सिर्फ़ कुछ लाख वर्ष पुराने हैं।"
+            ]
+        },
+        "ring": {
+            "name": "रिंग नीहारिका",
+            "tagline": "मरते तारे का धुएँ का छल्ला",
+            "facts": [
+                [
+                    "सूची",
+                    "M57"
+                ],
+                [
+                    "प्रकार",
+                    "ग्रहीय नीहारिका"
+                ],
+                [
+                    "दूरी",
+                    "~2,300 प्रकाश वर्ष"
+                ],
+                [
+                    "तारामंडल",
+                    "वीणा (लायरा)"
+                ],
+                [
+                    "केंद्र",
+                    "श्वेत बौना"
+                ],
+                [
+                    "आयु",
+                    "~4,000 वर्ष"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "रिंग नीहारिका एक ग्रहीय नीहारिका है, सूर्य जैसे तारे द्वारा जीवन के अंत में छोड़ा गया चमकता गैस का खोल।"
+                ],
+                [
+                    "ग्रह नहीं",
+                    "“ग्रहीय नीहारिका” नाम पुरानी दूरबीनों से आया, जिनमें ये ग्रहों जैसी गोल दिखती थीं। इनका ग्रहों से कोई संबंध नहीं।"
+                ],
+                [
+                    "भविष्य की झलक",
+                    "हमारा सूर्य शायद 5 अरब वर्ष बाद ऐसी ही नीहारिका बनाएगा।"
+                ]
+            ],
+            "dyk": [
+                "यह छल्ला असल में डोनट या पीपे जैसा है।",
+                "वेब ने इसमें लगभग 20,000 घने गैस के गुच्छे दिखाए।",
+                "इसे घरेलू दूरबीन से आसानी से खोजा जा सकता है।"
+            ]
+        },
+        "blackhole": {
+            "name": "ब्लैक होल",
+            "tagline": "जहाँ गुरुत्व जीत जाता है",
+            "facts": [
+                [
+                    "पहली तस्वीर",
+                    "2019 (M87*)"
+                ],
+                [
+                    "पलायन वेग",
+                    "प्रकाश से अधिक"
+                ],
+                [
+                    "प्रकार",
+                    "तारकीय, अतिविशाल"
+                ],
+                [
+                    "सबसे नज़दीकी ज्ञात",
+                    "गाया BH1"
+                ],
+                [
+                    "किनारा",
+                    "घटना क्षितिज"
+                ],
+                [
+                    "भविष्यवाणी",
+                    "सामान्य सापेक्षता"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "ब्लैक होल ऐसा क्षेत्र है जहाँ गुरुत्व इतना तीव्र है कि घटना क्षितिज पार करने के बाद प्रकाश भी नहीं निकल सकता।"
+                ],
+                [
+                    "कैसे बनते हैं",
+                    "बहुत विशाल तारों के ढहने से तारकीय ब्लैक होल बनते हैं। सूर्य से लाखों-अरबों गुना भारी अतिविशाल ब्लैक होल ज़्यादातर आकाशगंगाओं के केंद्र में हैं।"
+                ],
+                [
+                    "अदृश्य को देखना",
+                    "ब्लैक होल अपने प्रभावों से पहचाने जाते हैं: गैस की चमकती डिस्क, चारों ओर तेज़ घूमते तारे, और विलय से गुरुत्वीय तरंगें, जिन्हें LIGO ने पहली बार 2015 में पकड़ा।"
+                ]
+            ],
+            "dyk": [
+                "ब्लैक होल के पास समय धीमा चलता है।",
+                "स्टीफ़न हॉकिंग ने भविष्यवाणी की कि ब्लैक होल धीरे-धीरे वाष्पित होते हैं।",
+                "हमारी आकाशगंगा का केंद्रीय ब्लैक होल लगभग 26,000 प्रकाश वर्ष दूर है।"
+            ]
+        },
+        "supernova": {
+            "name": "सुपरनोवा",
+            "tagline": "तारों के सबसे बड़े विस्फोट",
+            "facts": [
+                [
+                    "चमक",
+                    "अरबों सूर्य"
+                ],
+                [
+                    "प्रकार",
+                    "Ia, II, Ib, Ic"
+                ],
+                [
+                    "आकाशगंगा में दर",
+                    "~2 प्रति सदी"
+                ],
+                [
+                    "यहाँ आख़िरी बार",
+                    "1604"
+                ],
+                [
+                    "पीछे छोड़ता है",
+                    "न्यूट्रॉन तारा या ब्लैक होल"
+                ],
+                [
+                    "बनाता है",
+                    "भारी तत्व"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "सुपरनोवा किसी तारे की विस्फोटक मृत्यु है, जो कुछ हफ़्तों तक पूरी आकाशगंगा से ज़्यादा चमक सकता है।"
+                ],
+                [
+                    "दो मुख्य प्रकार",
+                    "विशाल तारे केंद्र ढहने पर फटते हैं; श्वेत बौना साथी तारे से बहुत ज़्यादा पदार्थ लेने पर फट सकता है (टाइप Ia)।"
+                ],
+                [
+                    "तारों की धूल",
+                    "सुपरनोवा ऑक्सीजन, कैल्शियम और लोहे जैसे तत्व अंतरिक्ष में बिखेरते हैं, जो नए तारों, ग्रहों और लोगों में शामिल होते हैं।"
+                ]
+            ],
+            "dyk": [
+                "टाइप Ia सुपरनोवा ने दिखाया कि ब्रह्मांड का विस्तार तेज़ हो रहा है।",
+                "सुपरनोवा 1987A आधुनिक समय में देखा गया सबसे नज़दीकी था।",
+                "आपके रक्त का लोहा फटते तारों से आया है।"
+            ]
+        },
+        "aurora": {
+            "name": "ध्रुवीय ज्योति",
+            "tagline": "पृथ्वी का प्रकाश शो",
+            "facts": [
+                [
+                    "कारण",
+                    "सौर हवा"
+                ],
+                [
+                    "ऊँचाई",
+                    "100–300 किमी"
+                ],
+                [
+                    "हरा",
+                    "ऑक्सीजन"
+                ],
+                [
+                    "लाल",
+                    "ऊँची ऑक्सीजन"
+                ],
+                [
+                    "नीला/बैंगनी",
+                    "नाइट्रोजन"
+                ],
+                [
+                    "और कहाँ",
+                    "बृहस्पति, शनि"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "ध्रुवीय ज्योति रोशनी के पर्दे हैं जो सूर्य के आवेशित कणों के पृथ्वी के ऊपरी वायुमंडल की गैसों से टकराने पर बनते हैं।"
+                ],
+                [
+                    "कहाँ और कब",
+                    "ये आमतौर पर चुंबकीय ध्रुवों के चारों ओर छल्लों में दिखती हैं; तेज़ सौर तूफ़ानों में ध्रुवों से बहुत दूर भी दिख सकती हैं।"
+                ],
+                [
+                    "दूसरी दुनियाएँ",
+                    "बृहस्पति, शनि, अरुण, वरुण और गैनिमीड जैसे चंद्रमाओं पर भी ध्रुवीय ज्योति होती है।"
+                ]
+            ],
+            "dyk": [
+                "उत्तरी ज्योति को ऑरोरा बोरियालिस और दक्षिणी को ऑरोरा ऑस्ट्रेलिस कहते हैं।",
+                "ISS पर अंतरिक्ष यात्री अक्सर ध्रुवीय ज्योति के ऊपर से गुज़रते हैं।",
+                "मई 2024 के तेज़ सौर तूफ़ान ने ध्रुवीय ज्योति को असामान्य रूप से दूर तक दिखाया।"
+            ]
+        },
+        "eclipse": {
+            "name": "सूर्य ग्रहण",
+            "tagline": "जब चाँद सूर्य को ढक लेता है",
+            "facts": [
+                [
+                    "प्रकार",
+                    "पूर्ण, वलयाकार, आंशिक"
+                ],
+                [
+                    "अधिकतम पूर्णता",
+                    "~7.5 मिनट"
+                ],
+                [
+                    "आवृत्ति",
+                    "प्रति वर्ष 2–5"
+                ],
+                [
+                    "छाया की गति",
+                    "~1,700 किमी/घं"
+                ],
+                [
+                    "संयोग",
+                    "सूर्य 400× बड़ा, 400× दूर"
+                ],
+                [
+                    "दिखता है",
+                    "कोरोना"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "सूर्य ग्रहण तब होता है जब चाँद सूर्य और पृथ्वी के बीच आ जाता है और अपनी छाया पृथ्वी पर डालता है।"
+                ],
+                [
+                    "ब्रह्मांडीय संयोग",
+                    "सूर्य चाँद से लगभग 400 गुना चौड़ा है पर लगभग 400 गुना दूर भी, इसलिए दोनों हमारे आकाश में लगभग एक जैसे आकार के दिखते हैं।"
+                ],
+                [
+                    "सुरक्षा",
+                    "प्रमाणित ग्रहण चश्मे के बिना कभी सूर्य को न देखें; सिर्फ़ पूर्णता के छोटे पल में ही नंगी आँखों से देखना सुरक्षित है।"
+                ]
+            ],
+            "dyk": [
+                "पूर्णता के दौरान सूर्य का कोरोना दिखता है।",
+                "1868 में एक ग्रहण के दौरान सूर्य के प्रकाश में हीलियम खोजी गई।",
+                "लाखों वर्ष बाद पूर्ण सूर्य ग्रहण होने बंद हो जाएँगे।"
+            ]
+        },
+        "bigbang": {
+            "name": "बिग बैंग",
+            "tagline": "ब्रह्मांड की शुरुआत कैसे हुई",
+            "facts": [
+                [
+                    "कब",
+                    "13.8 अरब वर्ष पहले"
+                ],
+                [
+                    "पहले परमाणु",
+                    "~3.8 लाख वर्ष"
+                ],
+                [
+                    "पहले तारे",
+                    "~10–20 करोड़ वर्ष"
+                ],
+                [
+                    "प्रमाण",
+                    "CMB, विस्तार"
+                ],
+                [
+                    "नाम दिया",
+                    "फ़्रेड हॉयल"
+                ],
+                [
+                    "अब भी",
+                    "फैल रहा है"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "बिग बैंग वह वैज्ञानिक सिद्धांत है जिसके अनुसार ब्रह्मांड लगभग 13.8 अरब वर्ष पहले बेहद गर्म, घनी अवस्था से शुरू हुआ और तब से फैल रहा है।"
+                ],
+                [
+                    "विस्फोट नहीं",
+                    "यह अंतरिक्ष में कोई विस्फोट नहीं था; स्वयं अंतरिक्ष हर जगह एक साथ फैलने लगा।"
+                ],
+                [
+                    "प्रमाण",
+                    "हमसे दूर जाती आकाशगंगाएँ, बची हुई कॉस्मिक माइक्रोवेव पृष्ठभूमि, और हाइड्रोजन-हीलियम की मात्रा इस सिद्धांत का समर्थन करती हैं।"
+                ]
+            ],
+            "dyk": [
+                "“बिग बैंग” नाम मज़ाक में रखा गया था।",
+                "पुराने एनालॉग टीवी की झिलमिलाहट का कुछ हिस्सा बिग बैंग की चमक से था।",
+                "वेब बिग बैंग के कुछ करोड़ वर्ष बाद की आकाशगंगाएँ देख रहा है।"
+            ]
+        },
+        "darkmatter": {
+            "name": "डार्क मैटर",
+            "tagline": "अदृश्य बहुमत",
+            "facts": [
+                [
+                    "पदार्थ में हिस्सा",
+                    "~85%"
+                ],
+                [
+                    "ब्रह्मांड में हिस्सा",
+                    "~27%"
+                ],
+                [
+                    "परस्पर क्रिया",
+                    "सिर्फ़ गुरुत्व से"
+                ],
+                [
+                    "पहला संकेत",
+                    "1930 का दशक (ज़्विकी)"
+                ],
+                [
+                    "प्रमाण",
+                    "आकाशगंगाओं का घूर्णन"
+                ],
+                [
+                    "पहचान",
+                    "अज्ञात"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "डार्क मैटर एक अदृश्य पदार्थ है जो न प्रकाश छोड़ता है, न सोखता है, न लौटाता है; हम इसे केवल इसके गुरुत्व से पहचानते हैं।"
+                ],
+                [
+                    "प्रमाण",
+                    "आकाशगंगाएँ इतनी तेज़ घूमती हैं कि सिर्फ़ दिखने वाले पदार्थ से टिकी नहीं रह सकतीं, और आकाशगंगा समूह दिखने वाले द्रव्यमान से ज़्यादा प्रकाश मोड़ते हैं।"
+                ],
+                [
+                    "खोज",
+                    "वैज्ञानिक भूमिगत डिटेक्टरों, कण त्वरकों और ESA के यूक्लिड जैसे अंतरिक्ष दूरबीनों से डार्क मैटर कणों को खोज रहे हैं।"
+                ]
+            ],
+            "dyk": [
+                "वेरा रुबिन के आकाशगंगा घूर्णन अध्ययन मुख्य प्रमाण थे।",
+                "डार्क मैटर शायद इसी समय आपके आर-पार गुज़र रहा है।",
+                "इसके बिना शायद आकाशगंगाएँ कभी नहीं बनतीं।"
+            ]
+        },
+        "darkenergy": {
+            "name": "डार्क एनर्जी",
+            "tagline": "ब्रह्मांड को तेज़ करने वाली शक्ति",
+            "facts": [
+                [
+                    "ब्रह्मांड में हिस्सा",
+                    "~68%"
+                ],
+                [
+                    "खोज",
+                    "1998"
+                ],
+                [
+                    "नोबेल पुरस्कार",
+                    "2011"
+                ],
+                [
+                    "प्रभाव",
+                    "विस्तार को तेज़ करती है"
+                ],
+                [
+                    "प्रमाण",
+                    "टाइप Ia सुपरनोवा"
+                ],
+                [
+                    "प्रकृति",
+                    "अज्ञात"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "1998 में खगोलविदों ने पाया कि ब्रह्मांड का विस्तार धीमा नहीं, तेज़ हो रहा है। इसके अज्ञात कारण को डार्क एनर्जी कहते हैं।"
+                ],
+                [
+                    "यह क्या हो सकती है?",
+                    "एक विचार है कि यह ख़ाली अंतरिक्ष की अपनी ऊर्जा है, आइंस्टीन का “कॉस्मोलॉजिकल कॉन्स्टेंट”। हाल के सर्वेक्षण संकेत देते हैं कि यह समय के साथ बदल सकती है।"
+                ],
+                [
+                    "ब्रह्मांड का भविष्य",
+                    "अगर डार्क एनर्जी धक्का देती रही, तो दूर की आकाशगंगाएँ आख़िरकार हमारी दृष्टि से बाहर हो जाएँगी।"
+                ]
+            ],
+            "dyk": [
+                "ब्रह्मांड का सबसे बड़ा हिस्सा डार्क एनर्जी है।",
+                "विस्तार लगभग 5 अरब वर्ष पहले तेज़ होने लगा।",
+                "कोई नहीं जानता कि यह असल में क्या है।"
+            ]
+        },
+        "exoplanets": {
+            "name": "बाह्यग्रह",
+            "tagline": "दूसरे तारों के चारों ओर की दुनियाएँ",
+            "facts": [
+                [
+                    "पुष्ट",
+                    "6,000+"
+                ],
+                [
+                    "पहला (सूर्य जैसे तारे का)",
+                    "1995"
+                ],
+                [
+                    "मुख्य तरीक़े",
+                    "ट्रांज़िट, डगमगाहट"
+                ],
+                [
+                    "शीर्ष खोजी",
+                    "केपलर, TESS"
+                ],
+                [
+                    "सबसे नज़दीकी",
+                    "प्रॉक्सिमा b"
+                ],
+                [
+                    "सबसे आम",
+                    "सुपर-अर्थ"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "बाह्यग्रह वे ग्रह हैं जो सूर्य के अलावा दूसरे तारों की परिक्रमा करते हैं; ज़्यादातर तारों के शायद कम से कम एक ग्रह है।"
+                ],
+                [
+                    "कैसे खोजते हैं",
+                    "दूरबीनें देखती हैं कि ग्रह के सामने से गुज़रने पर तारे की रोशनी ज़रा घटती है, या ग्रह के खिंचाव से तारा कैसे डगमगाता है।"
+                ],
+                [
+                    "जीवन की खोज",
+                    "वेब कुछ बाह्यग्रहों के वायुमंडल का विश्लेषण कर सकता है और पानी, कार्बन डाइऑक्साइड व जीवन के संभावित संकेत खोजता है।"
+                ]
+            ],
+            "dyk": [
+                "कुछ बाह्यग्रह दो सूर्यों की परिक्रमा करते हैं।",
+                "TRAPPIST-1 के सात पृथ्वी-आकार के ग्रह हैं।",
+                "कुछ “गर्म बृहस्पति” एक दिन से कम में अपने तारे का चक्कर लगाते हैं।"
+            ]
+        },
+        "cmb": {
+            "name": "कॉस्मिक माइक्रोवेव पृष्ठभूमि",
+            "tagline": "ब्रह्मांड का सबसे पुराना प्रकाश",
+            "facts": [
+                [
+                    "उत्सर्जन",
+                    "बिग बैंग के ~3.8 लाख वर्ष बाद"
+                ],
+                [
+                    "तापमान",
+                    "2.725 K"
+                ],
+                [
+                    "खोज",
+                    "1965"
+                ],
+                [
+                    "नक़्शा बनाया",
+                    "COBE, WMAP, प्लैंक"
+                ],
+                [
+                    "नोबेल",
+                    "1978, 2006"
+                ],
+                [
+                    "उतार-चढ़ाव",
+                    "1 लाख में 1 भाग"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "कॉस्मिक माइक्रोवेव पृष्ठभूमि (CMB) पूरे आकाश में फैला धुँधला विकिरण है, बिग बैंग की बची हुई चमक।"
+                ],
+                [
+                    "खोज",
+                    "1965 में आर्नो पेन्ज़ियास और रॉबर्ट विल्सन ने रेडियो एंटीना की खरखराहट दूर करते हुए संयोग से इसे खोजा।"
+                ],
+                [
+                    "शिशु तस्वीर",
+                    "CMB में तापमान की बारीक लहरें वे बीज हैं जो बाद में आकाशगंगाएँ बने; प्लैंक ने इनका बहुत बारीक नक़्शा बनाया।"
+                ]
+            ],
+            "dyk": [
+                "पहले इसे एंटीना में कबूतरों की बीट का शोर समझा गया।",
+                "यह हर दिशा में 0.001% के भीतर एक जैसा है।",
+                "यह बिग बैंग का सबसे अच्छा प्रमाण है।"
+            ]
+        },
+        "iss": {
+            "name": "अंतरिक्ष स्टेशन",
+            "tagline": "मानवता की परिक्रमा करती प्रयोगशाला",
+            "facts": [
+                [
+                    "लॉन्च",
+                    "1998"
+                ],
+                [
+                    "लगातार आबाद",
+                    "नवं. 2000 से"
+                ],
+                [
+                    "ऊँचाई",
+                    "~420 किमी"
+                ],
+                [
+                    "गति",
+                    "28,000 किमी/घं"
+                ],
+                [
+                    "परिक्रमा/दिन",
+                    "~16"
+                ],
+                [
+                    "द्रव्यमान",
+                    "~420 टन"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "अंतरराष्ट्रीय अंतरिक्ष स्टेशन अमेरिका, रूस, यूरोप, जापान और कनाडा की संयुक्त परियोजना है, जिस पर नवंबर 2000 से लगातार लोग रह रहे हैं।"
+                ],
+                [
+                    "विज्ञान",
+                    "इसके दल अध्ययन करते हैं कि सूक्ष्म गुरुत्व शरीर, पदार्थों, पौधों और तरल पदार्थों को कैसे प्रभावित करता है, जिससे लंबी यात्राओं की तैयारी होती है।"
+                ],
+                [
+                    "भविष्य",
+                    "ISS को लगभग 2030 में सेवानिवृत्त किया जाएगा; SpaceX इसे समुद्र में उतारेगा। इसकी जगह व्यावसायिक स्टेशन बन रहे हैं।"
+                ]
+            ],
+            "dyk": [
+                "आप ISS को पृथ्वी से बिना दूरबीन के देख सकते हैं।",
+                "दल हर दिन लगभग 16 सूर्योदय देखता है।",
+                "यह लगभग एक फ़ुटबॉल मैदान जितना बड़ा है।"
+            ]
+        },
+        "hubble": {
+            "name": "हबल दूरबीन",
+            "tagline": "खगोल विज्ञान बदलने वाली दूरबीन",
+            "facts": [
+                [
+                    "लॉन्च",
+                    "1990"
+                ],
+                [
+                    "दर्पण",
+                    "2.4 मी"
+                ],
+                [
+                    "ऊँचाई",
+                    "~540 किमी"
+                ],
+                [
+                    "मरम्मत मिशन",
+                    "5"
+                ],
+                [
+                    "अवलोकन",
+                    "16 लाख+"
+                ],
+                [
+                    "देखती है",
+                    "UV, दृश्य, निकट-IR"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "हबल अंतरिक्ष दूरबीन पृथ्वी के धुँधला करने वाले वायुमंडल के ऊपर परिक्रमा करती है और इसने खगोल विज्ञान की कई सबसे प्रसिद्ध तस्वीरें ली हैं।"
+                ],
+                [
+                    "कठिन शुरुआत",
+                    "इसके मुख्य दर्पण में छोटी ख़ामी थी; 1993 में यात्रियों ने सुधारक लेंस लगाए, और पाँच शटल मरम्मत मिशनों ने इसे चालू रखा।"
+                ],
+                [
+                    "खोजें",
+                    "हबल ने ब्रह्मांड की आयु तय करने में मदद की, दिखाया कि लगभग हर आकाशगंगा में अतिविशाल ब्लैक होल है, और डार्क एनर्जी की खोज में योगदान दिया।"
+                ]
+            ],
+            "dyk": [
+                "इसका नाम खगोलविद एडविन हबल पर है।",
+                "यह लगभग 27,000 किमी/घं से चलती है।",
+                "इसकी डीप फ़ील्ड तस्वीरों ने आकाश के छोटे से हिस्से में हज़ारों आकाशगंगाएँ दिखाईं।"
+            ]
+        },
+        "jwst": {
+            "name": "जेम्स वेब दूरबीन",
+            "tagline": "पहली आकाशगंगाओं को देखना",
+            "facts": [
+                [
+                    "लॉन्च",
+                    "25 दिसंबर 2021"
+                ],
+                [
+                    "दर्पण",
+                    "6.5 मी, 18 खंड"
+                ],
+                [
+                    "स्थान",
+                    "L2, 15 लाख किमी"
+                ],
+                [
+                    "देखती है",
+                    "इन्फ़्रारेड"
+                ],
+                [
+                    "सनशील्ड",
+                    "टेनिस कोर्ट जितनी"
+                ],
+                [
+                    "साझेदार",
+                    "NASA, ESA, CSA"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "वेब अब तक बनी सबसे शक्तिशाली अंतरिक्ष दूरबीन है, जो धूल के पार और आरंभिक ब्रह्मांड तक देखने के लिए इन्फ़्रारेड प्रकाश देखती है।"
+                ],
+                [
+                    "इंजीनियरिंग",
+                    "इसका सोने की परत वाला बेरिलियम दर्पण और पाँच परतों वाली सनशील्ड अंतरिक्ष में खुली; शील्ड उपकरणों को लगभग −233 °C पर रखती है।"
+                ],
+                [
+                    "खोजें",
+                    "वेब ने आश्चर्यजनक रूप से चमकीली आरंभिक आकाशगंगाएँ पाईं, बाह्यग्रहों पर कार्बन डाइऑक्साइड पकड़ी, और नीहारिकाओं व ग्रहों की शानदार तस्वीरें लीं।"
+                ]
+            ],
+            "dyk": [
+                "वेब का दर्पण क्षेत्रफल में हबल से लगभग 6 गुना बड़ा है।",
+                "यह पृथ्वी नहीं, अंतरिक्ष के एक बिंदु की परिक्रमा करती है।",
+                "इसकी पहली पूर्ण-रंगीन तस्वीर जुलाई 2022 में जारी हुई।"
+            ]
+        },
+        "voyager": {
+            "name": "वॉयेजर 1",
+            "tagline": "मनुष्य की बनाई सबसे दूर की वस्तु",
+            "facts": [
+                [
+                    "लॉन्च",
+                    "5 सितंबर 1977"
+                ],
+                [
+                    "दूरी",
+                    "> 165 AU"
+                ],
+                [
+                    "गति",
+                    "~61,000 किमी/घं"
+                ],
+                [
+                    "स्थिति",
+                    "अंतरतारकीय अंतरिक्ष"
+                ],
+                [
+                    "संकेत में देरी",
+                    "~23 घंटे"
+                ],
+                [
+                    "साथ में",
+                    "गोल्डन रिकॉर्ड"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "वॉयेजर 1 बृहस्पति और शनि के पास से गुज़रकर आगे बढ़ता रहा और 2012 में अंतरतारकीय अंतरिक्ष में पहुँचने वाला पहला यान बना।"
+                ],
+                [
+                    "पेल ब्लू डॉट",
+                    "1990 में इसने मुड़कर 6 अरब किमी दूर से पृथ्वी की तस्वीर ली, एक छोटा-सा बिंदु, जिसे कार्ल सेगन ने प्रसिद्ध किया।"
+                ],
+                [
+                    "गोल्डन रिकॉर्ड",
+                    "इसमें पृथ्वी की आवाज़ों, संगीत और तस्वीरों वाला सोने की परत चढ़ा रिकॉर्ड है, जो भी इसे पाए उसके लिए संदेश।"
+                ]
+            ],
+            "dyk": [
+                "इसका ऊर्जा स्रोत हर साल कम बिजली बनाता है।",
+                "इसके कंप्यूटरों में लगभग 70 KB मेमोरी है।",
+                "वॉयेजर 2 अरुण और वरुण तक जाने वाला एकमात्र यान है।"
+            ]
+        },
+        "apollo": {
+            "name": "अपोलो 11",
+            "tagline": "चाँद पर पहले क़दम",
+            "facts": [
+                [
+                    "लॉन्च",
+                    "16 जुलाई 1969"
+                ],
+                [
+                    "उतरा",
+                    "20 जुलाई 1969"
+                ],
+                [
+                    "दल",
+                    "आर्मस्ट्रॉन्ग, एल्ड्रिन, कॉलिन्स"
+                ],
+                [
+                    "स्थान",
+                    "शांति सागर"
+                ],
+                [
+                    "चंद्र-भ्रमण",
+                    "2.5 घंटे"
+                ],
+                [
+                    "नमूने",
+                    "21.5 किग्रा"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "अपोलो 11 चाँद पर मनुष्यों को उतारने वाला पहला मिशन था, जिसने राष्ट्रपति कैनेडी का 1961 का लक्ष्य पूरा किया।"
+                ],
+                [
+                    "लैंडिंग",
+                    "नील आर्मस्ट्रॉन्ग ने लूनर मॉड्यूल ईगल को चट्टानों के मैदान के पार उतारा, जब लैंडिंग ईंधन सिर्फ़ ~25 सेकंड का बचा था।"
+                ],
+                [
+                    "विरासत",
+                    "लगभग 60 करोड़ लोगों ने इसे सीधा देखा। कुल छह अपोलो मिशन उतरे और 12 यात्री चाँद पर चले।"
+                ]
+            ],
+            "dyk": [
+                "इसका मार्गदर्शन कंप्यूटर आधुनिक कैलकुलेटर से भी कम शक्तिशाली था।",
+                "यात्रियों ने एक परावर्तक छोड़ा जिससे आज भी चाँद की दूरी मापी जाती है।",
+                "माइकल कॉलिन्स अकेले परिक्रमा करते रहे जबकि बाक़ी सतह पर चले।"
+            ]
+        },
+        "perseverance": {
+            "name": "पर्सिवियरेंस रोवर",
+            "tagline": "मंगल पर प्राचीन जीवन की खोज",
+            "facts": [
+                [
+                    "उतरा",
+                    "18 फ़रवरी 2021"
+                ],
+                [
+                    "स्थान",
+                    "जेज़ेरो क्रेटर"
+                ],
+                [
+                    "द्रव्यमान",
+                    "1,025 किग्रा"
+                ],
+                [
+                    "ऊर्जा",
+                    "परमाणु (MMRTG)"
+                ],
+                [
+                    "सहायक",
+                    "इन्जेन्युटी हेलिकॉप्टर"
+                ],
+                [
+                    "लक्ष्य",
+                    "नमूने वापस लाना"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "पर्सिवियरेंस NASA का सबसे उन्नत मंगल रोवर है, जो कभी पानी से भरी झील रहे जेज़ेरो क्रेटर की खोज कर रहा है।"
+                ],
+                [
+                    "नमूने",
+                    "रोवर चट्टानों के कोर बंद नलियों में जमा करता है, ताकि भविष्य का मिशन उन्हें अध्ययन के लिए पृथ्वी पर ला सके।"
+                ],
+                [
+                    "इन्जेन्युटी",
+                    "इसके साथी हेलिकॉप्टर इन्जेन्युटी ने किसी दूसरी दुनिया पर पहली संचालित उड़ान भरी और कुल 72 उड़ानें पूरी कीं।"
+                ]
+            ],
+            "dyk": [
+                "इसमें माइक्रोफ़ोन हैं और इसने मंगल की आवाज़ें रिकॉर्ड की हैं।",
+                "इसके MOXIE प्रयोग ने मंगल की हवा से ऑक्सीजन बनाई।",
+                "इसमें जनता के 1.09 करोड़ नामों वाली एक चिप है।"
+            ]
+        },
+        "artemis": {
+            "name": "आर्टेमिस कार्यक्रम",
+            "tagline": "चाँद पर वापसी, रहने के लिए",
+            "facts": [
+                [
+                    "एजेंसी",
+                    "NASA + साझेदार"
+                ],
+                [
+                    "रॉकेट",
+                    "SLS"
+                ],
+                [
+                    "कैप्सूल",
+                    "ओरायन"
+                ],
+                [
+                    "आर्टेमिस I",
+                    "नवं. 2022 (बिना दल)"
+                ],
+                [
+                    "आर्टेमिस II",
+                    "दल सहित चंद्र परिक्रमा"
+                ],
+                [
+                    "लक्ष्य",
+                    "चाँद का दक्षिणी ध्रुव"
+                ]
+            ],
+            "sections": [
+                [
+                    "परिचय",
+                    "आर्टेमिस NASA का कार्यक्रम है, जो मनुष्यों को चाँद पर लौटाकर वहाँ स्थायी उपस्थिति बनाएगा, मंगल की ओर एक क़दम।"
+                ],
+                [
+                    "मिशन",
+                    "आर्टेमिस I ने 2022 में SLS रॉकेट और ओरायन कैप्सूल का चाँद के चारों ओर परीक्षण किया; आर्टेमिस II यात्रियों को चाँद के चारों ओर ले जाता है, और आर्टेमिस III दक्षिणी ध्रुव के पास उतरने का लक्ष्य रखता है।"
+                ],
+                [
+                    "गेटवे",
+                    "गेटवे नामक एक छोटा चंद्र-कक्षीय स्टेशन दलों और विज्ञान के केंद्र के रूप में योजनाबद्ध है।"
+                ]
+            ],
+            "dyk": [
+                "यूनानी मिथक में आर्टेमिस अपोलो की जुड़वाँ बहन है।",
+                "आर्टेमिस पहली महिला को चाँद पर उतारने की योजना रखता है।",
+                "दक्षिणी ध्रुव के छायादार गड्ढों में पानी की बर्फ़ हो सकती है।"
+            ]
+        }
+    }
+}

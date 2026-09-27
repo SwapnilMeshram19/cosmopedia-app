@@ -1,1 +1,886 @@
-[["Which planet has the most known moons?",["Jupiter","Saturn","Uranus","Neptune"],1,"Saturn has 146 known moons, more than any other planet.","saturn",2],["How long does sunlight take to reach Earth?",["8 seconds","8 minutes","8 hours","8 days"],1,"Sunlight takes about 8 minutes 20 seconds to reach Earth.","sun",1],["Which is the hottest planet?",["Mercury","Venus","Mars","Jupiter"],1,"Venus’s thick CO₂ atmosphere traps heat, reaching about 465 °C.","venus",1],["What is the tallest volcano in the Solar System?",["Mauna Kea","Mount Everest","Olympus Mons","Maxwell Montes"],2,"Olympus Mons on Mars rises about 22 km.","mars",2],["Which planet rotates on its side?",["Neptune","Uranus","Saturn","Venus"],1,"Uranus is tilted about 98°, probably after an ancient collision.","uranus",2],["When was Pluto reclassified as a dwarf planet?",["1996","2001","2006","2015"],2,"The IAU reclassified Pluto in 2006.","pluto",2],["Which moon has lakes of liquid methane?",["Europa","Io","Titan","Ganymede"],2,"Titan has lakes and seas of methane and ethane.","titan",2],["What is the largest moon in the Solar System?",["Titan","Ganymede","The Moon","Callisto"],1,"Ganymede is bigger than the planet Mercury.","ganymede",2],["Which moon is the most volcanically active body known?",["Io","Enceladus","Triton","Europa"],0,"Io has about 400 active volcanoes, powered by Jupiter’s tides.","io",3],["How old is the universe?",["4.6 billion yrs","10 billion yrs","13.8 billion yrs","100 billion yrs"],2,"The Big Bang happened about 13.8 billion years ago.","bigbang",1],["Roughly what share of all matter is dark matter?",["15%","50%","85%","99%"],2,"About 85% of all matter is invisible dark matter.","darkmatter",3],["Which star is closest to the Sun?",["Sirius","Proxima Centauri","Betelgeuse","Vega"],1,"Proxima Centauri is 4.24 light-years away.","proxima",1],["What is the brightest star in the night sky?",["Polaris","Betelgeuse","Sirius","Rigel"],2,"Sirius, the Dog Star, is the brightest star at night.","sirius",1],["In which constellation is Betelgeuse?",["Orion","Taurus","Lyra","Cygnus"],0,"Betelgeuse marks Orion’s shoulder.","betelgeuse",1],["About how wide is a neutron star?",["20 km","2,000 km","20,000 km","As wide as the Sun"],0,"A neutron star packs more than the Sun’s mass into about 20 km.","neutron",3],["Which large spiral galaxy is on a collision course with the Milky Way?",["Sombrero","Whirlpool","Andromeda","Pinwheel"],2,"Andromeda will merge with the Milky Way in about 4.5 billion years.","andromeda",1],["What sits at the centre of the Milky Way?",["A neutron star","A supermassive black hole","A giant red star","Empty space"],1,"Sagittarius A* is about 4 million times the mass of the Sun.","milkyway",1],["Which nebula is home to the Pillars of Creation?",["Orion Nebula","Eagle Nebula","Crab Nebula","Ring Nebula"],1,"The Pillars are inside the Eagle Nebula (M16).","pillars",2],["The Crab Nebula came from a supernova seen in which year?",["1054","1572","1604","1987"],0,"Chinese astronomers recorded it in 1054 AD.","crab",3],["What is a planetary nebula made from?",["A forming planet","A dying Sun-like star","Two colliding planets","A comet’s tail"],1,"It is gas thrown off by a Sun-like star near the end of its life.","ring",3],["When was the first image of a black hole released?",["1999","2009","2019","2023"],2,"The Event Horizon Telescope imaged M87* in 2019.","blackhole",2],["Which gas causes most of the green in auroras?",["Nitrogen","Oxygen","Helium","Hydrogen"],1,"Oxygen 100–300 km up glows green.","aurora",2],["Which way does a comet’s tail point?",["Towards the Sun","Away from the Sun","Always behind it","Towards Earth"],1,"The solar wind pushes comet tails away from the Sun.","comets",1],["What is the largest object in the asteroid belt?",["Vesta","Ceres","Pallas","Psyche"],1,"Ceres is about 940 km across and counts as a dwarf planet.","asteroids",2],["What causes meteor showers?",["Solar flares","Comet debris","Moon dust","Broken satellites"],1,"Earth passes through dust trails left behind by comets.","meteors",1],["Since when has the ISS been continuously crewed?",["1990","1998","2000","2011"],2,"People have lived aboard continuously since November 2000.","iss",3],["About how many sunrises do ISS astronauts see each day?",["1","4","16","50"],2,"The ISS orbits Earth about 16 times a day.","iss",2],["Which telescope launched on Christmas Day 2021?",["Hubble","Kepler","James Webb","Spitzer"],2,"Webb launched on 25 December 2021.","jwst",1],["What kind of light does Webb mainly observe?",["X-ray","Ultraviolet","Infrared","Radio"],2,"Infrared lets Webb see through dust and back into the early universe.","jwst",2],["What is the farthest human-made object?",["Voyager 1","Voyager 2","New Horizons","Pioneer 10"],0,"Voyager 1 is more than 165 AU from the Sun.","voyager",1],["Who was the first person to walk on the Moon?",["Buzz Aldrin","Yuri Gagarin","Neil Armstrong","Michael Collins"],2,"Neil Armstrong stepped onto the Moon on 20 July 1969.","apollo",1],["Which rover carried the Ingenuity helicopter to Mars?",["Curiosity","Perseverance","Opportunity","Zhurong"],1,"Ingenuity travelled with Perseverance and made 72 flights.","perseverance",2],["In Greek myth, Artemis is the twin of…",["Zeus","Apollo","Hermes","Athena"],1,"Artemis is Apollo’s twin sister.","artemis",2],["What temperature is the cosmic microwave background?",["0 K","2.7 K","27 K","273 K"],1,"The CMB is about 2.725 kelvin.","cmb",3],["What does dark energy do?",["Holds galaxies together","Speeds up cosmic expansion","Powers stars","Creates black holes"],1,"Dark energy is making the universe expand faster and faster.","darkenergy",2],["How are most exoplanets discovered?",["Direct photos","Dips in starlight","Radio signals","Space probes"],1,"Most are found by the tiny dip in light as a planet passes in front of its star.","exoplanets",3],["Which moon shoots water geysers from its south pole?",["Enceladus","Titan","Callisto","Phobos"],0,"Cassini found jets erupting from Enceladus’s “tiger stripes”.","enceladus",3],["Which moon may hide an ocean twice the volume of Earth’s?",["Europa","Io","The Moon","Titan"],0,"Europa’s hidden ocean may hold twice as much water as Earth’s oceans.","europa",2],["How long is a year on Mercury?",["88 days","225 days","365 days","687 days"],0,"Mercury orbits the Sun every 88 days.","mercury",2],["What gives Mars its red colour?",["Red plants","Iron oxide dust","Lava","Copper"],1,"Rust-like iron oxide dust covers the surface of Mars.","mars",1],["Which planet has the shortest day?",["Earth","Saturn","Jupiter","Mercury"],2,"Jupiter spins once every 9 h 56 min.","jupiter",2],["How was Neptune first found?",["By a space probe","By mathematical prediction","In an accidental photo","With a radio telescope"],1,"In 1846 its position was predicted from wobbles in Uranus’s orbit.","neptune",3],["About how often does Halley’s Comet return?",["Every 7 yrs","Every 76 yrs","Every 200 yrs","Every 1,000 yrs"],1,"Halley returns about every 76 years. Next visit: 2061.","comets",1],["Why can the Moon exactly cover the Sun in an eclipse?",["The Moon is bigger","Size and distance ratios match","Earth’s shadow helps","Clouds block the rest"],1,"The Sun is about 400× wider but also about 400× farther away.","eclipse",3],["What causes a Type Ia supernova?",["An exploding white dwarf","Colliding planets","Black holes merging","A comet impact"],0,"A white dwarf that takes on too much matter can explode.","supernova",3],["What is the Moon slowly doing?",["Getting closer","Drifting away","Shrinking fast","Spinning faster"],1,"It moves about 3.8 cm farther from Earth every year.","moon",1],["Which galaxy was first recognised as a spiral?",["Andromeda","Whirlpool","Sombrero","Milky Way"],1,"Lord Rosse sketched the Whirlpool’s spiral in 1845.","whirlpool",3],["What forms the Sombrero Galaxy’s “brim”?",["A ring of dust","A comet belt","A second galaxy","A nebula"],0,"A dark lane of dust gives it its hat-like brim.","sombrero",3],["Where does Earth’s magnetic field come from?",["The Moon","Molten iron in the outer core","The oceans","The atmosphere"],1,"Liquid iron moving in the outer core creates the magnetic field.","earth",2],["How many planets are in our Solar System?",["7","8","9","10"],1,"There are eight planets, from Mercury out to Neptune.","earth",1],["Which planet is known as the Red Planet?",["Venus","Mars","Jupiter","Mercury"],1,"Mars looks red because of iron oxide dust.","mars",1],["Which is the largest planet?",["Saturn","Neptune","Jupiter","Earth"],2,"Jupiter is more than twice as massive as all the other planets combined.","jupiter",1],["What is the Sun?",["A planet","A star","A comet","A galaxy"],1,"The Sun is a G-type main-sequence star.","sun",1],["Which planet is famous for its bright rings?",["Mars","Saturn","Venus","Mercury"],1,"Saturn’s rings are made of ice and rock.","saturn",1],["What is the name of our galaxy?",["Andromeda","Milky Way","Sombrero","Whirlpool"],1,"We live in the Milky Way.","milkyway",1],["Which planet is closest to the Sun?",["Venus","Earth","Mercury","Mars"],2,"Mercury orbits at 0.39 AU from the Sun.","mercury",1],["Where do astronauts live in orbit today?",["A Moon base","The ISS","Skylab","Mir"],1,"People have lived on the ISS continuously since 2000.","iss",1],["Which space telescope launched in 1990?",["Webb","Hubble","Kepler","Chandra"],1,"Hubble launched in April 1990.","hubble",2],["What causes auroras?",["Moonlight","Charged particles from the Sun","Volcanoes","Lightning"],1,"Particles in the solar wind hit gases high in the atmosphere and make them glow.","aurora",2],["Which planet has a six-sided storm at its north pole?",["Jupiter","Saturn","Neptune","Uranus"],1,"Saturn’s north pole has a hexagon-shaped jet stream.","saturn",2],["What are the names of Mars’s two moons?",["Io & Europa","Phobos & Deimos","Titan & Rhea","Triton & Nereid"],1,"Phobos and Deimos mean “fear” and “panic”.","mars",2],["Which mission first landed humans on the Moon?",["Apollo 8","Apollo 11","Apollo 13","Gemini 4"],1,"Apollo 11 landed on 20 July 1969.","apollo",2],["Who discovered the first pulsar in 1967?",["Vera Rubin","Jocelyn Bell Burnell","Carl Sagan","Edwin Hubble"],1,"Jocelyn Bell Burnell spotted the signal while she was a PhD student.","neutron",3],["What is Sputnik Planitia?",["A crater on Mars","Pluto’s heart-shaped glacier","A Soviet probe","A lunar sea"],1,"It is a vast plain of nitrogen ice on Pluto.","pluto",3],["What did NASA’s DART mission do in 2022?",["Landed on Mars","Changed an asteroid’s orbit","Sampled a comet","Photographed Pluto"],1,"DART hit the asteroid Dimorphos and shortened its orbit.","asteroids",3],["How many people have walked on the Moon?",["6","12","18","24"],1,"Twelve astronauts walked on the Moon across six Apollo landings.","moon",3],["What powers the Crab Nebula’s glow?",["A black hole","A pulsar","A red giant","A comet"],1,"A pulsar spinning 30 times a second provides the energy.","crab",3],["Which moon orbits its planet backwards?",["Titan","Triton","Europa","Phobos"],1,"Neptune’s moon Triton has a retrograde orbit.","neptune",3]]
+[
+    [
+        "Which planet has the most known moons?",
+        [
+            "Jupiter",
+            "Saturn",
+            "Uranus",
+            "Neptune"
+        ],
+        1,
+        "Saturn has 146 known moons, more than any other planet.",
+        "saturn",
+        2
+    ],
+    [
+        "How long does sunlight take to reach Earth?",
+        [
+            "8 seconds",
+            "8 minutes",
+            "8 hours",
+            "8 days"
+        ],
+        1,
+        "Sunlight takes about 8 minutes 20 seconds to reach Earth.",
+        "sun",
+        1
+    ],
+    [
+        "Which is the hottest planet?",
+        [
+            "Mercury",
+            "Venus",
+            "Mars",
+            "Jupiter"
+        ],
+        1,
+        "Venus’s thick CO₂ atmosphere traps heat, reaching about 465 °C.",
+        "venus",
+        1
+    ],
+    [
+        "What is the tallest volcano in the Solar System?",
+        [
+            "Mauna Kea",
+            "Mount Everest",
+            "Olympus Mons",
+            "Maxwell Montes"
+        ],
+        2,
+        "Olympus Mons on Mars rises about 22 km.",
+        "mars",
+        2
+    ],
+    [
+        "Which planet rotates on its side?",
+        [
+            "Neptune",
+            "Uranus",
+            "Saturn",
+            "Venus"
+        ],
+        1,
+        "Uranus is tilted about 98°, probably after an ancient collision.",
+        "uranus",
+        2
+    ],
+    [
+        "When was Pluto reclassified as a dwarf planet?",
+        [
+            "1996",
+            "2001",
+            "2006",
+            "2015"
+        ],
+        2,
+        "The IAU reclassified Pluto in 2006.",
+        "pluto",
+        2
+    ],
+    [
+        "Which moon has lakes of liquid methane?",
+        [
+            "Europa",
+            "Io",
+            "Titan",
+            "Ganymede"
+        ],
+        2,
+        "Titan has lakes and seas of methane and ethane.",
+        "titan",
+        2
+    ],
+    [
+        "What is the largest moon in the Solar System?",
+        [
+            "Titan",
+            "Ganymede",
+            "The Moon",
+            "Callisto"
+        ],
+        1,
+        "Ganymede is bigger than the planet Mercury.",
+        "ganymede",
+        2
+    ],
+    [
+        "Which moon is the most volcanically active body known?",
+        [
+            "Io",
+            "Enceladus",
+            "Triton",
+            "Europa"
+        ],
+        0,
+        "Io has about 400 active volcanoes, powered by Jupiter’s tides.",
+        "io",
+        3
+    ],
+    [
+        "How old is the universe?",
+        [
+            "4.6 billion yrs",
+            "10 billion yrs",
+            "13.8 billion yrs",
+            "100 billion yrs"
+        ],
+        2,
+        "The Big Bang happened about 13.8 billion years ago.",
+        "bigbang",
+        1
+    ],
+    [
+        "Roughly what share of all matter is dark matter?",
+        [
+            "15%",
+            "50%",
+            "85%",
+            "99%"
+        ],
+        2,
+        "About 85% of all matter is invisible dark matter.",
+        "darkmatter",
+        3
+    ],
+    [
+        "Which star is closest to the Sun?",
+        [
+            "Sirius",
+            "Proxima Centauri",
+            "Betelgeuse",
+            "Vega"
+        ],
+        1,
+        "Proxima Centauri is 4.24 light-years away.",
+        "proxima",
+        1
+    ],
+    [
+        "What is the brightest star in the night sky?",
+        [
+            "Polaris",
+            "Betelgeuse",
+            "Sirius",
+            "Rigel"
+        ],
+        2,
+        "Sirius, the Dog Star, is the brightest star at night.",
+        "sirius",
+        1
+    ],
+    [
+        "In which constellation is Betelgeuse?",
+        [
+            "Orion",
+            "Taurus",
+            "Lyra",
+            "Cygnus"
+        ],
+        0,
+        "Betelgeuse marks Orion’s shoulder.",
+        "betelgeuse",
+        1
+    ],
+    [
+        "About how wide is a neutron star?",
+        [
+            "20 km",
+            "2,000 km",
+            "20,000 km",
+            "As wide as the Sun"
+        ],
+        0,
+        "A neutron star packs more than the Sun’s mass into about 20 km.",
+        "neutron",
+        3
+    ],
+    [
+        "Which large spiral galaxy is on a collision course with the Milky Way?",
+        [
+            "Sombrero",
+            "Whirlpool",
+            "Andromeda",
+            "Pinwheel"
+        ],
+        2,
+        "Andromeda will merge with the Milky Way in about 4.5 billion years.",
+        "andromeda",
+        1
+    ],
+    [
+        "What sits at the centre of the Milky Way?",
+        [
+            "A neutron star",
+            "A supermassive black hole",
+            "A giant red star",
+            "Empty space"
+        ],
+        1,
+        "Sagittarius A* is about 4 million times the mass of the Sun.",
+        "milkyway",
+        1
+    ],
+    [
+        "Which nebula is home to the Pillars of Creation?",
+        [
+            "Orion Nebula",
+            "Eagle Nebula",
+            "Crab Nebula",
+            "Ring Nebula"
+        ],
+        1,
+        "The Pillars are inside the Eagle Nebula (M16).",
+        "pillars",
+        2
+    ],
+    [
+        "The Crab Nebula came from a supernova seen in which year?",
+        [
+            "1054",
+            "1572",
+            "1604",
+            "1987"
+        ],
+        0,
+        "Chinese astronomers recorded it in 1054 AD.",
+        "crab",
+        3
+    ],
+    [
+        "What is a planetary nebula made from?",
+        [
+            "A forming planet",
+            "A dying Sun-like star",
+            "Two colliding planets",
+            "A comet’s tail"
+        ],
+        1,
+        "It is gas thrown off by a Sun-like star near the end of its life.",
+        "ring",
+        3
+    ],
+    [
+        "When was the first image of a black hole released?",
+        [
+            "1999",
+            "2009",
+            "2019",
+            "2023"
+        ],
+        2,
+        "The Event Horizon Telescope imaged M87* in 2019.",
+        "blackhole",
+        2
+    ],
+    [
+        "Which gas causes most of the green in auroras?",
+        [
+            "Nitrogen",
+            "Oxygen",
+            "Helium",
+            "Hydrogen"
+        ],
+        1,
+        "Oxygen 100–300 km up glows green.",
+        "aurora",
+        2
+    ],
+    [
+        "Which way does a comet’s tail point?",
+        [
+            "Towards the Sun",
+            "Away from the Sun",
+            "Always behind it",
+            "Towards Earth"
+        ],
+        1,
+        "The solar wind pushes comet tails away from the Sun.",
+        "comets",
+        1
+    ],
+    [
+        "What is the largest object in the asteroid belt?",
+        [
+            "Vesta",
+            "Ceres",
+            "Pallas",
+            "Psyche"
+        ],
+        1,
+        "Ceres is about 940 km across and counts as a dwarf planet.",
+        "asteroids",
+        2
+    ],
+    [
+        "What causes meteor showers?",
+        [
+            "Solar flares",
+            "Comet debris",
+            "Moon dust",
+            "Broken satellites"
+        ],
+        1,
+        "Earth passes through dust trails left behind by comets.",
+        "meteors",
+        1
+    ],
+    [
+        "Since when has the ISS been continuously crewed?",
+        [
+            "1990",
+            "1998",
+            "2000",
+            "2011"
+        ],
+        2,
+        "People have lived aboard continuously since November 2000.",
+        "iss",
+        3
+    ],
+    [
+        "About how many sunrises do ISS astronauts see each day?",
+        [
+            "1",
+            "4",
+            "16",
+            "50"
+        ],
+        2,
+        "The ISS orbits Earth about 16 times a day.",
+        "iss",
+        2
+    ],
+    [
+        "Which telescope launched on Christmas Day 2021?",
+        [
+            "Hubble",
+            "Kepler",
+            "James Webb",
+            "Spitzer"
+        ],
+        2,
+        "Webb launched on 25 December 2021.",
+        "jwst",
+        1
+    ],
+    [
+        "What kind of light does Webb mainly observe?",
+        [
+            "X-ray",
+            "Ultraviolet",
+            "Infrared",
+            "Radio"
+        ],
+        2,
+        "Infrared lets Webb see through dust and back into the early universe.",
+        "jwst",
+        2
+    ],
+    [
+        "What is the farthest human-made object?",
+        [
+            "Voyager 1",
+            "Voyager 2",
+            "New Horizons",
+            "Pioneer 10"
+        ],
+        0,
+        "Voyager 1 is more than 165 AU from the Sun.",
+        "voyager",
+        1
+    ],
+    [
+        "Who was the first person to walk on the Moon?",
+        [
+            "Buzz Aldrin",
+            "Yuri Gagarin",
+            "Neil Armstrong",
+            "Michael Collins"
+        ],
+        2,
+        "Neil Armstrong stepped onto the Moon on 20 July 1969.",
+        "apollo",
+        1
+    ],
+    [
+        "Which rover carried the Ingenuity helicopter to Mars?",
+        [
+            "Curiosity",
+            "Perseverance",
+            "Opportunity",
+            "Zhurong"
+        ],
+        1,
+        "Ingenuity travelled with Perseverance and made 72 flights.",
+        "perseverance",
+        2
+    ],
+    [
+        "In Greek myth, Artemis is the twin of…",
+        [
+            "Zeus",
+            "Apollo",
+            "Hermes",
+            "Athena"
+        ],
+        1,
+        "Artemis is Apollo’s twin sister.",
+        "artemis",
+        2
+    ],
+    [
+        "What temperature is the cosmic microwave background?",
+        [
+            "0 K",
+            "2.7 K",
+            "27 K",
+            "273 K"
+        ],
+        1,
+        "The CMB is about 2.725 kelvin.",
+        "cmb",
+        3
+    ],
+    [
+        "What does dark energy do?",
+        [
+            "Holds galaxies together",
+            "Speeds up cosmic expansion",
+            "Powers stars",
+            "Creates black holes"
+        ],
+        1,
+        "Dark energy is making the universe expand faster and faster.",
+        "darkenergy",
+        2
+    ],
+    [
+        "How are most exoplanets discovered?",
+        [
+            "Direct photos",
+            "Dips in starlight",
+            "Radio signals",
+            "Space probes"
+        ],
+        1,
+        "Most are found by the tiny dip in light as a planet passes in front of its star.",
+        "exoplanets",
+        3
+    ],
+    [
+        "Which moon shoots water geysers from its south pole?",
+        [
+            "Enceladus",
+            "Titan",
+            "Callisto",
+            "Phobos"
+        ],
+        0,
+        "Cassini found jets erupting from Enceladus’s “tiger stripes”.",
+        "enceladus",
+        3
+    ],
+    [
+        "Which moon may hide an ocean twice the volume of Earth’s?",
+        [
+            "Europa",
+            "Io",
+            "The Moon",
+            "Titan"
+        ],
+        0,
+        "Europa’s hidden ocean may hold twice as much water as Earth’s oceans.",
+        "europa",
+        2
+    ],
+    [
+        "How long is a year on Mercury?",
+        [
+            "88 days",
+            "225 days",
+            "365 days",
+            "687 days"
+        ],
+        0,
+        "Mercury orbits the Sun every 88 days.",
+        "mercury",
+        2
+    ],
+    [
+        "What gives Mars its red colour?",
+        [
+            "Red plants",
+            "Iron oxide dust",
+            "Lava",
+            "Copper"
+        ],
+        1,
+        "Rust-like iron oxide dust covers the surface of Mars.",
+        "mars",
+        1
+    ],
+    [
+        "Which planet has the shortest day?",
+        [
+            "Earth",
+            "Saturn",
+            "Jupiter",
+            "Mercury"
+        ],
+        2,
+        "Jupiter spins once every 9 h 56 min.",
+        "jupiter",
+        2
+    ],
+    [
+        "How was Neptune first found?",
+        [
+            "By a space probe",
+            "By mathematical prediction",
+            "In an accidental photo",
+            "With a radio telescope"
+        ],
+        1,
+        "In 1846 its position was predicted from wobbles in Uranus’s orbit.",
+        "neptune",
+        3
+    ],
+    [
+        "About how often does Halley’s Comet return?",
+        [
+            "Every 7 yrs",
+            "Every 76 yrs",
+            "Every 200 yrs",
+            "Every 1,000 yrs"
+        ],
+        1,
+        "Halley returns about every 76 years. Next visit: 2061.",
+        "comets",
+        1
+    ],
+    [
+        "Why can the Moon exactly cover the Sun in an eclipse?",
+        [
+            "The Moon is bigger",
+            "Size and distance ratios match",
+            "Earth’s shadow helps",
+            "Clouds block the rest"
+        ],
+        1,
+        "The Sun is about 400× wider but also about 400× farther away.",
+        "eclipse",
+        3
+    ],
+    [
+        "What causes a Type Ia supernova?",
+        [
+            "An exploding white dwarf",
+            "Colliding planets",
+            "Black holes merging",
+            "A comet impact"
+        ],
+        0,
+        "A white dwarf that takes on too much matter can explode.",
+        "supernova",
+        3
+    ],
+    [
+        "What is the Moon slowly doing?",
+        [
+            "Getting closer",
+            "Drifting away",
+            "Shrinking fast",
+            "Spinning faster"
+        ],
+        1,
+        "It moves about 3.8 cm farther from Earth every year.",
+        "moon",
+        1
+    ],
+    [
+        "Which galaxy was first recognised as a spiral?",
+        [
+            "Andromeda",
+            "Whirlpool",
+            "Sombrero",
+            "Milky Way"
+        ],
+        1,
+        "Lord Rosse sketched the Whirlpool’s spiral in 1845.",
+        "whirlpool",
+        3
+    ],
+    [
+        "What forms the Sombrero Galaxy’s “brim”?",
+        [
+            "A ring of dust",
+            "A comet belt",
+            "A second galaxy",
+            "A nebula"
+        ],
+        0,
+        "A dark lane of dust gives it its hat-like brim.",
+        "sombrero",
+        3
+    ],
+    [
+        "Where does Earth’s magnetic field come from?",
+        [
+            "The Moon",
+            "Molten iron in the outer core",
+            "The oceans",
+            "The atmosphere"
+        ],
+        1,
+        "Liquid iron moving in the outer core creates the magnetic field.",
+        "earth",
+        2
+    ],
+    [
+        "How many planets are in our Solar System?",
+        [
+            "7",
+            "8",
+            "9",
+            "10"
+        ],
+        1,
+        "There are eight planets, from Mercury out to Neptune.",
+        "earth",
+        1
+    ],
+    [
+        "Which planet is known as the Red Planet?",
+        [
+            "Venus",
+            "Mars",
+            "Jupiter",
+            "Mercury"
+        ],
+        1,
+        "Mars looks red because of iron oxide dust.",
+        "mars",
+        1
+    ],
+    [
+        "Which is the largest planet?",
+        [
+            "Saturn",
+            "Neptune",
+            "Jupiter",
+            "Earth"
+        ],
+        2,
+        "Jupiter is more than twice as massive as all the other planets combined.",
+        "jupiter",
+        1
+    ],
+    [
+        "What is the Sun?",
+        [
+            "A planet",
+            "A star",
+            "A comet",
+            "A galaxy"
+        ],
+        1,
+        "The Sun is a G-type main-sequence star.",
+        "sun",
+        1
+    ],
+    [
+        "Which planet is famous for its bright rings?",
+        [
+            "Mars",
+            "Saturn",
+            "Venus",
+            "Mercury"
+        ],
+        1,
+        "Saturn’s rings are made of ice and rock.",
+        "saturn",
+        1
+    ],
+    [
+        "What is the name of our galaxy?",
+        [
+            "Andromeda",
+            "Milky Way",
+            "Sombrero",
+            "Whirlpool"
+        ],
+        1,
+        "We live in the Milky Way.",
+        "milkyway",
+        1
+    ],
+    [
+        "Which planet is closest to the Sun?",
+        [
+            "Venus",
+            "Earth",
+            "Mercury",
+            "Mars"
+        ],
+        2,
+        "Mercury orbits at 0.39 AU from the Sun.",
+        "mercury",
+        1
+    ],
+    [
+        "Where do astronauts live in orbit today?",
+        [
+            "A Moon base",
+            "The ISS",
+            "Skylab",
+            "Mir"
+        ],
+        1,
+        "People have lived on the ISS continuously since 2000.",
+        "iss",
+        1
+    ],
+    [
+        "Which space telescope launched in 1990?",
+        [
+            "Webb",
+            "Hubble",
+            "Kepler",
+            "Chandra"
+        ],
+        1,
+        "Hubble launched in April 1990.",
+        "hubble",
+        2
+    ],
+    [
+        "What causes auroras?",
+        [
+            "Moonlight",
+            "Charged particles from the Sun",
+            "Volcanoes",
+            "Lightning"
+        ],
+        1,
+        "Particles in the solar wind hit gases high in the atmosphere and make them glow.",
+        "aurora",
+        2
+    ],
+    [
+        "Which planet has a six-sided storm at its north pole?",
+        [
+            "Jupiter",
+            "Saturn",
+            "Neptune",
+            "Uranus"
+        ],
+        1,
+        "Saturn’s north pole has a hexagon-shaped jet stream.",
+        "saturn",
+        2
+    ],
+    [
+        "What are the names of Mars’s two moons?",
+        [
+            "Io & Europa",
+            "Phobos & Deimos",
+            "Titan & Rhea",
+            "Triton & Nereid"
+        ],
+        1,
+        "Phobos and Deimos mean “fear” and “panic”.",
+        "mars",
+        2
+    ],
+    [
+        "Which mission first landed humans on the Moon?",
+        [
+            "Apollo 8",
+            "Apollo 11",
+            "Apollo 13",
+            "Gemini 4"
+        ],
+        1,
+        "Apollo 11 landed on 20 July 1969.",
+        "apollo",
+        2
+    ],
+    [
+        "Who discovered the first pulsar in 1967?",
+        [
+            "Vera Rubin",
+            "Jocelyn Bell Burnell",
+            "Carl Sagan",
+            "Edwin Hubble"
+        ],
+        1,
+        "Jocelyn Bell Burnell spotted the signal while she was a PhD student.",
+        "neutron",
+        3
+    ],
+    [
+        "What is Sputnik Planitia?",
+        [
+            "A crater on Mars",
+            "Pluto’s heart-shaped glacier",
+            "A Soviet probe",
+            "A lunar sea"
+        ],
+        1,
+        "It is a vast plain of nitrogen ice on Pluto.",
+        "pluto",
+        3
+    ],
+    [
+        "What did NASA’s DART mission do in 2022?",
+        [
+            "Landed on Mars",
+            "Changed an asteroid’s orbit",
+            "Sampled a comet",
+            "Photographed Pluto"
+        ],
+        1,
+        "DART hit the asteroid Dimorphos and shortened its orbit.",
+        "asteroids",
+        3
+    ],
+    [
+        "How many people have walked on the Moon?",
+        [
+            "6",
+            "12",
+            "18",
+            "24"
+        ],
+        1,
+        "Twelve astronauts walked on the Moon across six Apollo landings.",
+        "moon",
+        3
+    ],
+    [
+        "What powers the Crab Nebula’s glow?",
+        [
+            "A black hole",
+            "A pulsar",
+            "A red giant",
+            "A comet"
+        ],
+        1,
+        "A pulsar spinning 30 times a second provides the energy.",
+        "crab",
+        3
+    ],
+    [
+        "Which moon orbits its planet backwards?",
+        [
+            "Titan",
+            "Triton",
+            "Europa",
+            "Phobos"
+        ],
+        1,
+        "Neptune’s moon Triton has a retrograde orbit.",
+        "neptune",
+        3
+    ]
+]
