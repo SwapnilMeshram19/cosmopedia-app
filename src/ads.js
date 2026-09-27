@@ -65,20 +65,30 @@ export async function initAds() {
 export function openAdInspector() { if (GMA) GMA.default().openAdInspector().catch((e) => log('inspector', errText(e))); }
 
 // Shows a rewarded ad. onReward runs only if the user earned it; onFail lets the caller fall back.
-export function showRewarded(onReward, onFail) {
+// Only one rewarded ad at a time: extra taps while an ad is loading/showing are ignored,
+// so users never get several ads queued back-to-back.
+let rewardedBusy = false;
+export const isRewardedBusy = () => rewardedBusy;
+
+// onCancel runs if the user closes the ad before earning the reward.
+export function showRewarded(onReward, onFail, onCancel) {
+  if (rewardedBusy) { log('rewarded ignored (already in progress)'); return false; }
   const id = unit('reward');
-  if (!GMA || !id) return onFail && onFail();
+  if (!GMA || !id) { if (onFail) onFail(); return false; }
+  rewardedBusy = true;
   let earned = false, done = false;
   const ad = GMA.RewardedAd.createForAdRequest(id);
   const subs = [];
-  const finish = (ok) => { if (done) return; done = true; subs.forEach((u) => u && u()); clearTimeout(to); ok ? onReward() : (onFail && onFail()); };
+  const release = () => { done = true; rewardedBusy = false; subs.forEach((u) => u && u()); clearTimeout(to); };
+  const finish = (ok) => { if (done) return; release(); ok ? onReward() : (onFail && onFail()); };
   const to = setTimeout(() => { log('rewarded timeout (no ad in 10s)'); finish(false); }, 10000);
   subs.push(ad.addAdEventListener(GMA.RewardedAdEventType.LOADED, () => { log('rewarded loaded'); clearTimeout(to); ad.show().catch((e) => { log('rewarded show error', errText(e)); finish(false); }); }));
   subs.push(ad.addAdEventListener(GMA.RewardedAdEventType.EARNED_REWARD, () => { log('reward earned'); earned = true; }));
-  subs.push(ad.addAdEventListener(GMA.AdEventType.CLOSED, () => { if (earned) finish(true); else { log('rewarded closed early'); done = true; subs.forEach((u) => u && u()); } }));
+  subs.push(ad.addAdEventListener(GMA.AdEventType.CLOSED, () => { if (earned) finish(true); else { log('rewarded closed early'); release(); if (onCancel) onCancel(); } }));
   subs.push(ad.addAdEventListener(GMA.AdEventType.ERROR, (e) => { log('rewarded error', errText(e)); finish(false); }));
   log('rewarded requested');
   ad.load();
+  return true;
 }
 
 // Returns true if a real interstitial is being loaded/shown.

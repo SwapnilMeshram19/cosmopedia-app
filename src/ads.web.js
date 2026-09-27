@@ -14,3 +14,5 @@ export const AD_DEBUG = false;
 export const setForceTestAds = () => {};
 export const usingTestAds = () => false;
 export function useAdLog() { return []; }
+
+export const isRewardedBusy = () => false;

@@ -3,7 +3,9 @@ import { File, Directory, Paths } from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import { httpsify } from './constants';
 
-// Downloads a remote image into the app cache and returns the local file URI.
+const MIME = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif' };
+
+// Downloads a remote image into the app cache and returns { uri, mime, file }.
 async function download(url) {
   url = httpsify(url);
   const ext = (url.match(/\.(jpe?g|png|webp|gif)(\?|$)/i) || [, 'jpg'])[1].toLowerCase();
@@ -11,26 +13,36 @@ async function download(url) {
   try { dir.create({ idempotent: true, intermediates: true }); } catch (e) {}
   const file = new File(dir, 'cosmopedia-' + Date.now() + '.' + ext);
   const out = await File.downloadFileAsync(url, file, { idempotent: true });
-  return out.uri;
+  return { uri: out.uri, mime: MIME[ext] || 'image/jpeg', file: out };
 }
 
-// Saves to the phone's gallery. If gallery access isn't available (e.g. limited in Expo Go),
-// falls back to the share sheet, where the user can pick "Save image" / Files / Drive.
+// Removes the temporary cache copy once it has been saved or shared.
+function cleanup(file) { try { if (file && file.exists) file.delete(); } catch (e) {} }
+
+// Saves to the phone's gallery (write-only access, no read permission needed).
+// If gallery access isn't available (denied, or limited in Expo Go), falls back to the
+// share sheet, where the user can pick "Save image" / Files / Drive.
+// Returns 'gallery' or 'share'. Throws if the download itself fails.
 export async function saveImage(url) {
-  const uri = await download(url);
+  const { uri, mime, file } = await download(url);
   try {
     const ML = require('expo-media-library/legacy');
     const perm = await ML.requestPermissionsAsync(true, Platform.OS === 'android' ? ['photo'] : undefined);
     if (!perm.granted) throw new Error('no permission');
     await ML.saveToLibraryAsync(uri);
+    cleanup(file);
     return 'gallery';
   } catch (e) {
-    if (await Sharing.isAvailableAsync()) { await Sharing.shareAsync(uri, { mimeType: 'image/jpeg', dialogTitle: 'Save image' }); return 'share'; }
+    if (await Sharing.isAvailableAsync()) {
+      await Sharing.shareAsync(uri, { mimeType: mime, dialogTitle: 'Save image' });
+      return 'share';
+    }
+    cleanup(file);
     throw e;
   }
 }
 
 export async function shareImage(url) {
-  const uri = await download(url);
-  await Sharing.shareAsync(uri, { mimeType: 'image/jpeg', dialogTitle: 'Share image' });
+  const { uri, mime } = await download(url);
+  await Sharing.shareAsync(uri, { mimeType: mime, dialogTitle: 'Share image' });
 }
