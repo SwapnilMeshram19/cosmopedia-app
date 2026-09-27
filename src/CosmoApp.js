@@ -184,8 +184,7 @@ export default class CosmoApp extends React.Component {
     const X = this.txt(), key = w.nasa_id || w.src, ads = PROPS.showAds ?? true;
     this.setState({ dlBusy: true, wallMsg: null });
     try {
-      const hd = await this.resolveHd(w);
-      const res = await rewardedSave(hd, { skipAd: !ads || !!this.state.unlocked[key] });
+      const res = await rewardedSave(() => this.resolveHd(w), { skipAd: !ads || !!this.state.unlocked[key] });
       if (res === 'gallery' || res === 'share') this.setState((st) => ({ unlocked: { ...st.unlocked, [key]: true } }));
       if (res === 'gallery') this.setState({ wallMsg: X.tDlDone });
       if (res === 'error') this.setState({ wallMsg: X.tDlFail });

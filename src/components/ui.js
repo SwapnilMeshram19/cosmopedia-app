@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet, ActivityIndicator } from 'react-native';
 import { Image } from 'expo-image';
 import Svg, { Defs, Pattern, Rect, Circle, ClipPath, G, Ellipse } from 'react-native-svg';
 import { FONTS } from '../theme';
@@ -132,7 +132,7 @@ export function BackBtn({ label, onPress }) {
 }
 
 /* ---------- Buttons ---------- */
-export function Btn({ label, onPress, variant = 'surface', height = 44, style, textStyle, size = 14, radius = 14, disabled = false }) {
+export function Btn({ label, onPress, variant = 'surface', height = 44, style, textStyle, size = 14, radius = 14, disabled = false, loading = false }) {
   const th = useT();
   const V = {
     surface: { bg: th.surface, border: th.ink(0.1), fg: th.text, w: 500 },
@@ -142,10 +142,12 @@ export function Btn({ label, onPress, variant = 'surface', height = 44, style, t
     ghost: { bg: 'transparent', border: th.ink(0.1), fg: th.text2, w: 500 },
   }[variant];
   return (
-    <Pressable onPress={onPress} disabled={disabled} style={[{
+    <Pressable onPress={onPress} disabled={disabled || loading} style={[{
       height, borderRadius: radius, backgroundColor: V.bg, borderWidth: V.border ? 1 : 0, borderColor: V.border,
-      alignItems: 'center', justifyContent: 'center', paddingHorizontal: 14, opacity: disabled ? 0.55 : 1,
+      alignItems: 'center', justifyContent: 'center', paddingHorizontal: 14, opacity: disabled && !loading ? 0.55 : loading ? 0.85 : 1,
+      flexDirection: 'row', gap: 10,
     }, style]}>
+      {loading && <ActivityIndicator size="small" color={V.fg} />}
       <T size={size} w={V.w} color={V.fg} style={textStyle}>{label}</T>
     </Pressable>
   );

@@ -150,6 +150,8 @@ function WallImage({ src }) {
 function Wall({ v, insets }) {
   const tx = v.tx, w = v.wall;
   const hasBanner = v.showAds && bannerEnabled();
+  const { saving, phase } = useRewardedSave();
+  const saveLabel = phase === 'ad' ? (tx.adLoading || 'Loading ad…') : phase === 'saving' ? tx.dlBusy : w.dlLabel;
   const failed = w.msg === tx.tDlFail;
   return (
     <View style={[fill, { backgroundColor: '#000', zIndex: 12 }]}>
@@ -161,9 +163,9 @@ function Wall({ v, insets }) {
         <T size={16} w={600} lh={1.3} color="#fff">{w.title}</T>
         <T mono size={10.5} color="#b8bcc6">Tap the image to view full screen and zoom</T>
         {/* One tap: ad → HD download → saved. Disabled until the whole thing finishes. */}
-        <Btn label={w.dlLabel} onPress={w.download} disabled={w.busy} variant="amber" height={50} size={15} />
+        <Btn label={saveLabel} onPress={w.download} loading={saving} disabled={w.busy || saving} variant="amber" height={50} size={15} />
         <View style={{ flexDirection: 'row', gap: 10 }}>
-          <Btn label="Share" onPress={w.share} disabled={w.busy} variant="blue" height={44} style={{ flex: 1 }} />
+          <Btn label={w.busy && !saving ? '…' : 'Share'} onPress={w.share} disabled={w.busy || saving} variant="blue" height={44} style={{ flex: 1 }} />
           <Btn label="Open in browser" onPress={w.openHd} variant="ghost" height={44} style={{ flex: 1, borderColor: 'rgba(255,255,255,.3)' }} textStyle={{ color: '#fff' }} />
         </View>
         {!!w.msg && <T size={13} w={500} color={failed ? '#ff9b9b' : '#7fd6a0'}>{w.msg}</T>}
@@ -211,9 +213,10 @@ function LightboxPage({ item, width, height, zoomed, onZoomChange, onSingleTap, 
   );
 }
 
-function IconBtn({ label, onPress, disabled }) {
+function IconBtn({ label, onPress, disabled, loading }) {
   return (
-    <Pressable onPress={onPress} disabled={disabled} hitSlop={8} style={{ minWidth: 40, height: 40, paddingHorizontal: 12, borderRadius: 20, backgroundColor: 'rgba(255,255,255,.14)', alignItems: 'center', justifyContent: 'center', opacity: disabled ? 0.5 : 1 }}>
+    <Pressable onPress={onPress} disabled={disabled || loading} hitSlop={8} style={{ minWidth: 40, height: 40, paddingHorizontal: 12, borderRadius: 20, backgroundColor: 'rgba(255,255,255,.14)', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, opacity: disabled && !loading ? 0.5 : 1 }}>
+      {loading && <ActivityIndicator size="small" color="#f0b46a" />}
       <T size={14} w={500} color="#fff">{label}</T>
     </Pressable>
   );
@@ -238,7 +241,9 @@ function Lightbox({ v, insets }) {
   const flash = (m) => { clearTimeout(noteT.current); setNote(m); noteT.current = setTimeout(() => setNote(null), 2400); };
   // One tap: rewarded ad → HD download → saved. The shared lock ignores every extra tap
   // (here or on any other Save button) until the ad AND the save have finished.
-  const { saving, save } = useRewardedSave();
+  const { saving, phase, save } = useRewardedSave();
+  const tx = v.tx;
+  const saveLabel = phase === 'ad' ? (tx.adLoading || 'Loading ad…') : phase === 'saving' ? tx.dlBusy : (v.showAds && bannerEnabled() ? '▶ Save HD' : '⤓ Save HD');
   const onSave = async () => {
     if (saving || busy) return;
     const res = await save(bestUrl(), { skipAd: !(v.showAds && bannerEnabled()) });
@@ -288,7 +293,7 @@ function Lightbox({ v, insets }) {
               {items.length > 1 && <T mono w={500} size={12} color="#d4d7de">{index + 1} / {items.length}</T>}
             </View>
             <IconBtn label={busy === 'share' ? '…' : 'Share'} onPress={onShare} disabled={!!busy || saving} />
-            <IconBtn label={saving ? 'Saving HD…' : (v.showAds && bannerEnabled() ? '▶ Save HD' : '⤓ Save HD')} onPress={onSave} disabled={!!busy || saving} />
+            <IconBtn label={saveLabel} onPress={onSave} loading={saving} disabled={!!busy || saving} />
           </View>
         )}
 

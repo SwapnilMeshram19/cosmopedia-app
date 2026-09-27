@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { adsAvailable, showRewarded } from './ads';
 import { saveImage } from './imageSave';
 
-// ONE app-wide lock for "watch ad → save HD image".
-// Shared by every Save button (wallpaper screen, lightbox, detail page), so the user can
-// never start a second ad or download until the current one has fully finished.
-let busy = false;
+// ONE app-wide lock for "watch ad → save HD image", shared by every Save button
+// (wallpaper screen, image viewer). While it runs, every Save button is disabled and shows
+// a loader, and extra taps are ignored until the ad AND the save have fully finished.
+//
+// phase: null (idle) | 'ad' (rewarded ad loading / showing) | 'saving' (HD download + save)
+let phase = null;
 const listeners = new Set();
-const setBusy = (v) => { busy = v; listeners.forEach((f) => f(v)); };
-export const isSaveBusy = () => busy;
+const setPhase = (p) => { phase = p; listeners.forEach((f) => f(p)); };
+export const isSaveBusy = () => phase !== null;
 
 // Resolves true if the reward was earned (or no ad could be shown), false if closed early.
 function watchAd() {
@@ -19,28 +21,32 @@ function watchAd() {
   });
 }
 
-// Returns 'gallery' | 'share' | 'cancelled' | 'busy' | 'error'.
+// url: the image URL, or an async function returning it (resolved after the ad).
 // options.skipAd: true to save without an ad (e.g. already unlocked).
+// Returns 'gallery' | 'share' | 'cancelled' | 'busy' | 'error'.
 export async function rewardedSave(url, options = {}) {
-  if (busy) return 'busy';
-  setBusy(true);
+  if (phase !== null) return 'busy';
   try {
     if (!options.skipAd) {
+      setPhase('ad');
       const ok = await watchAd();
       if (!ok) return 'cancelled';
     }
-    return await saveImage(url);
+    setPhase('saving');
+    const u = typeof url === 'function' ? await url() : url;
+    return await saveImage(u);
   } catch (e) {
     return 'error';
   } finally {
-    setBusy(false);
+    setPhase(null);
   }
 }
 
-// Hook for Save buttons: const { saving, save } = useRewardedSave();
-// <Pressable disabled={saving} onPress={() => save(url)} />
+// For Save buttons:
+//   const { saving, phase, save } = useRewardedSave();
+//   saving → disable the button; phase 'ad' → "Loading ad…", 'saving' → "Saving HD…"
 export function useRewardedSave() {
-  const [saving, setSaving] = useState(busy);
-  useEffect(() => { listeners.add(setSaving); return () => listeners.delete(setSaving); }, []);
-  return { saving, save: rewardedSave };
+  const [p, setP] = useState(phase);
+  useEffect(() => { listeners.add(setP); setP(phase); return () => listeners.delete(setP); }, []);
+  return { saving: p !== null, phase: p, save: rewardedSave };
 }
