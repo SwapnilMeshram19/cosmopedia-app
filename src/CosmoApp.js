@@ -20,6 +20,7 @@ import { LS } from './storage';
 import { makeTheme } from './theme';
 import { ThemeCtx } from './components/ui';
 import { rewardedSave, isSaveBusy } from './rewardedSave';
+import { shareImage } from './imageSave';
 import { adsAvailable, showRewarded, showInterstitial, openAdInspector, AD_DEBUG, setForceTestAds, usingTestAds } from './ads';
 import ErrorBoundary from './components/ErrorBoundary';
 import * as Notify from './notify';
@@ -67,7 +68,7 @@ export default class CosmoApp extends React.Component {
     saved: { topics: [], articles: [] }, reminders: {}, qs: { day: 0, levels: {} }, qLevel: 1, streak: { count: 0, best: 0, last: null },
     stats: { xp: 0, quizzes: 0, perfect: 0, hard: 0, read: [], shares: 0, sky: 0, iss: 0 },
     toast: null, push: null, alerts: false, lastSeen: 0, loc: null, iss: null, issAlerts: false, issNear: false, otd: null, otdFallback: false,
-    walls: {}, wallTheme: 'Nebulae', wall: null, dlBusy: false, unlocked: {}, kg: 70, lang: 'en', solarView: 'orbits', solarOff: 0, solarSel: 'earth',
+    walls: {}, wallTheme: 'Nebulae', wall: null, dlBusy: false, wallMsg: null, unlocked: {}, kg: 70, lang: 'en', solarView: 'orbits', solarOff: 0, solarSel: 'earth',
     astroReady: true, theme: 'system', sysDark: Appearance.getColorScheme() !== 'light', shareCard: null,
   };
   detailRef = React.createRef();
@@ -175,18 +176,26 @@ export default class CosmoApp extends React.Component {
       return hd.replace(/^http:/, 'https:');
     } catch (e) { return w.src; }
   }
-  // Save button on the wallpaper screen: one ad per wallpaper per session, then free.
-  // Uses the app-wide lock in rewardedSave.js, so taps during the ad/download are ignored.
+  // Save button on the wallpaper screen: ONE tap → rewarded ad → HD image saved to the gallery.
+  // The app-wide lock in rewardedSave.js ignores every tap until the ad AND the save are done.
+  // One ad per wallpaper per session; saving the same one again is free.
   async downloadWall() {
     const w = this.state.wall; if (!w || isSaveBusy()) return;
     const X = this.txt(), key = w.nasa_id || w.src, ads = PROPS.showAds ?? true;
+    this.setState({ dlBusy: true, wallMsg: null });
+    try {
+      const hd = await this.resolveHd(w);
+      const res = await rewardedSave(hd, { skipAd: !ads || !!this.state.unlocked[key] });
+      if (res === 'gallery' || res === 'share') this.setState((st) => ({ unlocked: { ...st.unlocked, [key]: true } }));
+      if (res === 'gallery') this.setState({ wallMsg: X.tDlDone });
+      if (res === 'error') this.setState({ wallMsg: X.tDlFail });
+    } finally { this.setState({ dlBusy: false }); }
+  }
+  async shareWall() {
+    const w = this.state.wall; if (!w || isSaveBusy() || this.state.dlBusy) return;
     this.setState({ dlBusy: true });
-    const hd = await this.resolveHd(w);
-    const res = await rewardedSave(hd, { skipAd: !ads || !!this.state.unlocked[key] });
-    if (res === 'gallery' || res === 'share') this.setState((st) => ({ unlocked: { ...st.unlocked, [key]: true } }));
-    if (res === 'gallery') this.showToast(X.tDlDone);
-    if (res === 'error') this.showToast(X.tDlFail);
-    this.setState({ dlBusy: false });
+    try { await shareImage(await this.resolveHd(w)); } catch (e) {}
+    finally { this.setState({ dlBusy: false }); }
   }
   bump(d) { const st = { ...this.state.stats }; Object.entries(d).forEach(([k, v]) => { st[k] = (st[k] || 0) + v; }); this.setState({ stats: st }); LS.set('cosmo_stats', st); }
   showToast(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: null }), 2600); }
@@ -468,8 +477,14 @@ export default class CosmoApp extends React.Component {
       sky, iss,
       solar, solarViews: [['orbits', tx.liveOrbits], ['sizes', tx.sizeCmp]].map(([id, label]) => ({ key: id, label, active: s.solarView === id, pick: () => this.setState({ solarView: id }) })),
       wallThemes: WALL_THEMES.map(([l]) => ({ key: l, label: l, active: s.wallTheme === l, pick: () => { this.setState({ wallTheme: l }); this.loadWalls(l); } })),
-      walls: (s.walls[s.wallTheme] || []).map((w) => ({ src: w.src, key: w.nasa_id || w.src, open: () => this.setState({ wall: w }) })), wallsLoading: !s.walls[s.wallTheme],
-      wall: W ? { src: W.src, title: W.title, hd: W.hd, dlBusy: s.dlBusy, dlLabel: s.dlBusy ? tx.dlBusy : (ads && !s.unlocked[W.nasa_id || W.src] ? tx.dlAd : tx.dl), dlDisabled: s.dlBusy, download: () => { if (!s.dlBusy) this.downloadWall(); }, openHd: async () => this.openUrl(await this.resolveHd(W)), view: () => this.setState({ lightbox: { items: [{ src: W.src, fallback: W.src, title: W.title }], index: 0 } }) } : null,
+      walls: (s.walls[s.wallTheme] || []).map((w) => ({ src: w.src, key: w.nasa_id || w.src, open: () => this.setState({ wall: w, wallMsg: null }) })), wallsLoading: !s.walls[s.wallTheme],
+      wall: W ? {
+        src: W.src, title: W.title, busy: s.dlBusy, msg: s.wallMsg,
+        dlLabel: s.dlBusy ? tx.dlBusy : (ads && !s.unlocked[W.nasa_id || W.src] ? tx.dlAd : tx.dl),
+        download: () => this.downloadWall(), share: () => this.shareWall(),
+        openHd: async () => this.openUrl(await this.resolveHd(W)),
+        view: () => this.setState({ lightbox: { items: [{ src: W.src, fallback: W.src, title: W.title }], index: 0 } }),
+      } : null,
       closeWall: () => this.setState({ wall: null }),
       weight: {
         kg: String(s.kg), onKg: (t) => { this.setState({ kg: t }); LS.set('cosmo_kg', t); },

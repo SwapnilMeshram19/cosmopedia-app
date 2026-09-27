@@ -2,11 +2,12 @@ import React, { useState, useRef } from 'react';
 import { View, Pressable, ScrollView, StyleSheet, Modal, ActivityIndicator, useWindowDimensions, FlatList } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ZoomableImage from '../components/ZoomableImage';
-import { saveImage, shareImage } from '../imageSave';
+import { shareImage } from '../imageSave';
+import { useRewardedSave } from '../rewardedSave';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Image } from 'expo-image';
 import { T, useT, Stripes, Img, Kicker, Grid, Diamond, Btn } from '../components/ui';
-import { AdSlot, BottomBanner, bannerEnabled, withReward } from '../ads';
+import { AdSlot, BottomBanner, bannerEnabled } from '../ads';
 import { httpsify } from '../constants';
 
 const fill = StyleSheet.absoluteFillObject;
@@ -128,38 +129,44 @@ function Article({ v, insets }) {
   );
 }
 
+// Wallpaper preview: shows the sharper ~large / ~medium file, falling back to the thumbnail.
+// (The full ~orig file is far too big to display; it is only used for saving.)
+function WallImage({ src }) {
+  const candidates = sizeVariants(src);
+  const [i, setI] = useState(0);
+  return (
+    <Image
+      key={candidates[i]}
+      source={{ uri: candidates[i] }}
+      placeholder={{ uri: httpsify(src) }}
+      style={fill}
+      contentFit="cover"
+      transition={200}
+      onError={() => { if (i + 1 < candidates.length) setI(i + 1); }}
+    />
+  );
+}
+
 function Wall({ v, insets }) {
-  const th = useT(), tx = v.tx, w = v.wall;
-  const [busy, setBusy] = useState(null);
-  const [msg, setMsg] = useState(null);
-  const doSave = async () => {
-    setBusy('save'); setMsg(null);
-    try { const how = await saveImage(w.hd); if (how === 'gallery') setMsg('Saved to your gallery ✓'); }
-    catch (e) { setMsg('Couldn’t save — try “Open in browser”.'); }
-    setBusy(null);
-  };
-  // The rewarded ad was already watched to unlock HD, so saving here is free.
-  const save = doSave;
+  const tx = v.tx, w = v.wall;
   const hasBanner = v.showAds && bannerEnabled();
-  const share = async () => { setBusy('share'); try { await shareImage(w.hd); } catch (e) {} setBusy(null); };
+  const failed = w.msg === tx.tDlFail;
   return (
     <View style={[fill, { backgroundColor: '#000', zIndex: 12 }]}>
      <View style={{ flex: 1 }}>
-      <Pressable onPress={w.view} style={fill}><Img src={w.hd || w.src} /></Pressable>
+      <Pressable onPress={w.view} style={fill}><WallImage src={w.src} /></Pressable>
       <LinearGradient pointerEvents="none" colors={['rgba(0,0,0,.55)', 'rgba(0,0,0,0)', 'rgba(0,0,0,0)', 'rgba(0,0,0,.92)']} locations={[0, 0.22, 0.55, 1]} style={fill} />
       <TopButtons top={insets.top + 8} onBack={v.closeWall} tx={tx} />
       <View style={{ position: 'absolute', left: 20, right: 20, bottom: hasBanner ? 16 : 28 + insets.bottom, gap: 12 }}>
         <T size={16} w={600} lh={1.3} color="#fff">{w.title}</T>
         <T mono size={10.5} color="#b8bcc6">Tap the image to view full screen and zoom</T>
-        {!w.hd && <Btn label={w.dlLabel} onPress={w.download} variant="amber" height={50} size={15} />}
-        {!!w.hd && (<>
-          <Btn label={busy === 'save' ? 'Saving…' : '⤓ Save to phone'} onPress={busy ? undefined : save} variant="amber" height={50} size={15} />
-          <View style={{ flexDirection: 'row', gap: 10 }}>
-            <Btn label={busy === 'share' ? '…' : 'Share'} onPress={busy ? undefined : share} variant="blue" height={44} style={{ flex: 1 }} />
-            <Btn label="Open in browser" onPress={w.openHd} variant="ghost" height={44} style={{ flex: 1, borderColor: 'rgba(255,255,255,.3)' }} textStyle={{ color: '#fff' }} />
-          </View>
-          {!!msg && <T size={13} w={500} color="#7fd6a0">{msg}</T>}
-        </>)}
+        {/* One tap: ad → HD download → saved. Disabled until the whole thing finishes. */}
+        <Btn label={w.dlLabel} onPress={w.download} disabled={w.busy} variant="amber" height={50} size={15} />
+        <View style={{ flexDirection: 'row', gap: 10 }}>
+          <Btn label="Share" onPress={w.share} disabled={w.busy} variant="blue" height={44} style={{ flex: 1 }} />
+          <Btn label="Open in browser" onPress={w.openHd} variant="ghost" height={44} style={{ flex: 1, borderColor: 'rgba(255,255,255,.3)' }} textStyle={{ color: '#fff' }} />
+        </View>
+        {!!w.msg && <T size={13} w={500} color={failed ? '#ff9b9b' : '#7fd6a0'}>{w.msg}</T>}
         <T mono size={10} color="#b8bcc6">{tx.credit}</T>
       </View>
      </View>
@@ -229,14 +236,17 @@ function Lightbox({ v, insets }) {
   const bestUrl = () => loaded.current[index] || sizeVariants(cur.src)[0];
 
   const flash = (m) => { clearTimeout(noteT.current); setNote(m); noteT.current = setTimeout(() => setNote(null), 2400); };
-  const onSave = () => withReward(doSave);
-  const doSave = async () => {
-    setBusy('save');
-    try { const how = await saveImage(bestUrl()); if (how === 'gallery') flash('Saved to your gallery ✓'); }
-    catch (e) { flash('Couldn’t save this image'); }
-    setBusy(null);
+  // One tap: rewarded ad → HD download → saved. The shared lock ignores every extra tap
+  // (here or on any other Save button) until the ad AND the save have finished.
+  const { saving, save } = useRewardedSave();
+  const onSave = async () => {
+    if (saving || busy) return;
+    const res = await save(bestUrl(), { skipAd: !(v.showAds && bannerEnabled()) });
+    if (res === 'gallery') flash('Saved to your gallery ✓');
+    if (res === 'error') flash('Couldn’t save this image');
   };
   const onShare = async () => {
+    if (saving || busy) return;
     setBusy('share');
     try { await shareImage(bestUrl()); } catch (e) { flash('Couldn’t share this image'); }
     setBusy(null);
@@ -277,8 +287,8 @@ function Lightbox({ v, insets }) {
             <View style={{ flex: 1, alignItems: 'center' }}>
               {items.length > 1 && <T mono w={500} size={12} color="#d4d7de">{index + 1} / {items.length}</T>}
             </View>
-            <IconBtn label={busy === 'share' ? '…' : 'Share'} onPress={onShare} disabled={!!busy} />
-            <IconBtn label={busy === 'save' ? 'Saving…' : (bannerEnabled() ? '▶ Save' : '⤓ Save')} onPress={onSave} disabled={!!busy} />
+            <IconBtn label={busy === 'share' ? '…' : 'Share'} onPress={onShare} disabled={!!busy || saving} />
+            <IconBtn label={saving ? 'Saving HD…' : (v.showAds && bannerEnabled() ? '▶ Save HD' : '⤓ Save HD')} onPress={onSave} disabled={!!busy || saving} />
           </View>
         )}
 

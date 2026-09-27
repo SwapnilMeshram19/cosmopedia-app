@@ -132,7 +132,7 @@ export function BackBtn({ label, onPress }) {
 }
 
 /* ---------- Buttons ---------- */
-export function Btn({ label, onPress, variant = 'surface', height = 44, style, textStyle, size = 14, radius = 14 }) {
+export function Btn({ label, onPress, variant = 'surface', height = 44, style, textStyle, size = 14, radius = 14, disabled = false }) {
   const th = useT();
   const V = {
     surface: { bg: th.surface, border: th.ink(0.1), fg: th.text, w: 500 },
@@ -142,9 +142,9 @@ export function Btn({ label, onPress, variant = 'surface', height = 44, style, t
     ghost: { bg: 'transparent', border: th.ink(0.1), fg: th.text2, w: 500 },
   }[variant];
   return (
-    <Pressable onPress={onPress} style={[{
+    <Pressable onPress={onPress} disabled={disabled} style={[{
       height, borderRadius: radius, backgroundColor: V.bg, borderWidth: V.border ? 1 : 0, borderColor: V.border,
-      alignItems: 'center', justifyContent: 'center', paddingHorizontal: 14,
+      alignItems: 'center', justifyContent: 'center', paddingHorizontal: 14, opacity: disabled ? 0.55 : 1,
     }, style]}>
       <T size={size} w={V.w} color={V.fg} style={textStyle}>{label}</T>
     </Pressable>
