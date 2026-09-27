@@ -19,7 +19,7 @@ import {
 import { LS } from './storage';
 import { makeTheme } from './theme';
 import { ThemeCtx } from './components/ui';
-import { saveImage } from './imageSave';
+import { rewardedSave, isSaveBusy } from './rewardedSave';
 import { adsAvailable, showRewarded, showInterstitial, openAdInspector, AD_DEBUG, setForceTestAds, usingTestAds } from './ads';
 import ErrorBoundary from './components/ErrorBoundary';
 import * as Notify from './notify';
@@ -96,7 +96,7 @@ export default class CosmoApp extends React.Component {
     this.pollIss(); this.issTimer = setInterval(() => this.pollIss(), 10000);
   }
   componentWillUnmount() {
-    try { this.appearanceSub.remove(); this.backSub.remove(); this.appStateSub.remove(); } catch (e) {}
+    try { this.appearanceSub.remove(); this.backSub.remove(); this.appStateSub.remove(); } catch (e) { }
     [this.timer, this.poll, this.issTimer].forEach(clearInterval);
     [this.tt, this.pt, this.pt2].forEach(clearTimeout);
   }
@@ -120,7 +120,7 @@ export default class CosmoApp extends React.Component {
       const j = await getJSON('https://images-api.nasa.gov/search?media_type=image&q=' + encodeURIComponent(o.q));
       const arr = (j.collection.items || []).filter((i) => i.links && i.links[0]).slice(0, 12).map((i) => ({ src: httpsify(i.links[0].href), title: (i.data && i.data[0] && i.data[0].title) || '' }));
       this.setState((s) => ({ imgs: { ...s.imgs, [o.id]: arr } }));
-    } catch (e) {}
+    } catch (e) { }
   }
   async loadNews(reset) {
     const term = (NF.find((f) => f[0] === this.state.nf) || NF[0])[1];
@@ -155,7 +155,7 @@ export default class CosmoApp extends React.Component {
         if (dist < 2000 && !this.state.issNear) { this.setState({ issNear: true }); this.pushNow({ title: 'The ISS is passing near you', body: 'It’s about ' + Math.round(dist).toLocaleString() + ' km away right now. Look up if it’s dark!', tab: 'sky' }); }
         else if (dist > 2500 && this.state.issNear) this.setState({ issNear: false });
       }
-    } catch (e) {}
+    } catch (e) { }
   }
   async loadWalls(theme) {
     if (this.state.walls[theme]) return; const q = (WALL_THEMES.find((t) => t[0] === theme) || WALL_THEMES[0])[1];
@@ -175,51 +175,18 @@ export default class CosmoApp extends React.Component {
       return hd.replace(/^http:/, 'https:');
     } catch (e) { return w.src; }
   }
-  // Downloads the HD image for wallpaper `w` and saves it to the gallery (share sheet as fallback).
-  async fetchHd(w) {
-    const X = this.txt();
-    this.showToast(X.tDlStart);
-    try {
-      const hd = await this.resolveHd(w);
-      this.setState((s) => ({ wall: s.wall && s.wall.nasa_id === w.nasa_id ? { ...s.wall, hd } : s.wall }));
-      const where = await saveImage(hd);
-      if (where === 'gallery') this.showToast(X.tDlDone);
-    } catch (e) { this.showToast(X.tDlFail); }
-  }
-
-  // Resolves true when the user earned the reward, false if they closed the ad early.
-  // Falls back to the in-app countdown when no real ad is available / fills.
-  watchReward(kind) {
-    return new Promise((resolve) => {
-      const fallback = () => { this.interResolve = resolve; this.startInter(5, kind); };
-      if (!adsAvailable()) return fallback();
-      let settled = false;
-      const done = (v) => { settled = true; resolve(v); };
-      const started = showRewarded(() => done(true), () => { settled = true; fallback(); }, () => done(false));
-      if (started === false && !settled) resolve(false); // another ad already running
-    });
-  }
-
-  // Save button. A synchronous lock (this.dlLock, not React state) blocks every extra tap
-  // from the first tap until the ad has finished AND the HD image is saved.
-  // One ad per wallpaper per session; re-saving the same one is free.
+  // Save button on the wallpaper screen: one ad per wallpaper per session, then free.
+  // Uses the app-wide lock in rewardedSave.js, so taps during the ad/download are ignored.
   async downloadWall() {
-    if (this.dlLock) return;
-    const w = this.state.wall; if (!w) return;
-    this.dlLock = true;
+    const w = this.state.wall; if (!w || isSaveBusy()) return;
+    const X = this.txt(), key = w.nasa_id || w.src, ads = PROPS.showAds ?? true;
     this.setState({ dlBusy: true });
-    try {
-      const key = w.nasa_id || w.src, ads = PROPS.showAds ?? true;
-      if (ads && !this.state.unlocked[key]) {
-        const ok = await this.watchReward('wall');
-        if (!ok) return;
-        this.setState((st) => ({ unlocked: { ...st.unlocked, [key]: true } }));
-      }
-      await this.fetchHd(w);
-    } finally {
-      this.dlLock = false;
-      this.setState({ dlBusy: false });
-    }
+    const hd = await this.resolveHd(w);
+    const res = await rewardedSave(hd, { skipAd: !ads || !!this.state.unlocked[key] });
+    if (res === 'gallery' || res === 'share') this.setState((st) => ({ unlocked: { ...st.unlocked, [key]: true } }));
+    if (res === 'gallery') this.showToast(X.tDlDone);
+    if (res === 'error') this.showToast(X.tDlFail);
+    this.setState({ dlBusy: false });
   }
   bump(d) { const st = { ...this.state.stats }; Object.entries(d).forEach(([k, v]) => { st[k] = (st[k] || 0) + v; }); this.setState({ stats: st }); LS.set('cosmo_stats', st); }
   showToast(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: null }), 2600); }
@@ -296,7 +263,7 @@ export default class CosmoApp extends React.Component {
         const had = this.state.lastSeen; this.setState({ lastSeen: a.id }); LS.set('cosmo_lastseen', a.id);
         if (force || had) this.pushNow({ title: 'Breaking · ' + a.news_site, body: a.title, article: a });
       }
-    } catch (e) {}
+    } catch (e) { }
   }
   startPolling() { clearInterval(this.poll); this.poll = setInterval(() => this.checkLatest(false), 120000); }
   toggleAlerts() {
@@ -322,7 +289,7 @@ export default class CosmoApp extends React.Component {
   // Web version drew a canvas and used navigator.share. Here: render ShareCard offscreen → PNG → share sheet.
   async share(kicker, title, sub) {
     if (Platform.OS === 'web') {
-      try { if (navigator.share) await navigator.share({ title: 'Cosmopedia', text: title + ' — ' + sub }); else { await navigator.clipboard.writeText(title + ' — ' + sub); this.showToast('Copied to clipboard'); } this.bump({ shares: 1 }); } catch (e) {}
+      try { if (navigator.share) await navigator.share({ title: 'Cosmopedia', text: title + ' — ' + sub }); else { await navigator.clipboard.writeText(title + ' — ' + sub); this.showToast('Copied to clipboard'); } this.bump({ shares: 1 }); } catch (e) { }
       return;
     }
     this.setState({ shareCard: { kicker, title, sub } });
@@ -331,7 +298,7 @@ export default class CosmoApp extends React.Component {
       const uri = await captureRef(this.shareRef, { format: 'png', quality: 1, width: 1080, height: 1350, result: 'tmpfile' });
       if (await Sharing.isAvailableAsync()) await Sharing.shareAsync(uri, { mimeType: 'image/png', dialogTitle: title, UTI: 'public.png' });
       this.bump({ shares: 1 });
-    } catch (e) {}
+    } catch (e) { }
     this.setState({ shareCard: null });
   }
   openUrl(url) { if (!url) return; WebBrowser.openBrowserAsync(url).catch(() => Linking.openURL(url)); }
@@ -502,7 +469,7 @@ export default class CosmoApp extends React.Component {
       solar, solarViews: [['orbits', tx.liveOrbits], ['sizes', tx.sizeCmp]].map(([id, label]) => ({ key: id, label, active: s.solarView === id, pick: () => this.setState({ solarView: id }) })),
       wallThemes: WALL_THEMES.map(([l]) => ({ key: l, label: l, active: s.wallTheme === l, pick: () => { this.setState({ wallTheme: l }); this.loadWalls(l); } })),
       walls: (s.walls[s.wallTheme] || []).map((w) => ({ src: w.src, key: w.nasa_id || w.src, open: () => this.setState({ wall: w }) })), wallsLoading: !s.walls[s.wallTheme],
-      wall: W ? { src: W.src, title: W.title, hd: W.hd, dlBusy: s.dlBusy, dlLabel: s.dlBusy ? tx.dlBusy : (ads && !s.unlocked[W.nasa_id || W.src] ? tx.dlAd : tx.dl), dlDisabled: s.dlBusy, download: () => { if (!s.dlBusy) this.downloadWall(); }, openHd: () => this.openUrl(W.hd), view: () => this.setState({ lightbox: { items: [{ src: W.hd || W.src, fallback: W.src, title: W.title }], index: 0 } }) } : null,
+      wall: W ? { src: W.src, title: W.title, hd: W.hd, dlBusy: s.dlBusy, dlLabel: s.dlBusy ? tx.dlBusy : (ads && !s.unlocked[W.nasa_id || W.src] ? tx.dlAd : tx.dl), dlDisabled: s.dlBusy, download: () => { if (!s.dlBusy) this.downloadWall(); }, openHd: async () => this.openUrl(await this.resolveHd(W)), view: () => this.setState({ lightbox: { items: [{ src: W.src, fallback: W.src, title: W.title }], index: 0 } }) } : null,
       closeWall: () => this.setState({ wall: null }),
       weight: {
         kg: String(s.kg), onKg: (t) => { this.setState({ kg: t }); LS.set('cosmo_kg', t); },
@@ -547,14 +514,14 @@ export default class CosmoApp extends React.Component {
         <View style={{ flex: 1, backgroundColor: th.bg }}>
           <ScrollView ref={this.mainRef} style={{ flex: 1 }} contentContainerStyle={{ paddingTop: insets.top + 10, paddingHorizontal: 20, paddingBottom: 24 }}
             keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
-           <View key={'ads' + (s.adKey || 0)}>
-            {v.isExplore && <ExploreScreen v={v} />}
-            {v.isNews && <NewsScreen v={v} />}
-            {v.isToday && <TodayScreen v={v} />}
-            {v.isQuiz && <QuizScreen v={v} />}
-            {v.isSky && <SkyScreen v={v} />}
-            {(v.isMoreHome || v.sub) && <MoreScreens v={v} />}
-           </View>
+            <View key={'ads' + (s.adKey || 0)}>
+              {v.isExplore && <ExploreScreen v={v} />}
+              {v.isNews && <NewsScreen v={v} />}
+              {v.isToday && <TodayScreen v={v} />}
+              {v.isQuiz && <QuizScreen v={v} />}
+              {v.isSky && <SkyScreen v={v} />}
+              {(v.isMoreHome || v.sub) && <MoreScreens v={v} />}
+            </View>
           </ScrollView>
           {/* Hide the tab bar while a full-screen page is open (Android ignores zIndex for overlays) */}
           {!(v.detail || v.article || v.wall || v.interActive) && (<>

@@ -23,8 +23,26 @@ function cleanup(file) { try { if (file && file.exists) file.delete(); } catch (
 // If gallery access isn't available (denied, or limited in Expo Go), falls back to the
 // share sheet, where the user can pick "Save image" / Files / Drive.
 // Returns 'gallery' or 'share'. Throws if the download itself fails.
+// NASA image library links end in ~thumb / ~small / ~medium. Try the HD versions first,
+// falling back step by step so a missing ~orig file never breaks the save.
+function hdCandidates(url) {
+  url = httpsify(url);
+  const m = url.match(/^(https:\/\/images-assets\.nasa\.gov\/image\/.+?)~(thumb|small|medium|large|orig)(\.[a-z]+)$/i);
+  if (!m) return [url];
+  const [, base, , ext] = m;
+  return [...new Set([base + '~orig' + ext, base + '~large' + ext, url])];
+}
+
+async function downloadHd(url) {
+  let lastErr;
+  for (const u of hdCandidates(url)) {
+    try { return await download(u); } catch (e) { lastErr = e; }
+  }
+  throw lastErr;
+}
+
 async function doSave(url) {
-  const { uri, mime, file } = await download(url);
+  const { uri, mime, file } = await downloadHd(url);
   try {
     const ML = require('expo-media-library/legacy');
     const perm = await ML.requestPermissionsAsync(true, Platform.OS === 'android' ? ['photo'] : undefined);
