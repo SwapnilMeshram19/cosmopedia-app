@@ -10,7 +10,7 @@ import { T, useT, Stripes, Img, Kicker, Grid, Diamond, Btn } from '../components
 import { AdSlot, BottomBanner, bannerEnabled } from '../ads';
 import { httpsify } from '../constants';
 
-const fill = StyleSheet.absoluteFillObject;
+const fill = StyleSheet.absoluteFill; // absoluteFillObject was removed in React Native 0.86
 
 function TopButtons({ top, onBack, saved, onSave, tx }) {
   const th = useT();
@@ -30,7 +30,7 @@ function Detail({ v, insets }) {
   const th = useT(), tx = v.tx, d = v.detail;
   return (
     <View style={[fill, { backgroundColor: th.bg, zIndex: 10 }]}>
-      <ScrollView ref={v.detailRef} style={{ flex: 1 }} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: bannerEnabled() ? 24 : 40 + insets.bottom }}>
+      <ScrollView ref={v.detailRef} style={{ flex: 1 }} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 + insets.bottom }}>
         <View style={{ height: 360 + insets.top }}>
           <Stripes />
           {!!d.hero && <Pressable onPress={d.openHero} style={fill}><Img src={d.hero} /></Pressable>}
@@ -101,7 +101,6 @@ function Detail({ v, insets }) {
           )}
         </View>
       </ScrollView>
-      {v.showAds && <BottomBanner padBottom={insets.bottom} bg={th.bg} line={th.ink(0.07)} />}
     </View>
   );
 }
@@ -110,7 +109,7 @@ function Article({ v, insets }) {
   const th = useT(), tx = v.tx, a = v.article;
   return (
     <View style={[fill, { backgroundColor: th.bg, zIndex: 11 }]}>
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: bannerEnabled() ? 24 : 40 + insets.bottom }}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 40 + insets.bottom }}>
         <View style={{ height: 280 + insets.top }}>
           <Stripes />
           {!!a.img && <Img src={a.img} />}
@@ -124,7 +123,6 @@ function Article({ v, insets }) {
           {v.showAds && <View style={{ marginTop: 10 }}><AdSlot kind="rectangle" /></View>}
         </View>
       </ScrollView>
-      {v.showAds && <BottomBanner padBottom={insets.bottom} bg={th.bg} line={th.ink(0.07)} />}
     </View>
   );
 }

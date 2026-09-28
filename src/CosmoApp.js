@@ -522,11 +522,16 @@ export default class CosmoApp extends React.Component {
     const th = this._theme;
     const v = this.renderVals();
     const { insets } = this.props;
+    // A full-screen page (details, article, wallpaper, ad countdown) is open.
+    // The main list is HIDDEN (display: 'none') instead of relying on zIndex: on Android the
+    // overlay could be drawn behind the list, so only its bottom banner ad was visible.
+    // display: 'none' keeps the list mounted, so its scroll position is kept when you go back.
+    const fullPage = !!(v.detail || v.article || v.wall || v.interActive);
     return (
       <ThemeCtx.Provider value={th}>
         <StatusBar style={mode === 'dark' ? 'light' : 'dark'} />
         <View style={{ flex: 1, backgroundColor: th.bg }}>
-          <ScrollView ref={this.mainRef} style={{ flex: 1 }} contentContainerStyle={{ paddingTop: insets.top + 10, paddingHorizontal: 20, paddingBottom: 24 }}
+          <ScrollView ref={this.mainRef} style={{ flex: 1, display: fullPage ? 'none' : 'flex' }} contentContainerStyle={{ paddingTop: insets.top + 10, paddingHorizontal: 20, paddingBottom: 24 }}
             keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
             <View key={'ads' + (s.adKey || 0)}>
               {v.isExplore && <ExploreScreen v={v} />}
@@ -538,7 +543,7 @@ export default class CosmoApp extends React.Component {
             </View>
           </ScrollView>
           {/* Hide the tab bar while a full-screen page is open (Android ignores zIndex for overlays) */}
-          {!(v.detail || v.article || v.wall || v.interActive) && (<>
+          {!fullPage && (<>
             <TabBar v={v} bottom={insets.bottom} />
           </>)}
           <ErrorBoundary onReset={() => this.setState({ detail: null, article: null, wall: null, lightbox: null })}>

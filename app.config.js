@@ -10,8 +10,11 @@ module.exports = ({ config }) => {
 
   const buildProps = ['expo-build-properties', {
     android: {
-      enableMinifyInReleaseBuilds: true,          // R8: strips unused Java/Kotlin code
-      enableShrinkResourcesInReleaseBuilds: true, // removes unused Android resources
+      // R8 minify + resource shrinking are OFF: they can strip classes that native modules
+      // (AdMob banners, gesture handler, image viewer) load at runtime, which makes screens
+      // like the details page crash or not open in release APKs.
+      enableMinifyInReleaseBuilds: false,
+      enableShrinkResourcesInReleaseBuilds: false,
       enablePngCrunchInReleaseBuilds: true,
       ...(isProd ? {} : {
         buildArchs: ['arm64-v8a'],               // test APK: one CPU type instead of four
