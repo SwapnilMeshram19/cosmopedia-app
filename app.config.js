@@ -2,7 +2,7 @@
 // - Test builds (development / preview / preview-real) get their own package name so they install
 //   next to the Play Store version, and are built for 64-bit ARM only (every phone from ~2017 on)
 //   to keep the APK small.
-// - production keeps com.sam.cosmopedia and all CPU types; Google Play then delivers only the
+// - production keeps com.cosmopedia.app and all CPU types; Google Play then delivers only the
 //   parts each phone needs, so users download far less than the .aab size.
 module.exports = ({ config }) => {
   const profile = process.env.EAS_BUILD_PROFILE || process.env.APP_VARIANT || 'production';
