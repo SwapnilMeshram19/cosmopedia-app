@@ -35,8 +35,9 @@ import QuizScreen from './screens/QuizScreen';
 import SkyScreen from './screens/SkyScreen';
 import MoreScreens from './screens/MoreScreens';
 
-// Set to your own free key from https://api.nasa.gov (DEMO_KEY is rate-limited to ~30 req/hour per IP).
-export const NASA_API_KEY = 'DEMO_KEY';
+// Your free key from https://api.nasa.gov, supplied at build time (EAS environment variable
+// EXPO_PUBLIC_NASA_KEY). DEMO_KEY is only a fallback for local runs (~30 requests/hour per IP).
+export const NASA_API_KEY = process.env.EXPO_PUBLIC_NASA_KEY || 'DEMO_KEY';
 // Mirrors the web component's props
 const PROPS = { showAds: true, interstitialEvery: 4 };
 
@@ -151,9 +152,18 @@ export default class CosmoApp extends React.Component {
     }
     catch (e) { this.setState({ newsLoading: false, newsErr: true }); }
   }
+  // Cached for 3 hours: one NASA key is shared by every install (1,000 requests/hour), so each
+  // phone should ask at most a few times a day. The cached copy is also shown when offline.
   async loadApod() {
-    try { const j = await getJSON('https://api.nasa.gov/planetary/apod?api_key=' + NASA_API_KEY); if (!j || j.error || j.code || typeof j.title !== 'string') throw 0; this.setState({ apod: j }); }
-    catch (e) { this.setState({ apodErr: true }); }
+    const c = LS.get('cosmo_apod', null);
+    const cached = c && c.data && typeof c.data.title === 'string' ? c.data : null;
+    if (cached && Date.now() - (c.at || 0) < 3 * 3600e3) { this.setState({ apod: cached }); return; }
+    try {
+      const j = await getJSON('https://api.nasa.gov/planetary/apod?api_key=' + NASA_API_KEY);
+      if (!j || j.error || j.code || typeof j.title !== 'string') throw 0;
+      this.setState({ apod: j }); LS.set('cosmo_apod', { at: Date.now(), data: j });
+    }
+    catch (e) { if (cached) this.setState({ apod: cached }); else this.setState({ apodErr: true }); }
   }
   async loadLaunches() {
     try {
@@ -346,12 +356,13 @@ export default class CosmoApp extends React.Component {
     if (r === 'skip') { const l = this.lv(), q = this.curQ(); if (q) { const tries = { ...l.tries, [l.cur]: [-1, q[2]] }; this.setLv({ ...l, tries, cur: l.cur + 1 }); if (l.cur === 4) this.finishLevel(tries); } }
   }
   triggerReward(kind) {
-    // Real rewarded video in a dev/production build; simulated countdown in Expo Go or if no ad fills.
+    // Real rewarded video in a dev/production build; simulated countdown only in Expo Go / web.
+    // If no ad fills, the reward is simply given: never show a fake "ad" screen in a real build.
     if (adsAvailable()) {
-      showRewarded(() => this.applyReward(kind), () => this.startInter(5, kind));
+      showRewarded(() => this.applyReward(kind), () => this.applyReward(kind));
       return;
     }
-    this.startInter(5, kind);
+    this.startInter(5, kind); // Expo Go / web only: simulated placeholder
   }
   toggleTopic(id) { const X = this.txt(); const sv = this.state.saved; const has = sv.topics.includes(id); const n = { ...sv, topics: has ? sv.topics.filter((x) => x !== id) : [id, ...sv.topics] }; this.setState({ saved: n }); LS.set('cosmo_saved', n); this.showToast(has ? X.tRemoved : X.tSaved); }
   toggleArticle(a) { const X = this.txt(); const sv = this.state.saved; const has = sv.articles.some((x) => x.id === a.id); const slim = { id: a.id, title: a.title, image_url: a.image_url, news_site: a.news_site, published_at: a.published_at, summary: a.summary, url: a.url }; const n = { ...sv, articles: has ? sv.articles.filter((x) => x.id !== a.id) : [slim, ...sv.articles] }; this.setState({ saved: n }); LS.set('cosmo_saved', n); this.showToast(has ? X.tRemoved : X.tStory); }

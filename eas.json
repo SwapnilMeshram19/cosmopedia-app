@@ -1,10 +1,11 @@
 {
   "cli": {
     "version": ">= 16.0.0",
-    "appVersionSource": "local"
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
+      "environment": "development",
       "developmentClient": true,
       "distribution": "internal",
       "android": {
@@ -16,6 +17,7 @@
       }
     },
     "preview": {
+      "environment": "preview",
       "distribution": "internal",
       "android": {
         "buildType": "apk"
@@ -26,6 +28,8 @@
       }
     },
     "production": {
+      "environment": "production",
+      "autoIncrement": true,
       "android": {
         "buildType": "app-bundle"
       },
@@ -34,6 +38,7 @@
       }
     },
     "preview-real": {
+      "environment": "preview",
       "distribution": "internal",
       "android": {
         "buildType": "apk"

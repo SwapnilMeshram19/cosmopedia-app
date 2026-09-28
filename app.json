@@ -8,7 +8,7 @@
     "userInterfaceStyle": "automatic",
     "backgroundColor": "#07080c",
     "ios": {
-      "bundleIdentifier": "com.sam.cosmopedia",
+      "bundleIdentifier": "com.cosmopedia.app",
       "supportsTablet": false,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Cosmopedia uses your location to show which planets are visible tonight and how far the ISS is from you.",
@@ -16,8 +16,7 @@
       }
     },
     "android": {
-      "package": "com.sam.cosmopedia",
-      "versionCode": 1,
+      "package": "com.cosmopedia.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#07080c"

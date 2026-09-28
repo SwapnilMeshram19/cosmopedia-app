@@ -18,7 +18,7 @@ eas build -p android --profile production   # AAB for Google Play
 
 ## Before publishing
 - `src/ads.js` → set `ADMOB_UNITS.interstitial` (create an interstitial unit in AdMob). Dev builds use Google test IDs automatically.
-- `src/CosmoApp.js` → replace `NASA_API_KEY = 'DEMO_KEY'` with your free key from https://api.nasa.gov
+- NASA key: add `EXPO_PUBLIC_NASA_KEY` (free key from https://api.nasa.gov) as a plain-text EAS environment variable for production, preview and development (expo.dev → project → Environment variables). Local runs: put it in `.env`.
 - `app.json` → `iosAppId` is Google's test ID; replace it if you ship on iOS.
 - Package name is `com.sam.cosmopedia` (same as the TWA). To update the existing Play listing, sign with the same upload key.
 
