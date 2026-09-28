@@ -103,12 +103,14 @@ export default class CosmoApp extends React.Component {
     });
     if (LS.get('cosmo_adtest', false)) setForceTestAds(true);
     if (alerts) { this.startPolling(); setNewsTask(true); }
+    // Tapping an OS notification (also the one that cold-started the app) opens the right screen.
+    this.tapSub = Notify.onTap((d) => this.onNotifTap(d));
     OBJ.forEach((o) => this.loadImgs(o));
     this.loadNews(true); this.loadApod(); this.loadLaunches(); this.loadOtd();
     this.pollIss(); this.issTimer = setInterval(() => this.pollIss(), 10000);
   }
   componentWillUnmount() {
-    try { this.appearanceSub.remove(); this.backSub.remove(); this.appStateSub.remove(); } catch (e) { }
+    try { this.appearanceSub.remove(); this.backSub.remove(); this.appStateSub.remove(); this.tapSub && this.tapSub(); } catch (e) { }
     [this.timer, this.poll, this.issTimer].forEach(clearInterval);
     [this.tt, this.pt, this.pt2].forEach(clearTimeout);
   }
@@ -231,9 +233,25 @@ export default class CosmoApp extends React.Component {
   }
   bump(d) { const st = { ...this.state.stats }; Object.entries(d).forEach(([k, v]) => { st[k] = (st[k] || 0) + v; }); this.setState({ stats: st }); LS.set('cosmo_stats', st); }
   showToast(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: null }), 2600); }
+  // Where a tapped notification leads: news story → article, launch → Today, ISS → Sky.
+  async onNotifTap(d) {
+    const tabs = ['explore', 'news', 'today', 'sky', 'more'];
+    this.setState({ push: null, lightbox: null, wall: null, detail: null, article: null });
+    if (typeof d.articleId === 'number') {
+      this.setTab('news');
+      const known = this.state.news.find((a) => a.id === d.articleId);
+      if (known) { this.setState({ article: known }); return; }
+      try {
+        const a = await getJSON('https://api.spaceflightnewsapi.net/v4/articles/' + d.articleId + '/');
+        if (a && a.id === d.articleId && typeof a.title === 'string') this.setState({ article: a });
+      } catch (e) { }
+      return;
+    }
+    if (tabs.includes(d.tab)) this.setTab(d.tab);
+  }
   pushNow(p) {
     clearTimeout(this.pt2); this.setState({ push: p }); this.pt2 = setTimeout(() => this.setState({ push: null }), 6000);
-    if (this.appState && this.appState !== 'active') Notify.notifyNow(p.title, p.body, { tab: p.tab });
+    if (this.appState && this.appState !== 'active') Notify.notifyNow(p.title, p.body, { tab: p.tab || (p.article ? 'news' : undefined), articleId: p.article ? p.article.id : undefined });
   }
   startInter(n, reward) {
     clearInterval(this.timer); this.setState({ inter: true, interN: n, reward });
@@ -263,7 +281,7 @@ export default class CosmoApp extends React.Component {
       const rem = r[id], live = list.find((l) => l.id === id);
       if (live) {
         await Notify.cancel(rem.notifId);
-        r[id] = { ...rem, name: live.name, net: live.net, notifId: await Notify.scheduleLaunch(live) };
+        r[id] = { ...rem, name: live.name, net: live.net, notifId: await Notify.scheduleLaunch(live, { prompt: false }) };
         changed = true;
       } else if (new Date(rem.net).getTime() < Date.now() - 6 * 3600e3) {
         await Notify.cancel(rem.notifId); delete r[id]; changed = true;
@@ -322,10 +340,18 @@ export default class CosmoApp extends React.Component {
     const X = this.txt();
     const r = { ...this.state.reminders };
     if (r[l.id]) { Notify.cancel(r[l.id].notifId); delete r[l.id]; this.showToast(X.tRemOff); this.setState({ reminders: r }); LS.set('cosmo_remind', r); return; }
-    r[l.id] = { id: l.id, name: l.name, net: l.net }; this.showToast(X.tRemSet);
-    this.setState({ reminders: r }); LS.set('cosmo_remind', r);
+    // Saved first so it shows under More → Saved even if the OS alert can't be scheduled yet;
+    // syncReminders re-tries on every app start (e.g. after notifications are allowed in Settings).
+    r[l.id] = { id: l.id, name: l.name, net: l.net }; this.setState({ reminders: r }); LS.set('cosmo_remind', r);
     const notifId = await Notify.scheduleLaunch(l);
-    if (notifId) { const r2 = { ...this.state.reminders }; if (r2[l.id]) { r2[l.id] = { ...r2[l.id], notifId }; this.setState({ reminders: r2 }); LS.set('cosmo_remind', r2); } }
+    if (notifId) {
+      const r2 = { ...this.state.reminders };
+      if (r2[l.id]) { r2[l.id] = { ...r2[l.id], notifId }; this.setState({ reminders: r2 }); LS.set('cosmo_remind', r2); }
+      const soon = new Date(l.net).getTime() - Date.now() < 3600e3;
+      this.showToast(soon ? X.tRemSoon : X.tRemSet);
+    } else {
+      this.showToast(!Notify.available() ? X.tNotifApp : X.tNotifOff);
+    }
   }
   async checkLatest(force) {
     try {
@@ -341,10 +367,18 @@ export default class CosmoApp extends React.Component {
     const X = this.txt();
     const on = !this.state.alerts; this.setState({ alerts: on }); LS.set('cosmo_newsalerts', on);
     setNewsTask(on);
-    if (on) { Notify.askPermission(); this.showToast(X.tNewsOn); this.startPolling(); this.checkLatest(false); }
+    if (on) {
+      this.startPolling(); this.checkLatest(false);
+      Notify.askPermission().then((ok) => this.showToast(ok ? X.tNewsOn : !Notify.available() ? X.tNotifApp : X.tNotifOff));
+    }
     else { clearInterval(this.poll); this.showToast(X.tNewsOff); }
   }
-  toggleIssAlerts() { const X = this.txt(); const on = !this.state.issAlerts; if (on) Notify.askPermission(); this.setState({ issAlerts: on, issNear: false }); LS.set('cosmo_issalerts', on); this.showToast(on ? X.tIssOn : X.tIssOff); }
+  toggleIssAlerts() {
+    const X = this.txt(); const on = !this.state.issAlerts;
+    this.setState({ issAlerts: on, issNear: false }); LS.set('cosmo_issalerts', on);
+    if (!on) { this.showToast(X.tIssOff); return; }
+    Notify.askPermission().then((ok) => this.showToast(ok ? X.tIssOn : !Notify.available() ? X.tNotifApp : X.tNotifOff));
+  }
   async locate() {
     const X = this.txt();
     try {

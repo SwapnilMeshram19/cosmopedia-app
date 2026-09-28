@@ -16,33 +16,44 @@ function mod() {
   return N;
 }
 
-let ready = null;
-async function ensure() {
+// True when real OS notifications can work in this binary (false in Expo Go / web).
+export const available = () => !!mod();
+
+let channelReady = false;
+// prompt = true: show the system permission dialog if needed (only from a user tap).
+// prompt = false: just check (startup re-sync, background task). Never caches a "no",
+// so enabling notifications later in system Settings takes effect without a restart.
+async function ensure(prompt = true) {
   const Notifications = mod();
   if (!Notifications) return false;
-  if (ready !== null) return ready;
   try {
-    if (Platform.OS === 'android') {
+    if (Platform.OS === 'android' && !channelReady) {
       await Notifications.setNotificationChannelAsync('default', { name: 'Cosmopedia alerts', importance: Notifications.AndroidImportance.DEFAULT });
+      channelReady = true;
     }
     const cur = await Notifications.getPermissionsAsync();
-    let ok = cur.granted;
-    if (!ok) ok = (await Notifications.requestPermissionsAsync()).granted;
-    ready = ok;
-  } catch (e) { ready = false; }
-  return ready;
+    if (cur.granted) return true;
+    if (!prompt || cur.canAskAgain === false) return false;
+    return (await Notifications.requestPermissionsAsync()).granted;
+  } catch (e) { return false; }
 }
 
-// Real OS notification 1 hour before a launch
-export async function scheduleLaunch(launch) {
-  if (!(await ensure())) return null;
+// Real OS notification 1 hour before a launch. If liftoff is already less than an hour away,
+// it fires in a few seconds with the actual minutes left. Returns the notification id or null.
+export async function scheduleLaunch(launch, { prompt = true } = {}) {
+  if (!launch || !launch.net) return null;
+  const net = new Date(launch.net).getTime();
+  if (!Number.isFinite(net) || net <= Date.now() + 60e3) return null; // unknown date or already launching
+  if (!(await ensure(prompt))) return null;
   const Notifications = mod();
-  const at = new Date(new Date(launch.net).getTime() - 3600e3);
-  if (at.getTime() <= Date.now()) return null;
+  const oneHourBefore = net - 3600e3;
+  const at = Math.max(oneHourBefore, Date.now() + 5e3);
+  const mins = Math.round((net - at) / 60e3);
+  const title = mins >= 55 ? launch.name + ' launches in 1 hour' : launch.name + ' launches in ' + mins + ' min';
   try {
     return await Notifications.scheduleNotificationAsync({
-      content: { title: launch.name + ' launches in 1 hour', body: 'Open Cosmopedia to follow the countdown.', data: { tab: 'today' } },
-      trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: at },
+      content: { title, body: 'Open Cosmopedia to follow the countdown.', data: { tab: 'today', launchId: launch.id } },
+      trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: new Date(at) },
     });
   } catch (e) { return null; }
 }
@@ -52,10 +63,30 @@ export async function cancel(id) {
   if (id && Notifications) { try { await Notifications.cancelScheduledNotificationAsync(id); } catch (e) {} }
 }
 
+// Immediate notification. Never shows a permission dialog (it can run from the background task).
 export async function notifyNow(title, body, data) {
-  if (!(await ensure())) return;
+  if (!(await ensure(false))) return;
   const Notifications = mod();
   try { await Notifications.scheduleNotificationAsync({ content: { title, body, data: data || {} }, trigger: null }); } catch (e) {}
 }
 
-export const askPermission = ensure;
+// Calls cb(data) when the user taps one of our notifications: while the app is running, and once
+// for the notification that cold-started the app. Returns an unsubscribe function.
+export function onTap(cb) {
+  const Notifications = mod();
+  if (!Notifications) return () => {};
+  const handle = (resp) => {
+    const data = resp && resp.notification && resp.notification.request && resp.notification.request.content && resp.notification.request.content.data;
+    if (data && typeof data === 'object') cb(data);
+  };
+  let sub = null;
+  try {
+    const last = Notifications.getLastNotificationResponse();
+    if (last) { handle(last); Notifications.clearLastNotificationResponse(); }
+    sub = Notifications.addNotificationResponseReceivedListener((r) => { handle(r); try { Notifications.clearLastNotificationResponse(); } catch (e) {} });
+  } catch (e) {}
+  return () => { try { sub && sub.remove(); } catch (e) {} };
+}
+
+// true = allowed (asks if needed). Use from user actions only.
+export const askPermission = () => ensure(true);
