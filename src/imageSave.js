@@ -1,7 +1,8 @@
-import { Platform } from 'react-native';
+import { Platform, PermissionsAndroid } from 'react-native';
 import { File, Directory, Paths } from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import { httpsify } from './constants';
+import CosmoGallery from '../modules/cosmo-gallery';
 
 const MIME = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif' };
 
@@ -19,10 +20,6 @@ async function download(url) {
 // Removes the temporary cache copy once it has been saved or shared.
 function cleanup(file) { try { if (file && file.exists) file.delete(); } catch (e) {} }
 
-// Saves to the phone's gallery (write-only access, no read permission needed).
-// If gallery access isn't available (denied, or limited in Expo Go), falls back to the
-// share sheet, where the user can pick "Save image" / Files / Drive.
-// Returns 'gallery' or 'share'. Throws if the download itself fails.
 // NASA image library links end in ~thumb / ~small / ~medium. Try the HD versions first,
 // falling back step by step so a missing ~orig file never breaks the save.
 function hdCandidates(url) {
@@ -41,22 +38,21 @@ async function downloadHd(url) {
   throw lastErr;
 }
 
+// Saves to the phone's gallery through the local CosmoGallery module (MediaStore).
+// Needs no media-read permission; Android 9 and below ask for WRITE_EXTERNAL_STORAGE.
+// Returns 'gallery'. Throws on any failure: Save never falls back to the share sheet.
 async function doSave(url) {
+  if (!CosmoGallery) throw new Error('Gallery saving needs a development/production build (not Expo Go)');
+  if (Platform.OS === 'android' && Platform.Version < 29) {
+    const r = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
+    if (r !== PermissionsAndroid.RESULTS.GRANTED) throw new Error('Storage permission denied');
+  }
   const { uri, mime, file } = await downloadHd(url);
   try {
-    const ML = require('expo-media-library/legacy');
-    const perm = await ML.requestPermissionsAsync(true, Platform.OS === 'android' ? ['photo'] : undefined);
-    if (!perm.granted) throw new Error('no permission');
-    await ML.saveToLibraryAsync(uri);
-    cleanup(file);
+    await CosmoGallery.saveImage(uri, mime, uri.split('/').pop());
     return 'gallery';
-  } catch (e) {
-    if (await Sharing.isAvailableAsync()) {
-      await Sharing.shareAsync(uri, { mimeType: mime, dialogTitle: 'Save image' });
-      return 'share';
-    }
+  } finally {
     cleanup(file);
-    throw e;
   }
 }
 

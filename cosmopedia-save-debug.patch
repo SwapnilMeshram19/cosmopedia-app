@@ -1,0 +1,80 @@
+diff --git a/src/CosmoApp.js b/src/CosmoApp.js
+index e8a8cdb..1bae5bd 100644
+--- a/src/CosmoApp.js
++++ b/src/CosmoApp.js
+@@ -19,7 +19,7 @@ import {
+ import { LS } from './storage';
+ import { makeTheme } from './theme';
+ import { ThemeCtx } from './components/ui';
+-import { rewardedSave, isSaveBusy } from './rewardedSave';
++import { rewardedSave, isSaveBusy, lastSaveError } from './rewardedSave';
+ import { shareImage } from './imageSave';
+ import { adsAvailable, showRewarded, showInterstitial, openAdInspector, AD_DEBUG, setForceTestAds, usingTestAds } from './ads';
+ import ErrorBoundary from './components/ErrorBoundary';
+@@ -220,7 +220,7 @@ export default class CosmoApp extends React.Component {
+       const res = await rewardedSave(() => this.resolveHd(w), { skipAd: !ads || !!this.state.unlocked[key] });
+       if (res === 'gallery' || res === 'share') this.setState((st) => ({ unlocked: { ...st.unlocked, [key]: true } }));
+       if (res === 'gallery') this.setState({ wallMsg: X.tDlDone });
+-      if (res === 'error') this.setState({ wallMsg: X.tDlFail });
++      if (res === 'error') { this.setState({ wallMsg: X.tDlFail }); if (AD_DEBUG && lastSaveError()) this.showToast(lastSaveError()); }
+     } finally { this.setState({ dlBusy: false }); }
+   }
+   async shareWall() {
+diff --git a/src/rewardedSave.js b/src/rewardedSave.js
+index 5b2f753..864c7c5 100644
+--- a/src/rewardedSave.js
++++ b/src/rewardedSave.js
+@@ -8,6 +8,9 @@ import { saveImage } from './imageSave';
+ //
+ // phase: null (idle) | 'ad' (rewarded ad loading / showing) | 'saving' (HD download + save)
+ let phase = null;
++let lastError = null;
++// Reason for the most recent failed save (shown on screen in debug/preview builds).
++export const lastSaveError = () => lastError;
+ const listeners = new Set();
+ const setPhase = (p) => { phase = p; listeners.forEach((f) => f(p)); };
+ export const isSaveBusy = () => phase !== null;
+@@ -26,6 +29,7 @@ function watchAd() {
+ // Returns 'gallery' | 'share' | 'cancelled' | 'busy' | 'error'.
+ export async function rewardedSave(url, options = {}) {
+   if (phase !== null) return 'busy';
++  lastError = null;
+   try {
+     if (!options.skipAd) {
+       setPhase('ad');
+@@ -36,6 +40,8 @@ export async function rewardedSave(url, options = {}) {
+     const u = typeof url === 'function' ? await url() : url;
+     return await saveImage(u);
+   } catch (e) {
++    lastError = (e && (e.code ? e.code + ': ' : '') + (e.message || String(e))) || 'unknown error';
++    console.warn('[save] failed:', lastError);
+     return 'error';
+   } finally {
+     setPhase(null);
+diff --git a/src/screens/Overlays.js b/src/screens/Overlays.js
+index a854303..ae3baf8 100644
+--- a/src/screens/Overlays.js
++++ b/src/screens/Overlays.js
+@@ -3,11 +3,11 @@ import { View, Pressable, ScrollView, StyleSheet, Modal, ActivityIndicator, useW
+ import { GestureHandlerRootView } from 'react-native-gesture-handler';
+ import ZoomableImage from '../components/ZoomableImage';
+ import { shareImage } from '../imageSave';
+-import { useRewardedSave } from '../rewardedSave';
++import { useRewardedSave, lastSaveError } from '../rewardedSave';
+ import { LinearGradient } from 'expo-linear-gradient';
+ import { Image } from 'expo-image';
+ import { T, useT, Stripes, Img, Kicker, Grid, Diamond, Btn } from '../components/ui';
+-import { AdSlot, BottomBanner, bannerEnabled } from '../ads';
++import { AdSlot, BottomBanner, bannerEnabled, AD_DEBUG } from '../ads';
+ import { httpsify } from '../constants';
+ 
+ const fill = StyleSheet.absoluteFill; // absoluteFillObject was removed in React Native 0.86
+@@ -246,7 +246,7 @@ function Lightbox({ v, insets }) {
+     if (saving || busy) return;
+     const res = await save(bestUrl(), { skipAd: !(v.showAds && bannerEnabled()) });
+     if (res === 'gallery') flash('Saved to your gallery ✓');
+-    if (res === 'error') flash('Couldn’t save this image');
++    if (res === 'error') flash('Couldn’t save this image' + (AD_DEBUG && lastSaveError() ? '\n' + lastSaveError() : ''));
+   };
+   const onShare = async () => {
+     if (saving || busy) return;

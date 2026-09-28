@@ -61,6 +61,7 @@ function MoreHome({ v }) {
             <Btn label="Interstitial" onPress={v.adTest.interstitial} height={40} size={13} style={{ flex: 1 }} />
           </View>
           <Btn label="Open Ad Inspector" onPress={v.adTest.inspector} variant="outlineBlue" height={40} size={13} />
+          <Btn label="Test background news alert" onPress={v.adTest.testNewsTask} variant="outlineBlue" height={40} size={13} />
         </View>
       </>)}
 

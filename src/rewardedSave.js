@@ -8,6 +8,9 @@ import { saveImage } from './imageSave';
 //
 // phase: null (idle) | 'ad' (rewarded ad loading / showing) | 'saving' (HD download + save)
 let phase = null;
+let lastError = null;
+// Reason for the most recent failed save (shown on screen in debug/preview builds).
+export const lastSaveError = () => lastError;
 const listeners = new Set();
 const setPhase = (p) => { phase = p; listeners.forEach((f) => f(p)); };
 export const isSaveBusy = () => phase !== null;
@@ -26,6 +29,7 @@ function watchAd() {
 // Returns 'gallery' | 'share' | 'cancelled' | 'busy' | 'error'.
 export async function rewardedSave(url, options = {}) {
   if (phase !== null) return 'busy';
+  lastError = null;
   try {
     if (!options.skipAd) {
       setPhase('ad');
@@ -36,6 +40,8 @@ export async function rewardedSave(url, options = {}) {
     const u = typeof url === 'function' ? await url() : url;
     return await saveImage(u);
   } catch (e) {
+    lastError = (e && (e.code ? e.code + ': ' : '') + (e.message || String(e))) || 'unknown error';
+    console.warn('[save] failed:', lastError);
     return 'error';
   } finally {
     setPhase(null);

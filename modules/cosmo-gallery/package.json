@@ -1,0 +1,7 @@
+{
+  "name": "cosmo-gallery",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "description": "Saves images to the Android gallery via MediaStore (no media-read permissions)."
+}

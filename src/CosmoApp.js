@@ -19,11 +19,12 @@ import {
 import { LS } from './storage';
 import { makeTheme } from './theme';
 import { ThemeCtx } from './components/ui';
-import { rewardedSave, isSaveBusy } from './rewardedSave';
+import { rewardedSave, isSaveBusy, lastSaveError } from './rewardedSave';
 import { shareImage } from './imageSave';
 import { adsAvailable, showRewarded, showInterstitial, openAdInspector, AD_DEBUG, setForceTestAds, usingTestAds } from './ads';
 import ErrorBoundary from './components/ErrorBoundary';
 import * as Notify from './notify';
+import { setNewsTask, runNewsTaskNow } from './background';
 import { ShareCard } from './components/ShareCard';
 import Overlays from './screens/Overlays';
 import TabBar from './screens/TabBar';
@@ -59,7 +60,13 @@ function locQuiz(q, i, lang) {
   if (!t) return q;
   return [t[0], t[1], q[2], t[2], q[4], q[5]];
 }
-const getJSON = async (url) => { const r = await fetch(url); return r.json(); };
+// Throws on HTTP errors (rate limits, 5xx) so callers fall into their catch/error state
+// instead of rendering an error body as data.
+const getJSON = async (url) => {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('HTTP ' + r.status + ' ' + url);
+  return r.json();
+};
 
 export default class CosmoApp extends React.Component {
   state = {
@@ -78,7 +85,11 @@ export default class CosmoApp extends React.Component {
   componentDidMount() {
     this.appearanceSub = Appearance.addChangeListener(({ colorScheme }) => this.setState({ sysDark: colorScheme !== 'light' }));
     this.backSub = BackHandler.addEventListener('hardwareBackPress', () => this.onBack());
-    this.appStateSub = AppState.addEventListener('change', (s) => { this.appState = s; });
+    this.appStateSub = AppState.addEventListener('change', (s) => {
+      this.appState = s;
+      // The background news task may have advanced lastSeen while the app was away.
+      if (s === 'active') LS.reload('cosmo_lastseen').then((v) => { if (typeof v === 'number' && v > this.state.lastSeen) this.setState({ lastSeen: v }); });
+    });
     const today = DAY();
     let qs = LS.get('cosmo_quiz2', null);
     if (!qs || qs.day !== today || !qs.levels) qs = { day: today, levels: {} };
@@ -91,7 +102,7 @@ export default class CosmoApp extends React.Component {
       loc: LS.get('cosmo_loc', null), lang: LS.get('cosmo_lang', 'en'), kg: LS.get('cosmo_kg', 70),
     });
     if (LS.get('cosmo_adtest', false)) setForceTestAds(true);
-    if (alerts) this.startPolling();
+    if (alerts) { this.startPolling(); setNewsTask(true); }
     OBJ.forEach((o) => this.loadImgs(o));
     this.loadNews(true); this.loadApod(); this.loadLaunches(); this.loadOtd();
     this.pollIss(); this.issTimer = setInterval(() => this.pollIss(), 10000);
@@ -128,22 +139,44 @@ export default class CosmoApp extends React.Component {
     const url = reset ? 'https://api.spaceflightnewsapi.net/v4/articles/?limit=12' + (term ? '&search=' + encodeURIComponent(term) : '') : this.state.newsNext;
     if (!url) return;
     this.setState({ newsLoading: true, newsErr: false, ...(reset ? { news: [] } : {}) });
-    try { const j = await getJSON(url); this.setState((s) => ({ news: reset ? j.results : [...s.news, ...j.results], newsNext: j.next, newsLoading: false })); }
+    try {
+      const j = await getJSON(url);
+      if (!j || !Array.isArray(j.results)) throw new Error('Bad news response');
+      this.setState((s) => ({ news: reset ? j.results : [...s.news, ...j.results], newsNext: typeof j.next === 'string' ? j.next : null, newsLoading: false }));
+    }
     catch (e) { this.setState({ newsLoading: false, newsErr: true }); }
   }
   async loadApod() {
-    try { const j = await getJSON('https://api.nasa.gov/planetary/apod?api_key=' + NASA_API_KEY); if (j.error || j.code) throw 0; this.setState({ apod: j }); }
+    try { const j = await getJSON('https://api.nasa.gov/planetary/apod?api_key=' + NASA_API_KEY); if (!j || j.error || j.code || typeof j.title !== 'string') throw 0; this.setState({ apod: j }); }
     catch (e) { this.setState({ apodErr: true }); }
   }
   async loadLaunches() {
-    try { const j = await getJSON('https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=6&mode=list'); if (!j.results) throw 0; this.setState({ launches: j.results }); }
+    try {
+      // mode=normal (still one request) adds mission, rocket and pad details for the details view.
+      const j = await getJSON('https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=6&mode=normal');
+      if (!j || !Array.isArray(j.results)) throw 0;
+      const list = j.results.filter((l) => l && l.id && l.name && l.net);
+      this.setState({ launches: list }, () => this.syncReminders(list));
+    }
     catch (e) { this.setState({ launchErr: true }); }
   }
   async loadOtd() {
     const d = new Date(), mm = String(d.getMonth() + 1).padStart(2, '0'), dd = String(d.getDate()).padStart(2, '0');
     try {
       const j = await getJSON('https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/' + mm + '/' + dd);
-      const ev = (j.events || []).filter((e) => SPACE_RE.test(e.text)).slice(0, 5).map((e) => { const pg = (e.pages || []).find((p) => p.thumbnail); return { year: e.year, text: e.text, img: pg && pg.thumbnail.source }; });
+      const events = j && Array.isArray(j.events) ? j.events : [];
+      const ev = events.filter((e) => e && typeof e.text === 'string' && SPACE_RE.test(e.text)).slice(0, 5).map((e) => {
+        const pages = Array.isArray(e.pages) ? e.pages.filter(Boolean) : [];
+        const pg = pages.find((p) => p.thumbnail) || pages[0] || {};
+        return {
+          year: e.year, text: e.text,
+          img: pg.thumbnail && pg.thumbnail.source,
+          big: pg.originalimage && pg.originalimage.source,
+          title: (pg.titles && pg.titles.normalized) || pg.normalizedtitle || '',
+          extract: typeof pg.extract === 'string' ? pg.extract : '',
+          url: pg.content_urls && pg.content_urls.mobile && pg.content_urls.mobile.page,
+        };
+      });
       if (ev.length) this.setState({ otd: ev }); else this.setState({ otd: OTD_FALLBACK, otdFallback: true });
     } catch (e) { this.setState({ otd: OTD_FALLBACK, otdFallback: true }); }
   }
@@ -187,7 +220,7 @@ export default class CosmoApp extends React.Component {
       const res = await rewardedSave(() => this.resolveHd(w), { skipAd: !ads || !!this.state.unlocked[key] });
       if (res === 'gallery' || res === 'share') this.setState((st) => ({ unlocked: { ...st.unlocked, [key]: true } }));
       if (res === 'gallery') this.setState({ wallMsg: X.tDlDone });
-      if (res === 'error') this.setState({ wallMsg: X.tDlFail });
+      if (res === 'error') { this.setState({ wallMsg: X.tDlFail }); if (AD_DEBUG && lastSaveError()) this.showToast(lastSaveError()); }
     } finally { this.setState({ dlBusy: false }); }
   }
   async shareWall() {
@@ -205,6 +238,38 @@ export default class CosmoApp extends React.Component {
   startInter(n, reward) {
     clearInterval(this.timer); this.setState({ inter: true, interN: n, reward });
     this.timer = setInterval(() => this.setState((s) => { if (s.interN <= 1) clearInterval(this.timer); return { interN: Math.max(0, s.interN - 1) }; }), 1000);
+  }
+  // Generic details page for Today content (APOD, On this day, launches). Reuses the article overlay.
+  openInfo(o) { this.setState({ article: { kind: 'info', ...o } }); }
+  launchInfo(l) {
+    const m = l.mission || {}, rc = (l.rocket && l.rocket.configuration) || {}, pad = l.pad || {};
+    const lines = [
+      m.description,
+      rc.full_name && 'Rocket: ' + rc.full_name,
+      m.orbit && m.orbit.name && 'Orbit: ' + m.orbit.name,
+      pad.name && 'Pad: ' + pad.name + (pad.location && pad.location.name ? ', ' + pad.location.name : ''),
+      'NET: ' + new Date(l.net).toLocaleString(LOCALE, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }),
+      l.status && l.status.description,
+    ].filter((x) => typeof x === 'string' && x);
+    const provider = (l.launch_service_provider && l.launch_service_provider.name) || l.lsp_name || 'Launch';
+    const img = typeof l.image === 'string' ? l.image : (l.image && (l.image.image_url || l.image.thumbnail_url));
+    this.openInfo({ title: l.name, image_url: img, news_site: provider, published_at: l.net, summary: lines.join('\n\n'), url: null });
+  }
+  // Re-arms every launch reminder against fresh data: follows NET changes (scrubs/slips),
+  // restores alarms after an Android backup restore, and drops reminders for past launches.
+  async syncReminders(list) {
+    const r = { ...this.state.reminders }; let changed = false;
+    for (const id of Object.keys(r)) {
+      const rem = r[id], live = list.find((l) => l.id === id);
+      if (live) {
+        await Notify.cancel(rem.notifId);
+        r[id] = { ...rem, name: live.name, net: live.net, notifId: await Notify.scheduleLaunch(live) };
+        changed = true;
+      } else if (new Date(rem.net).getTime() < Date.now() - 6 * 3600e3) {
+        await Notify.cancel(rem.notifId); delete r[id]; changed = true;
+      }
+    }
+    if (changed) { this.setState({ reminders: r }); LS.set('cosmo_remind', r); }
   }
   openDetail(id) {
     const every = PROPS.interstitialEvery ?? 4, ads = PROPS.showAds ?? true;
@@ -259,14 +324,12 @@ export default class CosmoApp extends React.Component {
     if (r[l.id]) { Notify.cancel(r[l.id].notifId); delete r[l.id]; this.showToast(X.tRemOff); this.setState({ reminders: r }); LS.set('cosmo_remind', r); return; }
     r[l.id] = { id: l.id, name: l.name, net: l.net }; this.showToast(X.tRemSet);
     this.setState({ reminders: r }); LS.set('cosmo_remind', r);
-    clearTimeout(this.pt);
-    this.pt = setTimeout(() => this.pushNow({ title: l.name + ' launches in 1 hour', body: 'Tap to follow the countdown. (Preview of the alert you’ll get.)', tab: 'today' }), 3000);
     const notifId = await Notify.scheduleLaunch(l);
     if (notifId) { const r2 = { ...this.state.reminders }; if (r2[l.id]) { r2[l.id] = { ...r2[l.id], notifId }; this.setState({ reminders: r2 }); LS.set('cosmo_remind', r2); } }
   }
   async checkLatest(force) {
     try {
-      const j = await getJSON('https://api.spaceflightnewsapi.net/v4/articles/?limit=1'); const a = j.results && j.results[0]; if (!a) return;
+      const j = await getJSON('https://api.spaceflightnewsapi.net/v4/articles/?limit=1'); const a = j && Array.isArray(j.results) ? j.results[0] : null; if (!a || typeof a.id !== 'number') return;
       if (force || a.id > this.state.lastSeen) {
         const had = this.state.lastSeen; this.setState({ lastSeen: a.id }); LS.set('cosmo_lastseen', a.id);
         if (force || had) this.pushNow({ title: 'Breaking · ' + a.news_site, body: a.title, article: a });
@@ -277,7 +340,8 @@ export default class CosmoApp extends React.Component {
   toggleAlerts() {
     const X = this.txt();
     const on = !this.state.alerts; this.setState({ alerts: on }); LS.set('cosmo_newsalerts', on);
-    if (on) { Notify.askPermission(); this.showToast(X.tNewsOn); this.startPolling(); clearTimeout(this.pt); this.pt = setTimeout(() => this.checkLatest(true), 3000); }
+    setNewsTask(on);
+    if (on) { Notify.askPermission(); this.showToast(X.tNewsOn); this.startPolling(); this.checkLatest(false); }
     else { clearInterval(this.poll); this.showToast(X.tNewsOff); }
   }
   toggleIssAlerts() { const X = this.txt(); const on = !this.state.issAlerts; if (on) Notify.askPermission(); this.setState({ issAlerts: on, issNear: false }); LS.set('cosmo_issalerts', on); this.showToast(on ? X.tIssOn : X.tIssOff); }
@@ -353,7 +417,8 @@ export default class CosmoApp extends React.Component {
     const Ar = s.article; const aSaved = !!Ar && s.saved.articles.some((x) => x.id === Ar.id);
     const ap = s.apod;
     const apod = ap
-      ? { title: ap.title, text: ap.explanation, img: ap.media_type === 'image' ? ap.url : null, hasImg: ap.media_type === 'image', isVideo: ap.media_type !== 'image', url: ap.url, open: () => this.setState({ lightbox: { items: [{ src: ap.hdurl || ap.url, fallback: ap.url, title: ap.title }], index: 0 } }), openVideo: () => this.openUrl(ap.url) }
+      ? { details: () => this.openInfo({ title: ap.title, image_url: ap.media_type === 'image' ? ap.url : ap.thumbnail_url, news_site: 'NASA APOD' + (ap.copyright ? ' · © ' + String(ap.copyright).trim() : ''), published_at: ap.date, summary: ap.explanation || '', url: typeof ap.date === 'string' && ap.date.length >= 10 ? 'https://apod.nasa.gov/apod/ap' + ap.date.slice(2, 10).replace(/-/g, '') + '.html' : null }),
+          title: ap.title, text: ap.explanation, img: ap.media_type === 'image' ? ap.url : null, hasImg: ap.media_type === 'image', isVideo: ap.media_type !== 'image', url: ap.url, open: () => this.setState({ lightbox: { items: [{ src: ap.hdurl || ap.url, fallback: ap.url, title: ap.title }], index: 0 } }), openVideo: () => this.openUrl(ap.url) }
       : { title: s.apodErr ? 'Picture unavailable' : 'Loading today’s picture…', text: s.apodErr ? 'NASA’s free demo key has hit its hourly limit. Add your own free key from api.nasa.gov before you publish.' : '', hasImg: false, isVideo: false };
 
     // quiz
@@ -460,16 +525,27 @@ export default class CosmoApp extends React.Component {
       newsFilters: NF.map(([l]) => ({ key: l, label: l, active: s.nf === l, pick: () => this.setState({ nf: l }, () => this.loadNews(true)) })),
       newsItems, newsLoading: s.newsLoading, newsErr: s.newsErr, canLoadMore: !!s.newsNext && !s.newsLoading,
       loadMore: () => this.loadNews(false), refreshNews: () => this.loadNews(true),
-      article: Ar ? { title: Ar.title, img: Ar.image_url, site: Ar.news_site, date: fmt(Ar.published_at), summary: Ar.summary, url: Ar.url, saved: aSaved, toggleSave: () => this.toggleArticle(Ar), openFull: () => this.openUrl(Ar.url) } : null,
+      article: Ar ? {
+        title: Ar.title, img: Ar.image_url, site: Ar.news_site, date: Ar.published_at ? fmt(Ar.published_at) : '', summary: Ar.summary, url: Ar.url, saved: aSaved,
+        toggleSave: Ar.kind === 'info' ? null : () => this.toggleArticle(Ar),   // Today details can't be saved
+        openFull: Ar.url ? () => this.openUrl(Ar.url) : null,
+      } : null,
       closeArticle: () => this.setState({ article: null }),
       detail, closeDetail: () => this.setState({ detail: null }), detailRef: this.detailRef,
       lightbox: s.lightbox, closeLightbox: () => this.setState({ lightbox: null }),
       todayLabel: new Date().toLocaleDateString(LOCALE, { weekday: 'long', month: 'long', day: 'numeric' }),
       apod, launchErr: s.launchErr,
-      launches: s.launches.map((l) => { const im = typeof l.image === 'string' ? l.image : (l.image && l.image.thumbnail_url); const rm = !!s.reminders[l.id]; return { id: l.id, name: l.name, provider: (l.lsp_name || (l.launch_service_provider && l.launch_service_provider.name) || ''), pad: (l.location || (l.pad && l.pad.location && l.pad.location.name) || '').split(',')[0], when: new Date(l.net).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }), status: (l.status && (l.status.abbrev || l.status.name)) || '', img: im, reminded: rm, remind: () => this.toggleRemind(l) }; }),
+      launches: s.launches.map((l) => { const im = typeof l.image === 'string' ? l.image : (l.image && l.image.thumbnail_url); const rm = !!s.reminders[l.id]; return { id: l.id, name: l.name, provider: (l.lsp_name || (l.launch_service_provider && l.launch_service_provider.name) || ''), pad: (l.location || (l.pad && l.pad.location && l.pad.location.name) || '').split(',')[0], when: new Date(l.net).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }), status: (l.status && (l.status.abbrev || l.status.name)) || '', img: im, reminded: rm, remind: () => this.toggleRemind(l), open: () => this.launchInfo(l) }; }),
       moonNow, moonNext, moonDays, openMoon: () => this.goSub('moon'),
       eclipses: ECLIPSES.filter((e) => e[0] >= nowISO).slice(0, 5).map(([d, type, where]) => { const dt = new Date(d + 'T12:00:00'); return { key: d, type, where, day: dt.getDate(), mon: dt.toLocaleDateString(LOCALE, { month: 'short' }).toUpperCase(), year: dt.getFullYear() }; }),
-      otd: (s.otd || []).map((e) => ({ year: e.year, text: e.text, img: e.img, ago: (new Date().getFullYear() - e.year) + ' ' + tx.yearsAgo })), otdLoading: !s.otd, otdFallback: s.otdFallback,
+      otd: (s.otd || []).map((e) => ({
+        year: e.year, text: e.text, img: e.img, ago: (new Date().getFullYear() - e.year) + ' ' + tx.yearsAgo,
+        open: () => this.openInfo({
+          title: e.title || String(e.year), image_url: e.big || e.img, news_site: 'On this day · ' + e.year,
+          summary: e.extract ? e.text + '\n\n' + e.extract : e.text,
+          url: e.url || 'https://en.wikipedia.org/wiki/Special:Search?search=' + encodeURIComponent(e.text),
+        }),
+      })), otdLoading: !s.otd, otdFallback: s.otdFallback,
       quiz, rank, openBadges: () => this.goSub('badges'),
       ranks: RANKS.map(([n0, x2], i) => ({ name: RNm[i] || n0, xp: x2, reached: xp >= x2 })),
       badges: BADGES.map(([id, name, desc], i) => { const tb = (tx.badges || [])[i]; return { id, name: tb ? tb[0] : name, desc: tb ? tb[1] : desc, earned: !!earned[id] }; }),
@@ -502,6 +578,12 @@ export default class CosmoApp extends React.Component {
         rewarded: () => showRewarded(() => this.showToast('Reward earned ✓'), () => this.showToast('Rewarded ad failed — see log')),
         interstitial: () => { if (!showInterstitial()) this.showToast('No interstitial unit set'); },
         inspector: openAdInspector,
+        // Debug: pretend an older story was last seen, then run the background task now.
+        testNewsTask: async () => {
+          LS.set('cosmo_lastseen', Math.max(1, (this.state.lastSeen || 2) - 1));
+          const ok = await runNewsTaskNow();
+          this.showToast(ok ? 'News task triggered · the alert should arrive in a few seconds' : 'Background task not available here');
+        },
       } : null,
       interActive: s.inter, interDone: s.inter && s.interN === 0, interN: s.interN, interCloseIn: F(tx.closeIn, { n: s.interN }),
       interLabel: s.reward ? 'REWARDED AD' : 'INTERSTITIAL AD',

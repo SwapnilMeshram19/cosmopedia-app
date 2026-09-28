@@ -3,11 +3,11 @@ import { View, Pressable, ScrollView, StyleSheet, Modal, ActivityIndicator, useW
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ZoomableImage from '../components/ZoomableImage';
 import { shareImage } from '../imageSave';
-import { useRewardedSave } from '../rewardedSave';
+import { useRewardedSave, lastSaveError } from '../rewardedSave';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Image } from 'expo-image';
 import { T, useT, Stripes, Img, Kicker, Grid, Diamond, Btn } from '../components/ui';
-import { AdSlot, BottomBanner, bannerEnabled } from '../ads';
+import { AdSlot, BottomBanner, bannerEnabled, AD_DEBUG } from '../ads';
 import { httpsify } from '../constants';
 
 const fill = StyleSheet.absoluteFill; // absoluteFillObject was removed in React Native 0.86
@@ -119,7 +119,7 @@ function Article({ v, insets }) {
           <T mono w={500} size={11} color={th.blue}>{a.site} · {a.date}</T>
           <T size={24} w={700} lh={1.2} ls={-0.01}>{a.title}</T>
           <T size={15.5} lh={1.6} color={th.text2}>{a.summary}</T>
-          <Btn label={`${tx.readFull} ↗`} onPress={a.openFull} variant="blue" height={50} size={15} style={{ marginTop: 8 }} />
+          {!!a.openFull && <Btn label={`${tx.readFull} ↗`} onPress={a.openFull} variant="blue" height={50} size={15} style={{ marginTop: 8 }} />}
           {v.showAds && <View style={{ marginTop: 10 }}><AdSlot kind="rectangle" /></View>}
         </View>
       </ScrollView>
@@ -246,7 +246,7 @@ function Lightbox({ v, insets }) {
     if (saving || busy) return;
     const res = await save(bestUrl(), { skipAd: !(v.showAds && bannerEnabled()) });
     if (res === 'gallery') flash('Saved to your gallery ✓');
-    if (res === 'error') flash('Couldn’t save this image');
+    if (res === 'error') flash('Couldn’t save this image' + (AD_DEBUG && lastSaveError() ? '\n' + lastSaveError() : ''));
   };
   const onShare = async () => {
     if (saving || busy) return;

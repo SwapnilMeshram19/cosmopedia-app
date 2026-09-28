@@ -14,4 +14,9 @@ export const LS = {
   },
   get(k, d) { return k in cache ? cache[k] : d; },
   set(k, v) { cache[k] = v; AsyncStorage.setItem(k, JSON.stringify(v)).catch(() => {}); },
+  // Re-reads one key from disk (e.g. after the background task changed it).
+  async reload(k) {
+    try { const v = await AsyncStorage.getItem(k); if (v != null) cache[k] = JSON.parse(v); } catch (e) {}
+    return cache[k];
+  },
 };
