@@ -59,6 +59,19 @@ export default function NewsScreen({ v }) {
       } />
       <ChipRow>{v.newsFilters.map((c) => <Chip key={c.key} label={c.label} active={c.active} onPress={c.pick} accent="blue" />)}</ChipRow>
 
+      {/* Shown on the ISRO filter: separate alerts for ISRO stories only. */}
+      {v.showIsroAlerts && (
+        <Pressable onPress={v.toggleIsroAlerts} style={{ flexDirection: 'row', alignItems: 'center', gap: 12, padding: 14, borderRadius: 16, backgroundColor: th.surface, borderWidth: 1, borderColor: th.ink(0.06) }}>
+          <View style={{ flex: 1, gap: 2 }}>
+            <T size={15} w={600}>{tx.isroAlertsTitle}</T>
+            <T size={12} color={th.muted}>{tx.isroAlertsSub}</T>
+          </View>
+          <View style={[pill, v.isroAlertsOn ? { backgroundColor: th.blue } : { borderWidth: 1, borderColor: 'rgba(143,184,255,.5)' }]}>
+            <T mono w={v.isroAlertsOn ? 600 : 500} size={12} color={v.isroAlertsOn ? th.onBlue : th.blue}>{v.isroAlertsOn ? tx.alertsOn : tx.alertsOff}</T>
+          </View>
+        </Pressable>
+      )}
+
       {v.newsErr && <View style={{ padding: 16, borderRadius: 14, backgroundColor: th.errBg }}><T size={14} color={th.err}>{tx.newsErr}</T></View>}
 
       {v.newsItems.map((n) => n.isAd

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Pressable } from 'react-native';
-import { T, useT, Header, Stripes, Img, Kicker, MoonDisc } from '../components/ui';
+import { T, useT, Header, Stripes, Img, Kicker, MoonDisc, Chip, ChipRow } from '../components/ui';
 
 export default function TodayScreen({ v }) {
   const th = useT(), tx = v.tx, apod = v.apod;
@@ -61,7 +61,11 @@ export default function TodayScreen({ v }) {
       {/* Upcoming launches */}
       <View style={{ gap: 10 }}>
         <Kicker>{tx.launchesTitle}</Kicker>
+        <ChipRow>{v.launchFilters.map((c) => <Chip key={c.key} label={c.label} active={c.active} onPress={c.pick} accent="blue" />)}</ChipRow>
         {v.launchErr && <T size={14} color={th.muted}>{tx.launchErr}</T>}
+        {v.isroLaunchLoading && <T size={14} color={th.muted}>{tx.loadingLaunches}</T>}
+        {v.isroLaunchErr && <T size={14} color={th.muted}>{tx.isroLaunchErr}</T>}
+        {v.isroLaunchEmpty && <T size={14} color={th.muted}>{tx.isroNoLaunch}</T>}
         {v.launches.map((l) => (
           <Pressable key={l.id} onPress={l.open} style={{ flexDirection: 'row', gap: 12, alignItems: 'center', padding: 12, borderRadius: 16, backgroundColor: th.surface, borderWidth: 1, borderColor: th.ink(0.06) }}>
             <View style={{ width: 56, height: 56, borderRadius: 12, overflow: 'hidden' }}>

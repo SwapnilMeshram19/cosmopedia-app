@@ -3,7 +3,7 @@ import * as BackgroundTask from 'expo-background-task';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notify from './notify';
 
-// Checks Spaceflight News for a new story while the app is in the background and posts a
+// Checks Spaceflight News (all news and/or ISRO news) for a new story while the app is in the background and posts a
 // local notification. Runs through WorkManager: roughly every 30 min, never exact, and
 // aggressive OEM battery savers (Xiaomi, Oppo, Vivo, Realme) may skip it for swiped-away apps.
 //
@@ -17,22 +17,37 @@ async function read(key, fallback) {
   try { const v = await AsyncStorage.getItem(key); return v == null ? fallback : JSON.parse(v); } catch (e) { return fallback; }
 }
 
-TaskManager.defineTask(NEWS_TASK, async () => {
-  const OK = BackgroundTask.BackgroundTaskResult.Success;
+// Latest article for a search term ('' = all news). Returns null on any error or bad response.
+async function latest(search) {
   try {
-    if (!(await read('cosmo_newsalerts', false))) return OK;
-    const res = await fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=1');
-    if (!res.ok) return OK; // rate limit / server error: just try on the next run
+    const res = await fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=1' + (search ? '&search=' + encodeURIComponent(search) : ''));
+    if (!res.ok) return null; // rate limit / server error: try on the next run
     const j = await res.json();
     const a = j && Array.isArray(j.results) ? j.results[0] : null;
-    if (!a || typeof a.id !== 'number' || typeof a.title !== 'string') return OK;
-    const last = await read('cosmo_lastseen', 0);
-    if (a.id > last) {
-      await AsyncStorage.setItem('cosmo_lastseen', JSON.stringify(a.id));
-      // `last` is 0 on the very first check: record the id without notifying about an old story.
-      if (last) await Notify.notifyNow('Breaking · ' + (a.news_site || 'Space news'), a.title, { tab: 'news', articleId: a.id });
-    }
-    return OK;
+    return a && typeof a.id === 'number' && typeof a.title === 'string' ? a : null;
+  } catch (e) { return null; }
+}
+
+// Notifies once per new article. The first check for a feed only records the id (no alert
+// about an old story). Returns the id it notified about, or null.
+async function checkFeed(search, key, prefix, skipId) {
+  const a = await latest(search);
+  if (!a) return null;
+  const last = await read(key, 0);
+  if (a.id <= last) return null;
+  await AsyncStorage.setItem(key, JSON.stringify(a.id));
+  if (!last || a.id === skipId) return null;
+  await Notify.notifyNow(prefix + (a.news_site || 'Space news'), a.title, { tab: 'news', articleId: a.id });
+  return a.id;
+}
+
+TaskManager.defineTask(NEWS_TASK, async () => {
+  try {
+    const all = await read('cosmo_newsalerts', false), isro = await read('cosmo_isroalerts', false);
+    const sent = all ? await checkFeed('', 'cosmo_lastseen', 'Breaking · ', null) : null;
+    // Skip the ISRO alert if the same story was just sent as a general alert.
+    if (isro) await checkFeed('isro', 'cosmo_lastseen_isro', 'ISRO · ', sent);
+    return BackgroundTask.BackgroundTaskResult.Success;
   } catch (e) {
     return BackgroundTask.BackgroundTaskResult.Failed;
   }

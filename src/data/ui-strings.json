@@ -272,7 +272,15 @@
     "tDlStart": "Downloading HD image…",
     "tDlDone": "HD image saved to your gallery ✓",
     "tDlFail": "Download failed. Check your connection and try again",
-    "adLoading": "Loading ad…"
+    "adLoading": "Loading ad…",
+    "tIsroOn": "ISRO alerts on · we’ll notify you about new ISRO stories",
+    "tIsroOff": "ISRO alerts off",
+    "isroAlertsTitle": "ISRO news alerts",
+    "isroAlertsSub": "Get notified when a new ISRO story is published",
+    "lAll": "All",
+    "isroNoLaunch": "No ISRO launches scheduled right now.",
+    "isroLaunchErr": "ISRO launch schedule unavailable right now. Try again later.",
+    "loadingLaunches": "Loading launches…"
   },
   "hi": {
     "explore": "खोजें",
@@ -547,7 +555,15 @@
     "tDlStart": "HD तस्वीर डाउनलोड हो रही है…",
     "tDlDone": "HD तस्वीर गैलरी में सेव हो गई ✓",
     "tDlFail": "डाउनलोड नहीं हुआ। कनेक्शन जाँचें और फिर कोशिश करें",
-    "adLoading": "विज्ञापन लोड हो रहा है…"
+    "adLoading": "विज्ञापन लोड हो रहा है…",
+    "tIsroOn": "ISRO अलर्ट चालू · नई ISRO ख़बर आने पर सूचना मिलेगी",
+    "tIsroOff": "ISRO अलर्ट बंद",
+    "isroAlertsTitle": "ISRO समाचार अलर्ट",
+    "isroAlertsSub": "ISRO की नई ख़बर आने पर सूचना पाएँ",
+    "lAll": "सभी",
+    "isroNoLaunch": "अभी कोई ISRO लॉन्च तय नहीं है।",
+    "isroLaunchErr": "ISRO लॉन्च शेड्यूल अभी उपलब्ध नहीं है। बाद में फिर कोशिश करें।",
+    "loadingLaunches": "लॉन्च लोड हो रहे हैं…"
   },
   "es": {
     "explore": "Explorar",
@@ -822,6 +838,14 @@
     "tDlStart": "Descargando imagen HD…",
     "tDlDone": "Imagen HD guardada en tu galería ✓",
     "tDlFail": "La descarga falló. Revisa tu conexión e inténtalo de nuevo",
-    "adLoading": "Cargando anuncio…"
+    "adLoading": "Cargando anuncio…",
+    "tIsroOn": "Alertas de ISRO activadas · te avisaremos de nuevas noticias de ISRO",
+    "tIsroOff": "Alertas de ISRO desactivadas",
+    "isroAlertsTitle": "Alertas de noticias de ISRO",
+    "isroAlertsSub": "Recibe un aviso cuando se publique una noticia de ISRO",
+    "lAll": "Todos",
+    "isroNoLaunch": "No hay lanzamientos de ISRO programados ahora mismo.",
+    "isroLaunchErr": "El calendario de lanzamientos de ISRO no está disponible ahora. Inténtalo más tarde.",
+    "loadingLaunches": "Cargando lanzamientos…"
   }
 }

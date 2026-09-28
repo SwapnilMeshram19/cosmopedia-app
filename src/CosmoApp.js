@@ -71,10 +71,10 @@ const getJSON = async (url) => {
 export default class CosmoApp extends React.Component {
   state = {
     tab: 'explore', sub: null, cat: 'All', q: '', imgs: {}, detail: null, lightbox: null, news: [], newsNext: null, newsLoading: false, newsErr: false, nf: 'Latest', article: null,
-    apod: null, apodErr: false, launches: [], launchErr: false, opens: 0, inter: false, interN: 0, reward: null,
+    apod: null, apodErr: false, launches: [], launchErr: false, launchFilter: 'all', isroLaunches: null, isroLaunchErr: false, opens: 0, inter: false, interN: 0, reward: null,
     saved: { topics: [], articles: [] }, reminders: {}, qs: { day: 0, levels: {} }, qLevel: 1, streak: { count: 0, best: 0, last: null },
     stats: { xp: 0, quizzes: 0, perfect: 0, hard: 0, read: [], shares: 0, sky: 0, iss: 0 },
-    toast: null, push: null, alerts: false, lastSeen: 0, loc: null, iss: null, issAlerts: false, issNear: false, otd: null, otdFallback: false,
+    toast: null, push: null, alerts: false, lastSeen: 0, isroAlerts: false, lastSeenIsro: 0, loc: null, iss: null, issAlerts: false, issNear: false, otd: null, otdFallback: false,
     walls: {}, wallTheme: 'Nebulae', wall: null, dlBusy: false, wallMsg: null, unlocked: {}, kg: 70, lang: 'en', solarView: 'orbits', solarOff: 0, solarSel: 'earth',
     astroReady: true, theme: 'system', sysDark: Appearance.getColorScheme() !== 'light', shareCard: null,
   };
@@ -88,21 +88,24 @@ export default class CosmoApp extends React.Component {
     this.appStateSub = AppState.addEventListener('change', (s) => {
       this.appState = s;
       // The background news task may have advanced lastSeen while the app was away.
-      if (s === 'active') LS.reload('cosmo_lastseen').then((v) => { if (typeof v === 'number' && v > this.state.lastSeen) this.setState({ lastSeen: v }); });
+      if (s === 'active') {
+        LS.reload('cosmo_lastseen').then((v) => { if (typeof v === 'number' && v > this.state.lastSeen) this.setState({ lastSeen: v }); });
+        LS.reload('cosmo_lastseen_isro').then((v) => { if (typeof v === 'number' && v > this.state.lastSeenIsro) this.setState({ lastSeenIsro: v }); });
+      }
     });
     const today = DAY();
     let qs = LS.get('cosmo_quiz2', null);
     if (!qs || qs.day !== today || !qs.levels) qs = { day: today, levels: {} };
-    const alerts = LS.get('cosmo_newsalerts', false), issAlerts = LS.get('cosmo_issalerts', false);
+    const alerts = LS.get('cosmo_newsalerts', false), issAlerts = LS.get('cosmo_issalerts', false), isroAlerts = LS.get('cosmo_isroalerts', false);
     this.setState({
       theme: LS.get('cosmo_theme', 'system'),
       saved: LS.get('cosmo_saved', { topics: [], articles: [] }), reminders: LS.get('cosmo_remind', {}), qs,
       streak: LS.get('cosmo_streak', { count: 0, best: 0, last: null }),
-      stats: { ...this.state.stats, ...LS.get('cosmo_stats', {}) }, alerts, issAlerts, lastSeen: LS.get('cosmo_lastseen', 0),
+      stats: { ...this.state.stats, ...LS.get('cosmo_stats', {}) }, alerts, issAlerts, isroAlerts, lastSeen: LS.get('cosmo_lastseen', 0), lastSeenIsro: LS.get('cosmo_lastseen_isro', 0),
       loc: LS.get('cosmo_loc', null), lang: LS.get('cosmo_lang', 'en'), kg: LS.get('cosmo_kg', 70),
     });
     if (LS.get('cosmo_adtest', false)) setForceTestAds(true);
-    if (alerts) { this.startPolling(); setNewsTask(true); }
+    if (alerts || isroAlerts) { this.startPolling(); setNewsTask(true); }
     // Tapping an OS notification (also the one that cold-started the app) opens the right screen.
     this.tapSub = Notify.onTap((d) => this.onNotifTap(d));
     OBJ.forEach((o) => this.loadImgs(o));
@@ -161,6 +164,22 @@ export default class CosmoApp extends React.Component {
       this.setState({ launches: list }, () => this.syncReminders(list));
     }
     catch (e) { this.setState({ launchErr: true }); }
+  }
+  // ISRO launches (Launch Library agency id 31). Loaded only when the ISRO chip is first tapped,
+  // to stay inside the free API limit (15 requests/hour per IP).
+  async loadIsroLaunches() {
+    this.setState({ isroLaunchErr: false });
+    try {
+      const j = await getJSON('https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=6&mode=normal&lsp__id=31');
+      if (!j || !Array.isArray(j.results)) throw 0;
+      const list = j.results.filter((l) => l && l.id && l.name && l.net);
+      this.setState({ isroLaunches: list }, () => this.syncReminders(list));
+    }
+    catch (e) { this.setState({ isroLaunches: [], isroLaunchErr: true }); }
+  }
+  setLaunchFilter(f) {
+    this.setState({ launchFilter: f });
+    if (f === 'isro' && (this.state.isroLaunches === null || this.state.isroLaunchErr)) this.loadIsroLaunches();
   }
   async loadOtd() {
     const d = new Date(), mm = String(d.getMonth() + 1).padStart(2, '0'), dd = String(d.getDate()).padStart(2, '0');
@@ -358,20 +377,48 @@ export default class CosmoApp extends React.Component {
       const j = await getJSON('https://api.spaceflightnewsapi.net/v4/articles/?limit=1'); const a = j && Array.isArray(j.results) ? j.results[0] : null; if (!a || typeof a.id !== 'number') return;
       if (force || a.id > this.state.lastSeen) {
         const had = this.state.lastSeen; this.setState({ lastSeen: a.id }); LS.set('cosmo_lastseen', a.id);
-        if (force || had) this.pushNow({ title: 'Breaking · ' + a.news_site, body: a.title, article: a });
+        if (force || had) { this.lastPushedId = a.id; this.pushNow({ title: 'Breaking · ' + a.news_site, body: a.title, article: a }); }
       }
     } catch (e) { }
   }
-  startPolling() { clearInterval(this.poll); this.poll = setInterval(() => this.checkLatest(false), 120000); }
+  // Same as checkLatest, for ISRO stories only. Skips a story that was just shown as a general alert.
+  async checkIsro() {
+    try {
+      const j = await getJSON('https://api.spaceflightnewsapi.net/v4/articles/?limit=1&search=isro');
+      const a = j && Array.isArray(j.results) ? j.results[0] : null; if (!a || typeof a.id !== 'number' || typeof a.title !== 'string') return;
+      if (a.id > this.state.lastSeenIsro) {
+        const had = this.state.lastSeenIsro; this.setState({ lastSeenIsro: a.id }); LS.set('cosmo_lastseen_isro', a.id);
+        if (had && a.id !== this.lastPushedId) this.pushNow({ title: 'ISRO · ' + (a.news_site || 'Space news'), body: a.title, article: a });
+      }
+    } catch (e) { }
+  }
+  async pollAlerts() {
+    if (this.state.alerts) await this.checkLatest(false);
+    if (this.state.isroAlerts) await this.checkIsro();
+  }
+  startPolling() { clearInterval(this.poll); this.poll = setInterval(() => this.pollAlerts(), 120000); }
+  // Stops polling / the background task only when neither news nor ISRO alerts are on.
+  syncAlertJobs() {
+    const any = this.state.alerts || this.state.isroAlerts;
+    setNewsTask(any);
+    if (any) this.startPolling(); else clearInterval(this.poll);
+  }
+  toggleIsroAlerts() {
+    const X = this.txt();
+    const on = !this.state.isroAlerts;
+    this.setState({ isroAlerts: on }, () => this.syncAlertJobs()); LS.set('cosmo_isroalerts', on);
+    if (!on) { this.showToast(X.tIsroOff); return; }
+    this.checkIsro();
+    Notify.askPermission().then((ok) => this.showToast(ok ? X.tIsroOn : !Notify.available() ? X.tNotifApp : X.tNotifOff));
+  }
   toggleAlerts() {
     const X = this.txt();
-    const on = !this.state.alerts; this.setState({ alerts: on }); LS.set('cosmo_newsalerts', on);
-    setNewsTask(on);
+    const on = !this.state.alerts; this.setState({ alerts: on }, () => this.syncAlertJobs()); LS.set('cosmo_newsalerts', on);
     if (on) {
-      this.startPolling(); this.checkLatest(false);
+      this.checkLatest(false);
       Notify.askPermission().then((ok) => this.showToast(ok ? X.tNewsOn : !Notify.available() ? X.tNotifApp : X.tNotifOff));
     }
-    else { clearInterval(this.poll); this.showToast(X.tNewsOff); }
+    else this.showToast(X.tNewsOff);
   }
   toggleIssAlerts() {
     const X = this.txt(); const on = !this.state.issAlerts;
@@ -568,8 +615,13 @@ export default class CosmoApp extends React.Component {
       detail, closeDetail: () => this.setState({ detail: null }), detailRef: this.detailRef,
       lightbox: s.lightbox, closeLightbox: () => this.setState({ lightbox: null }),
       todayLabel: new Date().toLocaleDateString(LOCALE, { weekday: 'long', month: 'long', day: 'numeric' }),
-      apod, launchErr: s.launchErr,
-      launches: s.launches.map((l) => { const im = typeof l.image === 'string' ? l.image : (l.image && l.image.thumbnail_url); const rm = !!s.reminders[l.id]; return { id: l.id, name: l.name, provider: (l.lsp_name || (l.launch_service_provider && l.launch_service_provider.name) || ''), pad: (l.location || (l.pad && l.pad.location && l.pad.location.name) || '').split(',')[0], when: new Date(l.net).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }), status: (l.status && (l.status.abbrev || l.status.name)) || '', img: im, reminded: rm, remind: () => this.toggleRemind(l), open: () => this.launchInfo(l) }; }),
+      apod, launchErr: s.launchFilter === 'all' && s.launchErr,
+      launchFilters: [['all', tx.lAll], ['isro', 'ISRO']].map(([key, label]) => ({ key, label, active: s.launchFilter === key, pick: () => this.setLaunchFilter(key) })),
+      launchIsro: s.launchFilter === 'isro',
+      isroLaunchLoading: s.launchFilter === 'isro' && s.isroLaunches === null,
+      isroLaunchErr: s.launchFilter === 'isro' && s.isroLaunchErr,
+      isroLaunchEmpty: s.launchFilter === 'isro' && Array.isArray(s.isroLaunches) && !s.isroLaunches.length && !s.isroLaunchErr,
+      launches: (s.launchFilter === 'isro' ? (s.isroLaunches || []) : s.launches).map((l) => { const im = typeof l.image === 'string' ? l.image : (l.image && l.image.thumbnail_url); const rm = !!s.reminders[l.id]; return { id: l.id, name: l.name, provider: (l.lsp_name || (l.launch_service_provider && l.launch_service_provider.name) || ''), pad: (l.location || (l.pad && l.pad.location && l.pad.location.name) || '').split(',')[0], when: new Date(l.net).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }), status: (l.status && (l.status.abbrev || l.status.name)) || '', img: im, reminded: rm, remind: () => this.toggleRemind(l), open: () => this.launchInfo(l) }; }),
       moonNow, moonNext, moonDays, openMoon: () => this.goSub('moon'),
       eclipses: ECLIPSES.filter((e) => e[0] >= nowISO).slice(0, 5).map(([d, type, where]) => { const dt = new Date(d + 'T12:00:00'); return { key: d, type, where, day: dt.getDate(), mon: dt.toLocaleDateString(LOCALE, { month: 'short' }).toUpperCase(), year: dt.getFullYear() }; }),
       otd: (s.otd || []).map((e) => ({
@@ -627,6 +679,7 @@ export default class CosmoApp extends React.Component {
       toast: s.toast, push: s.push,
       pushTap: () => { const p = s.push || {}; this.setState({ push: null, ...(p.article ? { article: p.article, tab: 'news', sub: null } : {}), ...(p.tab ? { tab: p.tab, sub: null } : {}) }); },
       alertsOn: s.alerts, toggleAlerts: () => this.toggleAlerts(),
+      showIsroAlerts: s.nf === 'ISRO', isroAlertsOn: s.isroAlerts, toggleIsroAlerts: () => this.toggleIsroAlerts(),
       issAlertsOn: s.issAlerts, toggleIssAlerts: () => this.toggleIssAlerts(),
     };
   }
