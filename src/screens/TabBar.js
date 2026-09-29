@@ -13,6 +13,9 @@ function Icon({ id, c }) {
   if (id === 'today') return (
     <Svg width={21} height={21} viewBox="0 0 24 24" fill="none"><Circle cx="12" cy="12" r="4.3" stroke={c} strokeWidth="1.8" /><Path d="M12 3v2.4M12 18.6V21M4.5 12H6.9M17.1 12h2.4M6.3 6.3l1.7 1.7M16 16l1.7 1.7M6.3 17.7L8 16M16 8l1.7-1.7" stroke={c} strokeWidth="1.6" strokeLinecap="round" /></Svg>
   );
+  if (id === 'launches') return (
+    <Svg width={21} height={21} viewBox="0 0 24 24" fill="none"><Path d="M12 2.8c2.6 2 4 5 4 8.6V16H8v-4.6c0-3.6 1.4-6.6 4-8.6z" stroke={c} strokeWidth="1.8" strokeLinejoin="round" /><Circle cx="12" cy="9.5" r="1.6" fill={c} /><Path d="M8 13.5l-2.6 2.2V19L8 17.4M16 13.5l2.6 2.2V19L16 17.4" stroke={c} strokeWidth="1.6" strokeLinejoin="round" /><Path d="M10.5 18.5L12 21.4l1.5-2.9" stroke={c} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></Svg>
+  );
   if (id === 'sky') return (
     <Svg width={21} height={21} viewBox="0 0 24 24" fill="none"><Path d="M15.5 13.5A6.5 6.5 0 0 1 9 5.2a7 7 0 1 0 8.4 10.2 6.4 6.4 0 0 1-1.9-1.9z" fill={c} /><Path d="M18.5 5l.8 1.7L21 7.5l-1.7.8-.8 1.7-.8-1.7L16 7.5l1.7-.8.8-1.7z" fill={c} /></Svg>
   );
@@ -30,7 +33,7 @@ export default function TabBar({ v, bottom }) {
           <View style={{ width: 34, height: 34, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: t.active ? 'rgba(240,180,106,.14)' : 'transparent' }}>
             <Icon id={t.id} c={t.active ? th.amber : th.muted} />
           </View>
-          <T size={11.5} w={t.active ? 600 : 500} color={t.active ? th.text : th.muted}>{t.label}</T>
+          <T size={11.5} w={t.active ? 600 : 500} color={t.active ? th.text : th.muted} lines={1}>{t.label}</T>
         </Pressable>
       ))}
     </View>

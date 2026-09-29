@@ -27,8 +27,11 @@ async function ensure(prompt = true) {
   const Notifications = mod();
   if (!Notifications) return false;
   try {
+    // Separate channels, so people can mute one kind in phone Settings and keep the others.
     if (Platform.OS === 'android' && !channelReady) {
-      await Notifications.setNotificationChannelAsync('default', { name: 'Cosmopedia alerts', importance: Notifications.AndroidImportance.DEFAULT });
+      await Notifications.setNotificationChannelAsync('news', { name: 'Space news', description: 'New stories from the space news feed', importance: Notifications.AndroidImportance.HIGH });
+      await Notifications.setNotificationChannelAsync('reminders', { name: 'Launch reminders', description: 'Alerts before launches you asked to be reminded about', importance: Notifications.AndroidImportance.HIGH });
+      await Notifications.setNotificationChannelAsync('default', { name: 'Other alerts', importance: Notifications.AndroidImportance.DEFAULT });
       channelReady = true;
     }
     const cur = await Notifications.getPermissionsAsync();
@@ -52,8 +55,8 @@ export async function scheduleLaunch(launch, { prompt = true } = {}) {
   const title = mins >= 55 ? launch.name + ' launches in 1 hour' : launch.name + ' launches in ' + mins + ' min';
   try {
     return await Notifications.scheduleNotificationAsync({
-      content: { title, body: 'Open Cosmopedia to follow the countdown.', data: { tab: 'today', launchId: launch.id } },
-      trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: new Date(at) },
+      content: { title, body: 'Open Cosmopedia to follow the countdown.', data: { tab: 'launches', launchId: launch.id } },
+      trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: new Date(at), channelId: 'reminders' },
     });
   } catch (e) { return null; }
 }
@@ -64,10 +67,12 @@ export async function cancel(id) {
 }
 
 // Immediate notification. Never shows a permission dialog (it can run from the background task).
-export async function notifyNow(title, body, data) {
+// channel: 'news' | 'reminders' | 'default' (Android notification channel).
+export async function notifyNow(title, body, data, channel = 'default') {
   if (!(await ensure(false))) return;
   const Notifications = mod();
-  try { await Notifications.scheduleNotificationAsync({ content: { title, body, data: data || {} }, trigger: null }); } catch (e) {}
+  const trigger = Platform.OS === 'android' ? { channelId: channel } : null;
+  try { await Notifications.scheduleNotificationAsync({ content: { title, body, data: data || {} }, trigger }); } catch (e) {}
 }
 
 // Calls cb(data) when the user taps one of our notifications: while the app is running, and once

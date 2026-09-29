@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Pressable } from 'react-native';
 import { T, useT, Header, Chip, ChipRow, Stripes, Img, Btn } from '../components/ui';
-import { AdSlot, adsAvailable } from '../ads';
+import { AdSlot } from '../ads';
 
 export function NewsRow({ n, size = 96, titleSize = 15, gap = 14, pb = 16 }) {
   const th = useT();
@@ -19,27 +19,10 @@ export function NewsRow({ n, size = 96, titleSize = 15, gap = 14, pb = 16 }) {
   );
 }
 
-function NativeAdCard({ tx }) {
-  const th = useT();
-  return (
-    <View style={{ borderRadius: 18, borderWidth: 1, borderStyle: 'dashed', borderColor: th.ink(0.18), padding: 14, backgroundColor: th.surface2, gap: 8 }}>
-      <T mono w={500} size={9.5} ls={0.12} color={th.amber}>{tx.sponsored}</T>
-      <AdSlot kind="native" />
-    </View>
-  );
-}
-
-function PlaceholderAd({ tx }) {
-  const th = useT();
-  return (
-    <View style={{ borderRadius: 18, borderWidth: 1, borderStyle: 'dashed', borderColor: th.ink(0.18), padding: 14, flexDirection: 'row', gap: 12, alignItems: 'center', backgroundColor: th.surface2 }}>
-      <View style={{ width: 64, height: 64, borderRadius: 12, overflow: 'hidden' }}><Stripes step={6} /></View>
-      <View style={{ flex: 1, gap: 3 }}>
-        <T mono w={500} size={9.5} ls={0.12} color={th.amber}>{tx.sponsored}</T>
-        <T size={14} color={th.text2}>{tx.nativeAd}</T>
-      </View>
-    </View>
-  );
+// In-feed banner: a plain AdMob banner between stories, no extra label (the ad itself carries
+// Google's ad marker). Spacing keeps it clearly apart from the tappable news rows.
+function FeedBanner() {
+  return <View style={{ marginVertical: 4 }}><AdSlot kind="horizontal" /></View>;
 }
 
 export default function NewsScreen({ v }) {
@@ -48,34 +31,16 @@ export default function NewsScreen({ v }) {
   return (
     <View style={{ gap: 16 }}>
       <Header kicker={tx.liveFeed} title={tx.newsTitle} right={
-        <View style={{ flexDirection: 'row', gap: 8 }}>
-          <Pressable onPress={v.toggleAlerts} style={[pill, v.alertsOn ? { backgroundColor: th.blue } : { borderWidth: 1, borderColor: 'rgba(143,184,255,.5)' }]}>
-            <T mono w={v.alertsOn ? 600 : 500} size={12} color={v.alertsOn ? th.onBlue : th.blue}>{v.alertsOn ? tx.alertsOn : tx.alertsOff}</T>
-          </Pressable>
-          <Pressable onPress={v.refreshNews} style={[pill, { borderWidth: 1, borderColor: th.ink(0.1) }]}>
-            <T mono w={500} size={12} color={th.text2}>↻</T>
-          </Pressable>
-        </View>
+        <Pressable onPress={v.refreshNews} style={[pill, { borderWidth: 1, borderColor: th.ink(0.1) }]}>
+          <T mono w={500} size={12} color={th.text2}>↻</T>
+        </Pressable>
       } />
       <ChipRow>{v.newsFilters.map((c) => <Chip key={c.key} label={c.label} active={c.active} onPress={c.pick} accent="blue" />)}</ChipRow>
-
-      {/* Shown on the ISRO filter: separate alerts for ISRO stories only. */}
-      {v.showIsroAlerts && (
-        <Pressable onPress={v.toggleIsroAlerts} style={{ flexDirection: 'row', alignItems: 'center', gap: 12, padding: 14, borderRadius: 16, backgroundColor: th.surface, borderWidth: 1, borderColor: th.ink(0.06) }}>
-          <View style={{ flex: 1, gap: 2 }}>
-            <T size={15} w={600}>{tx.isroAlertsTitle}</T>
-            <T size={12} color={th.muted}>{tx.isroAlertsSub}</T>
-          </View>
-          <View style={[pill, v.isroAlertsOn ? { backgroundColor: th.blue } : { borderWidth: 1, borderColor: 'rgba(143,184,255,.5)' }]}>
-            <T mono w={v.isroAlertsOn ? 600 : 500} size={12} color={v.isroAlertsOn ? th.onBlue : th.blue}>{v.isroAlertsOn ? tx.alertsOn : tx.alertsOff}</T>
-          </View>
-        </Pressable>
-      )}
 
       {v.newsErr && <View style={{ padding: 16, borderRadius: 14, backgroundColor: th.errBg }}><T size={14} color={th.err}>{tx.newsErr}</T></View>}
 
       {v.newsItems.map((n) => n.isAd
-        ? (adsAvailable() ? <NativeAdCard key={n.key} tx={tx} /> : <PlaceholderAd key={n.key} tx={tx} />)
+        ? <FeedBanner key={n.key} />
         : <NewsRow key={n.key} n={n} />)}
 
       {v.newsLoading && <T mono w={500} size={12} color={th.muted} align="center" style={{ padding: 14 }}>{tx.loadingNews}</T>}

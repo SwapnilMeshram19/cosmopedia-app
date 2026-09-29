@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Pressable } from 'react-native';
-import { T, useT, Header, Stripes, Img, Kicker, MoonDisc, Chip, ChipRow } from '../components/ui';
+import { T, useT, Header, Stripes, Img, Kicker, MoonDisc } from '../components/ui';
 
 export default function TodayScreen({ v }) {
   const th = useT(), tx = v.tx, apod = v.apod;
@@ -56,36 +56,6 @@ export default function TodayScreen({ v }) {
           </Pressable>
         ))}
         {v.otdFallback && <T mono size={11} color={th.muted2}>{tx.otdFallback}</T>}
-      </View>
-
-      {/* Upcoming launches */}
-      <View style={{ gap: 10 }}>
-        <Kicker>{tx.launchesTitle}</Kicker>
-        <ChipRow>{v.launchFilters.map((c) => <Chip key={c.key} label={c.label} active={c.active} onPress={c.pick} accent="blue" />)}</ChipRow>
-        {v.launchErr && <T size={14} color={th.muted}>{tx.launchErr}</T>}
-        {v.isroLaunchLoading && <T size={14} color={th.muted}>{tx.loadingLaunches}</T>}
-        {v.isroLaunchErr && <T size={14} color={th.muted}>{tx.isroLaunchErr}</T>}
-        {v.isroLaunchEmpty && <T size={14} color={th.muted}>{tx.isroNoLaunch}</T>}
-        {v.launches.map((l) => (
-          <Pressable key={l.id} onPress={l.open} style={{ flexDirection: 'row', gap: 12, alignItems: 'center', padding: 12, borderRadius: 16, backgroundColor: th.surface, borderWidth: 1, borderColor: th.ink(0.06) }}>
-            <View style={{ width: 56, height: 56, borderRadius: 12, overflow: 'hidden' }}>
-              <Stripes step={6} />
-              {!!l.img && <Img src={l.img} />}
-            </View>
-            <View style={{ flex: 1, minWidth: 0, gap: 3 }}>
-              <T size={14} w={600} lines={1}>{l.name}</T>
-              <T mono size={11} color={th.muted} lines={1}>{l.provider} · {l.pad}</T>
-            </View>
-            <View style={{ alignItems: 'flex-end', gap: 3 }}>
-              <T mono w={500} size={12} color={th.blue}>{l.when}</T>
-              <T mono size={10} color={th.muted}>{l.status}</T>
-              <Pressable onPress={l.remind} style={[{ marginTop: 4, height: 26, paddingHorizontal: 10, borderRadius: 13, justifyContent: 'center' },
-                l.reminded ? { backgroundColor: th.blue } : { borderWidth: 1, borderColor: 'rgba(143,184,255,.5)' }]}>
-                <T size={11} w={l.reminded ? 600 : 500} color={l.reminded ? th.onBlue : th.blue}>{l.reminded ? tx.reminded : tx.remind}</T>
-              </Pressable>
-            </View>
-          </Pressable>
-        ))}
       </View>
     </View>
   );

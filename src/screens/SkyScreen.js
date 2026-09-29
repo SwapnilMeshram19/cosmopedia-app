@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Pressable } from 'react-native';
-import { T, useT, Header, StatGrid, Kicker, Btn, Diamond, Toggle } from '../components/ui';
+import { T, useT, Header, BackBtn, StatGrid, Kicker, Btn, Diamond, Toggle } from '../components/ui';
 import IssMap from '../components/IssMap';
 
 export default function SkyScreen({ v }) {
@@ -8,13 +8,14 @@ export default function SkyScreen({ v }) {
   const card = { borderRadius: 18, backgroundColor: th.surface, borderWidth: 1, borderColor: th.ink(0.06) };
   return (
     <View style={{ gap: 18 }}>
+      <BackBtn label={tx.back} onPress={v.back} />
       <Header kicker={v.todayLabel} title={tx.skyTitle} />
 
       <View style={[card, { paddingVertical: 12, paddingHorizontal: 14, flexDirection: 'row', alignItems: 'center', gap: 12 }]}>
         <Diamond color={th.blue} />
         <View style={{ flex: 1, minWidth: 0, gap: 2 }}>
-          <T size={14} w={600}>{sky.place}</T>
-          <T mono size={11} color={th.muted}>{sky.coords}</T>
+          <T size={14} w={600} lines={1}>{sky.place}</T>
+          <T mono size={11} color={th.muted} lines={1}>{sky.fromGps ? tx.yourLocation + ' · ' : ''}{sky.coords}</T>
         </View>
         <Btn label={tx.useLoc} onPress={sky.locate} variant="outlineBlue" height={32} size={12} radius={16} style={{ paddingHorizontal: 12 }} />
       </View>

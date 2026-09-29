@@ -31,12 +31,16 @@ import TabBar from './screens/TabBar';
 import ExploreScreen from './screens/ExploreScreen';
 import NewsScreen from './screens/NewsScreen';
 import TodayScreen from './screens/TodayScreen';
+import LaunchesScreen from './screens/LaunchesScreen';
 import QuizScreen from './screens/QuizScreen';
 import SkyScreen from './screens/SkyScreen';
 import MoreScreens from './screens/MoreScreens';
 
 // Your free key from https://api.nasa.gov, supplied at build time (EAS environment variable
 // EXPO_PUBLIC_NASA_KEY). DEMO_KEY is only a fallback for local runs (~30 requests/hour per IP).
+// News feed banners: after the 3rd story, then after every 6 more.
+const NEWS_AD_FIRST = 3, NEWS_AD_EVERY = 6;
+
 export const NASA_API_KEY = process.env.EXPO_PUBLIC_NASA_KEY || 'DEMO_KEY';
 // Mirrors the web component's props
 const PROPS = { showAds: true, interstitialEvery: 4 };
@@ -72,10 +76,10 @@ const getJSON = async (url) => {
 export default class CosmoApp extends React.Component {
   state = {
     tab: 'explore', sub: null, cat: 'All', q: '', imgs: {}, detail: null, lightbox: null, news: [], newsNext: null, newsLoading: false, newsErr: false, nf: 'Latest', article: null,
-    apod: null, apodErr: false, launches: [], launchErr: false, launchFilter: 'all', isroLaunches: null, isroLaunchErr: false, opens: 0, inter: false, interN: 0, reward: null,
+    apod: null, apodErr: false, launches: [], launchErr: false, launchLoading: false, opens: 0, inter: false, interN: 0, reward: null,
     saved: { topics: [], articles: [] }, reminders: {}, qs: { day: 0, levels: {} }, qLevel: 1, streak: { count: 0, best: 0, last: null },
     stats: { xp: 0, quizzes: 0, perfect: 0, hard: 0, read: [], shares: 0, sky: 0, iss: 0 },
-    toast: null, push: null, alerts: false, lastSeen: 0, isroAlerts: false, lastSeenIsro: 0, loc: null, iss: null, issAlerts: false, issNear: false, otd: null, otdFallback: false,
+    toast: null, push: null, lastSeen: 0, loc: null, iss: null, issAlerts: false, issNear: false, otd: null, otdFallback: false,
     walls: {}, wallTheme: 'Nebulae', wall: null, dlBusy: false, wallMsg: null, unlocked: {}, kg: 70, lang: 'en', solarView: 'orbits', solarOff: 0, solarSel: 'earth',
     astroReady: true, theme: 'system', sysDark: Appearance.getColorScheme() !== 'light', shareCard: null,
   };
@@ -89,24 +93,27 @@ export default class CosmoApp extends React.Component {
     this.appStateSub = AppState.addEventListener('change', (s) => {
       this.appState = s;
       // The background news task may have advanced lastSeen while the app was away.
-      if (s === 'active') {
-        LS.reload('cosmo_lastseen').then((v) => { if (typeof v === 'number' && v > this.state.lastSeen) this.setState({ lastSeen: v }); });
-        LS.reload('cosmo_lastseen_isro').then((v) => { if (typeof v === 'number' && v > this.state.lastSeenIsro) this.setState({ lastSeenIsro: v }); });
-      }
+      if (s === 'active') LS.reload('cosmo_lastseen').then((v) => { if (typeof v === 'number' && v > this.state.lastSeen) this.setState({ lastSeen: v }); });
     });
     const today = DAY();
     let qs = LS.get('cosmo_quiz2', null);
     if (!qs || qs.day !== today || !qs.levels) qs = { day: today, levels: {} };
-    const alerts = LS.get('cosmo_newsalerts', false), issAlerts = LS.get('cosmo_issalerts', false), isroAlerts = LS.get('cosmo_isroalerts', false);
+    const issAlerts = LS.get('cosmo_issalerts', false);
     this.setState({
       theme: LS.get('cosmo_theme', 'system'),
       saved: LS.get('cosmo_saved', { topics: [], articles: [] }), reminders: LS.get('cosmo_remind', {}), qs,
       streak: LS.get('cosmo_streak', { count: 0, best: 0, last: null }),
-      stats: { ...this.state.stats, ...LS.get('cosmo_stats', {}) }, alerts, issAlerts, isroAlerts, lastSeen: LS.get('cosmo_lastseen', 0), lastSeenIsro: LS.get('cosmo_lastseen_isro', 0),
+      stats: { ...this.state.stats, ...LS.get('cosmo_stats', {}) }, issAlerts, lastSeen: LS.get('cosmo_lastseen', 0),
       loc: LS.get('cosmo_loc', null), lang: LS.get('cosmo_lang', 'en'), kg: LS.get('cosmo_kg', 70),
     });
     if (LS.get('cosmo_adtest', false)) setForceTestAds(true);
-    if (alerts || isroAlerts) { this.startPolling(); setNewsTask(true); }
+    // News notifications are always on. Users control them in phone Settings → Notifications
+    // ("Space news" channel), so there is no in-app switch.
+    this.startPolling(); setNewsTask(true);
+    // Ask for notification permission once, a few seconds after the first launch (Android 13+).
+    if (!LS.get('cosmo_notif_asked', false)) {
+      this.askT = setTimeout(() => { LS.set('cosmo_notif_asked', true); Notify.askPermission(); }, 4000);
+    }
     // Tapping an OS notification (also the one that cold-started the app) opens the right screen.
     this.tapSub = Notify.onTap((d) => this.onNotifTap(d));
     OBJ.forEach((o) => this.loadImgs(o));
@@ -114,6 +121,7 @@ export default class CosmoApp extends React.Component {
     this.pollIss(); this.issTimer = setInterval(() => this.pollIss(), 10000);
   }
   componentWillUnmount() {
+    clearTimeout(this.askT);
     try { this.appearanceSub.remove(); this.backSub.remove(); this.appStateSub.remove(); this.tapSub && this.tapSub(); } catch (e) { }
     [this.timer, this.poll, this.issTimer].forEach(clearInterval);
     [this.tt, this.pt, this.pt2].forEach(clearTimeout);
@@ -127,7 +135,7 @@ export default class CosmoApp extends React.Component {
     if (s.wall) { this.setState({ wall: null }); return true; }
     if (s.article) { this.setState({ article: null }); return true; }
     if (s.detail) { this.setState({ detail: null }); return true; }
-    if (s.tab === 'quiz') { this.setState({ tab: 'more', sub: null }); return true; }
+    if (s.tab === 'quiz' || s.tab === 'sky') { this.setState({ tab: 'more', sub: null }); return true; }
     if (s.sub) { this.setState({ sub: null }); return true; }
     if (s.tab !== 'explore') { this.setState({ tab: 'explore' }); return true; }
     return false;
@@ -165,31 +173,29 @@ export default class CosmoApp extends React.Component {
     }
     catch (e) { if (cached) this.setState({ apod: cached }); else this.setState({ apodErr: true }); }
   }
-  async loadLaunches() {
-    try {
-      // mode=normal (still one request) adds mission, rocket and pad details for the details view.
-      const j = await getJSON('https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=6&mode=normal');
-      if (!j || !Array.isArray(j.results)) throw 0;
-      const list = j.results.filter((l) => l && l.id && l.name && l.net);
-      this.setState({ launches: list }, () => this.syncReminders(list));
+  // Upcoming launches: the next launches worldwide merged with ISRO's next launches (Launch Library
+  // agency id 31), sorted by date. Cached for 30 minutes because the free API allows 15 requests/hour.
+  async loadLaunches(force) {
+    const c = LS.get('cosmo_launches', null);
+    const cached = c && Array.isArray(c.list) ? c.list : null;
+    if (!force && cached && Date.now() - (c.at || 0) < 30 * 60e3) {
+      this.setState({ launches: cached, launchErr: false }, () => this.syncReminders(cached)); return;
     }
-    catch (e) { this.setState({ launchErr: true }); }
-  }
-  // ISRO launches (Launch Library agency id 31). Loaded only when the ISRO chip is first tapped,
-  // to stay inside the free API limit (15 requests/hour per IP).
-  async loadIsroLaunches() {
-    this.setState({ isroLaunchErr: false });
-    try {
-      const j = await getJSON('https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=6&mode=normal&lsp__id=31');
-      if (!j || !Array.isArray(j.results)) throw 0;
-      const list = j.results.filter((l) => l && l.id && l.name && l.net);
-      this.setState({ isroLaunches: list }, () => this.syncReminders(list));
+    this.setState({ launchLoading: true, launchErr: false });
+    const base = 'https://ll.thespacedevs.com/2.2.0/launch/upcoming/?mode=normal&limit=';
+    const [all, isro] = await Promise.allSettled([getJSON(base + '12'), getJSON(base + '5&lsp__id=31')]);
+    const pick = (r) => (r.status === 'fulfilled' && r.value && Array.isArray(r.value.results) ? r.value.results : null);
+    const a = pick(all), b = pick(isro);
+    if (!a && !b) {
+      // Both failed (offline / rate limit): keep showing the last good list if there is one.
+      this.setState({ launchLoading: false, launches: cached || [], launchErr: !cached }); return;
     }
-    catch (e) { this.setState({ isroLaunches: [], isroLaunchErr: true }); }
-  }
-  setLaunchFilter(f) {
-    this.setState({ launchFilter: f });
-    if (f === 'isro' && (this.state.isroLaunches === null || this.state.isroLaunchErr)) this.loadIsroLaunches();
+    const seen = new Set();
+    const list = [...(a || []), ...(b || [])]
+      .filter((l) => l && l.id && l.name && l.net && !seen.has(l.id) && seen.add(l.id))
+      .sort((x, y) => new Date(x.net) - new Date(y.net));
+    this.setState({ launches: list, launchLoading: false }, () => this.syncReminders(list));
+    LS.set('cosmo_launches', { at: Date.now(), list });
   }
   async loadOtd() {
     const d = new Date(), mm = String(d.getMonth() + 1).padStart(2, '0'), dd = String(d.getDate()).padStart(2, '0');
@@ -264,8 +270,9 @@ export default class CosmoApp extends React.Component {
   showToast(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: null }), 2600); }
   // Where a tapped notification leads: news story → article, launch → Today, ISS → Sky.
   async onNotifTap(d) {
-    const tabs = ['explore', 'news', 'today', 'sky', 'more'];
+    const tabs = ['explore', 'news', 'today', 'launches', 'more'];
     this.setState({ push: null, lightbox: null, wall: null, detail: null, article: null });
+    if (d.tab === 'sky') { this.openSky(); return; }
     if (typeof d.articleId === 'number') {
       this.setTab('news');
       const known = this.state.news.find((a) => a.id === d.articleId);
@@ -278,9 +285,14 @@ export default class CosmoApp extends React.Component {
     }
     if (tabs.includes(d.tab)) this.setTab(d.tab);
   }
+  // Real phone notification, also while the app is open. The in-app banner is only a fallback
+  // where notifications can't work (Expo Go, web).
   pushNow(p) {
+    if (Notify.available()) {
+      Notify.notifyNow(p.title, p.body, { tab: p.tab || (p.article ? 'news' : undefined), articleId: p.article ? p.article.id : undefined }, p.article ? 'news' : 'default');
+      return;
+    }
     clearTimeout(this.pt2); this.setState({ push: p }); this.pt2 = setTimeout(() => this.setState({ push: null }), 6000);
-    if (this.appState && this.appState !== 'active') Notify.notifyNow(p.title, p.body, { tab: p.tab || (p.article ? 'news' : undefined), articleId: p.article ? p.article.id : undefined });
   }
   startInter(n, reward) {
     clearInterval(this.timer); this.setState({ inter: true, interN: n, reward });
@@ -383,54 +395,19 @@ export default class CosmoApp extends React.Component {
       this.showToast(!Notify.available() ? X.tNotifApp : X.tNotifOff);
     }
   }
-  async checkLatest(force) {
+  // One combined news feed (ISRO stories included). The first check only records the newest id,
+  // so nobody gets a notification about an old story.
+  async checkLatest() {
     try {
-      const j = await getJSON('https://api.spaceflightnewsapi.net/v4/articles/?limit=1'); const a = j && Array.isArray(j.results) ? j.results[0] : null; if (!a || typeof a.id !== 'number') return;
-      if (force || a.id > this.state.lastSeen) {
+      const j = await getJSON('https://api.spaceflightnewsapi.net/v4/articles/?limit=1'); const a = j && Array.isArray(j.results) ? j.results[0] : null;
+      if (!a || typeof a.id !== 'number' || typeof a.title !== 'string') return;
+      if (a.id > this.state.lastSeen) {
         const had = this.state.lastSeen; this.setState({ lastSeen: a.id }); LS.set('cosmo_lastseen', a.id);
-        if (force || had) { this.lastPushedId = a.id; this.pushNow({ title: 'Breaking · ' + a.news_site, body: a.title, article: a }); }
+        if (had) this.pushNow({ title: 'Breaking · ' + (a.news_site || 'Space news'), body: a.title, article: a });
       }
     } catch (e) { }
   }
-  // Same as checkLatest, for ISRO stories only. Skips a story that was just shown as a general alert.
-  async checkIsro() {
-    try {
-      const j = await getJSON('https://api.spaceflightnewsapi.net/v4/articles/?limit=1&search=isro');
-      const a = j && Array.isArray(j.results) ? j.results[0] : null; if (!a || typeof a.id !== 'number' || typeof a.title !== 'string') return;
-      if (a.id > this.state.lastSeenIsro) {
-        const had = this.state.lastSeenIsro; this.setState({ lastSeenIsro: a.id }); LS.set('cosmo_lastseen_isro', a.id);
-        if (had && a.id !== this.lastPushedId) this.pushNow({ title: 'ISRO · ' + (a.news_site || 'Space news'), body: a.title, article: a });
-      }
-    } catch (e) { }
-  }
-  async pollAlerts() {
-    if (this.state.alerts) await this.checkLatest(false);
-    if (this.state.isroAlerts) await this.checkIsro();
-  }
-  startPolling() { clearInterval(this.poll); this.poll = setInterval(() => this.pollAlerts(), 120000); }
-  // Stops polling / the background task only when neither news nor ISRO alerts are on.
-  syncAlertJobs() {
-    const any = this.state.alerts || this.state.isroAlerts;
-    setNewsTask(any);
-    if (any) this.startPolling(); else clearInterval(this.poll);
-  }
-  toggleIsroAlerts() {
-    const X = this.txt();
-    const on = !this.state.isroAlerts;
-    this.setState({ isroAlerts: on }, () => this.syncAlertJobs()); LS.set('cosmo_isroalerts', on);
-    if (!on) { this.showToast(X.tIsroOff); return; }
-    this.checkIsro();
-    Notify.askPermission().then((ok) => this.showToast(ok ? X.tIsroOn : !Notify.available() ? X.tNotifApp : X.tNotifOff));
-  }
-  toggleAlerts() {
-    const X = this.txt();
-    const on = !this.state.alerts; this.setState({ alerts: on }, () => this.syncAlertJobs()); LS.set('cosmo_newsalerts', on);
-    if (on) {
-      this.checkLatest(false);
-      Notify.askPermission().then((ok) => this.showToast(ok ? X.tNewsOn : !Notify.available() ? X.tNotifApp : X.tNotifOff));
-    }
-    else this.showToast(X.tNewsOff);
-  }
+  startPolling() { clearInterval(this.poll); this.checkLatest(); this.poll = setInterval(() => this.checkLatest(), 120000); }
   toggleIssAlerts() {
     const X = this.txt(); const on = !this.state.issAlerts;
     this.setState({ issAlerts: on, issNear: false }); LS.set('cosmo_issalerts', on);
@@ -446,9 +423,37 @@ export default class CosmoApp extends React.Component {
         Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced }),
         new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 8000)),
       ]);
-      const loc = { lat: p.coords.latitude, lon: p.coords.longitude, name: 'Your location' };
+      const loc = { lat: p.coords.latitude, lon: p.coords.longitude, name: X.yourLocation || 'Your location' };
       this.setState({ loc }); LS.set('cosmo_loc', loc); this.showToast(X.tLoc);
+      this.nameLocation(loc);
     } catch (e) { this.showToast(X.tNoLoc); }
+  }
+  // Turns coordinates into a place name ("Nagpur, Maharashtra") with the phone's own geocoder
+  // (free, no key, runs on the device). Keeps the generic name if it fails or times out.
+  async nameLocation(loc) {
+    if (!loc || Platform.OS === 'web') return;
+    try {
+      const res = await Promise.race([
+        Location.reverseGeocodeAsync({ latitude: loc.lat, longitude: loc.lon }),
+        new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 6000)),
+      ]);
+      const a = Array.isArray(res) ? res[0] : null;
+      if (!a) return;
+      const place = a.city || a.subregion || a.district;
+      const name = [place, a.region && a.region !== place ? a.region : null].filter(Boolean).join(', ') || a.country;
+      if (!name) return;
+      const cur = this.state.loc;
+      if (!cur || cur.lat !== loc.lat || cur.lon !== loc.lon) return; // location changed meanwhile
+      const named = { ...cur, name, placed: true };
+      this.setState({ loc: named }); LS.set('cosmo_loc', named);
+    } catch (e) { }
+  }
+  // Sky now lives under More.
+  openSky() {
+    const s = this.state;
+    this.setTab('sky'); this.bump({ sky: 1, iss: s.iss ? 1 : 0 });
+    if (!s.loc && !this.askedLoc) { this.askedLoc = true; this.locate(); }
+    else if (s.loc && !s.loc.placed) this.nameLocation(s.loc); // saved before place names existed
   }
   // Web version drew a canvas and used navigator.share. Here: render ShareCard offscreen → PNG → share sheet.
   async share(kicker, title, sub) {
@@ -488,7 +493,7 @@ export default class CosmoApp extends React.Component {
     const featured = OB.length ? this.obj(OB[day % OB.length]) : {};
     const newsItems = [];
     s.news.forEach((a, i) => {
-      if (ads && i > 0 && i % 5 === 0) newsItems.push({ isAd: true, key: 'ad' + i });
+      if (ads && i >= NEWS_AD_FIRST && (i - NEWS_AD_FIRST) % NEWS_AD_EVERY === 0) newsItems.push({ isAd: true, key: 'ad' + i });
       newsItems.push({ isAd: false, key: 'n' + a.id, title: a.title, img: a.image_url, hasImg: !!a.image_url, site: a.news_site, ago: ago(a.published_at), open: () => this.setState({ article: a }) });
     });
     let detail = null;
@@ -549,7 +554,7 @@ export default class CosmoApp extends React.Component {
 
     // sky
     const loc = s.loc || DEF_LOC;
-    let sky = { place: loc.name, coords: loc.lat.toFixed(2) + '°, ' + loc.lon.toFixed(2) + '°', lat: loc.lat.toFixed(3), lon: loc.lon.toFixed(3), locate: () => this.locate(), noDark: false, hasDark: false, planets: [], none: false };
+    let sky = { place: loc.name, fromGps: !!s.loc, coords: loc.lat.toFixed(2) + '°, ' + loc.lon.toFixed(2) + '°', lat: loc.lat.toFixed(3), lon: loc.lon.toFixed(3), locate: () => this.locate(), noDark: false, hasDark: false, planets: [], none: false };
     let moonNow = { name: '', illum: '', halfLeft: '50%', ellW: '0%', ellC: '#232733', nextFull: '', age: '' }, moonNext = [], moonDays = [];
     if (A_) {
       const t = this.skyCalc(loc);
@@ -599,15 +604,16 @@ export default class CosmoApp extends React.Component {
 
     return {
       tx,
-      isExplore: s.tab === 'explore', isNews: s.tab === 'news', isToday: s.tab === 'today', isQuiz: s.tab === 'quiz', isSky: s.tab === 'sky',
+      isExplore: s.tab === 'explore', isNews: s.tab === 'news', isToday: s.tab === 'today', isLaunches: s.tab === 'launches', isQuiz: s.tab === 'quiz', isSky: s.tab === 'sky',
       isMoreHome: more && !sub, sub: more ? sub : null,
       themes: [['system', tx.themeSystem, tx.themeSystemSub], ['light', tx.themeLight, tx.themeLightSub], ['dark', tx.themeDark, tx.themeDarkSub]].map(([id, name, sub3]) => ({ id, name, sub: sub3, active: s.theme === id, pick: () => { this.setState({ theme: id }); LS.set('cosmo_theme', id); } })),
-      back: () => this.setState(s.tab === 'quiz' ? { tab: 'more', sub: null } : { sub: null }),
-      tabs: ['explore', 'news', 'today', 'sky', 'more'].map((id) => {
-        const active = s.tab === id;
+      back: () => this.setState(s.tab === 'quiz' || s.tab === 'sky' ? { tab: 'more', sub: null } : { sub: null }),
+      tabs: ['explore', 'news', 'today', 'launches', 'more'].map((id) => {
+        // Quiz and Sky open from More, so More stays highlighted on them.
+        const active = id === 'more' ? ['more', 'quiz', 'sky'].includes(s.tab) : s.tab === id;
         return {
-          id, active, label: { explore: tx.explore, news: tx.news, today: tx.today, sky: tx.sky, more: tx.more }[id],
-          go: () => { this.setTab(id); if (id === 'sky') { this.bump({ sky: 1, iss: s.iss ? 1 : 0 }); if (!s.loc && !this.askedLoc) { this.askedLoc = true; this.locate(); } } },
+          id, active, label: { explore: tx.explore, news: tx.news, today: tx.today, launches: tx.launchesTab, more: tx.more }[id],
+          go: () => { this.setTab(id); if (id === 'launches') this.loadLaunches(); },
         };
       }),
       cats: CATS.map((c) => ({ key: c, label: CL(c), active: s.cat === c, pick: () => this.setState({ cat: c }) })),
@@ -626,13 +632,10 @@ export default class CosmoApp extends React.Component {
       detail, closeDetail: () => this.setState({ detail: null }), detailRef: this.detailRef,
       lightbox: s.lightbox, closeLightbox: () => this.setState({ lightbox: null }),
       todayLabel: new Date().toLocaleDateString(LOCALE, { weekday: 'long', month: 'long', day: 'numeric' }),
-      apod, launchErr: s.launchFilter === 'all' && s.launchErr,
-      launchFilters: [['all', tx.lAll], ['isro', 'ISRO']].map(([key, label]) => ({ key, label, active: s.launchFilter === key, pick: () => this.setLaunchFilter(key) })),
-      launchIsro: s.launchFilter === 'isro',
-      isroLaunchLoading: s.launchFilter === 'isro' && s.isroLaunches === null,
-      isroLaunchErr: s.launchFilter === 'isro' && s.isroLaunchErr,
-      isroLaunchEmpty: s.launchFilter === 'isro' && Array.isArray(s.isroLaunches) && !s.isroLaunches.length && !s.isroLaunchErr,
-      launches: (s.launchFilter === 'isro' ? (s.isroLaunches || []) : s.launches).map((l) => { const im = typeof l.image === 'string' ? l.image : (l.image && l.image.thumbnail_url); const rm = !!s.reminders[l.id]; return { id: l.id, name: l.name, provider: (l.lsp_name || (l.launch_service_provider && l.launch_service_provider.name) || ''), pad: (l.location || (l.pad && l.pad.location && l.pad.location.name) || '').split(',')[0], when: new Date(l.net).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }), status: (l.status && (l.status.abbrev || l.status.name)) || '', img: im, reminded: rm, remind: () => this.toggleRemind(l), open: () => this.launchInfo(l) }; }),
+      apod,
+      launchErr: s.launchErr, launchLoading: s.launchLoading && !s.launches.length,
+      launchEmpty: !s.launchLoading && !s.launchErr && !s.launches.length, reloadLaunches: () => this.loadLaunches(true),
+      launches: s.launches.map((l) => { const im = typeof l.image === 'string' ? l.image : (l.image && l.image.thumbnail_url); const rm = !!s.reminders[l.id]; return { id: l.id, name: l.name, provider: (l.lsp_name || (l.launch_service_provider && l.launch_service_provider.name) || ''), pad: (l.location || (l.pad && l.pad.location && l.pad.location.name) || '').split(',')[0], when: new Date(l.net).toLocaleDateString(LOCALE, { month: 'short', day: 'numeric' }), time: new Date(l.net).toLocaleTimeString(LOCALE, { hour: 'numeric', minute: '2-digit' }), isro: !!(l.launch_service_provider && l.launch_service_provider.id === 31), status: (l.status && (l.status.abbrev || l.status.name)) || '', img: im, reminded: rm, remind: () => this.toggleRemind(l), open: () => this.launchInfo(l) }; }),
       moonNow, moonNext, moonDays, openMoon: () => this.goSub('moon'),
       eclipses: ECLIPSES.filter((e) => e[0] >= nowISO).slice(0, 5).map(([d, type, where]) => { const dt = new Date(d + 'T12:00:00'); return { key: d, type, where, day: dt.getDate(), mon: dt.toLocaleDateString(LOCALE, { month: 'short' }).toUpperCase(), year: dt.getFullYear() }; }),
       otd: (s.otd || []).map((e) => ({
@@ -664,7 +667,7 @@ export default class CosmoApp extends React.Component {
         share: () => this.share('Weight on other worlds', 'On Mars I’d weigh just ' + (kg * 0.379).toFixed(1) + ' kg', 'On Jupiter: ' + (kg * 2.528).toFixed(1) + ' kg · On the Moon: ' + (kg * 0.166).toFixed(1) + ' kg'),
       },
       langs: LANGS.map(([id, name, native]) => ({ id, name, native, active: s.lang === id, pick: () => { this.setState({ lang: id }); LS.set('cosmo_lang', id); } })),
-      moreItems: [['quiz', tx.quizTitle, tx.mQuizSub], ['saved', tx.mSaved, tx.mSavedSub], ['solar', tx.mSolar, tx.mSolarSub], ['moon', tx.mMoon, tx.mMoonSub], ['walls', tx.mWalls, tx.mWallsSub], ['weight', tx.mWeight, tx.mWeightSub], ['badges', tx.mBadges, tx.mBadgesSub]].map(([id, label, sub2]) => ({ id, label, sub: sub2, go: () => id === 'quiz' ? this.setTab('quiz') : this.goSub(id) })),
+      moreItems: [['quiz', tx.quizTitle, tx.mQuizSub], ['sky', tx.skyTitle, tx.mSkySub], ['saved', tx.mSaved, tx.mSavedSub], ['solar', tx.mSolar, tx.mSolarSub], ['moon', tx.mMoon, tx.mMoonSub], ['walls', tx.mWalls, tx.mWallsSub], ['weight', tx.mWeight, tx.mWeightSub], ['badges', tx.mBadges, tx.mBadgesSub]].map(([id, label, sub2]) => ({ id, label, sub: sub2, go: () => id === 'quiz' ? this.setTab('quiz') : id === 'sky' ? this.openSky() : this.goSub(id) })),
       settingsItems: [['theme', tx.appearance, s.theme === 'system' ? tx.themeSystem : s.theme === 'light' ? tx.themeLight : tx.themeDark], ['lang', tx.mLang, (LANGS.find((l) => l[0] === s.lang) || LANGS[0])[2]]].map(([id, label, sub2]) => ({ id, label, sub: sub2, go: () => this.goSub(id) })),
       savedTopics, savedArticles, reminders,
       savedEmpty: !savedTopics.length && !savedArticles.length && !reminders.length,
@@ -689,8 +692,6 @@ export default class CosmoApp extends React.Component {
       closeInter: () => this.closeInter(),
       toast: s.toast, push: s.push,
       pushTap: () => { const p = s.push || {}; this.setState({ push: null, ...(p.article ? { article: p.article, tab: 'news', sub: null } : {}), ...(p.tab ? { tab: p.tab, sub: null } : {}) }); },
-      alertsOn: s.alerts, toggleAlerts: () => this.toggleAlerts(),
-      showIsroAlerts: s.nf === 'ISRO', isroAlertsOn: s.isroAlerts, toggleIsroAlerts: () => this.toggleIsroAlerts(),
       issAlertsOn: s.issAlerts, toggleIssAlerts: () => this.toggleIssAlerts(),
     };
   }
@@ -717,6 +718,7 @@ export default class CosmoApp extends React.Component {
               {v.isExplore && <ExploreScreen v={v} />}
               {v.isNews && <NewsScreen v={v} />}
               {v.isToday && <TodayScreen v={v} />}
+              {v.isLaunches && <LaunchesScreen v={v} />}
               {v.isQuiz && <QuizScreen v={v} />}
               {v.isSky && <SkyScreen v={v} />}
               {(v.isMoreHome || v.sub) && <MoreScreens v={v} />}
