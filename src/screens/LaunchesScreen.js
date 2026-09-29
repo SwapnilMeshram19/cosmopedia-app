@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Pressable } from 'react-native';
 import { T, useT, Header, Stripes, Img, Btn } from '../components/ui';
 import { AdSlot } from '../ads';
+import { FEED_AD_EVERY } from '../constants';
 
 // One launch row: tap for details, "Remind" for a notification 1 hour before liftoff.
 function LaunchRow({ l, tx }) {
@@ -58,8 +59,8 @@ export default function LaunchesScreen({ v }) {
       {v.launches.map((l, i) => (
         <React.Fragment key={l.id}>
           <LaunchRow l={l} tx={tx} />
-          {/* One inline banner after the 4th launch, spaced away from the Remind buttons. */}
-          {i === 3 && v.showAds && <View style={{ marginVertical: 6 }}><AdSlot kind="horizontal" /></View>}
+          {/* A banner after every 3 launches (not after the last), spaced away from the Remind buttons. */}
+          {v.showAds && (i + 1) % FEED_AD_EVERY === 0 && i < v.launches.length - 1 && <View style={{ marginVertical: 6 }}><AdSlot kind="horizontal" /></View>}
         </React.Fragment>
       ))}
 

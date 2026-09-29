@@ -35,3 +35,6 @@ export const fmtD=(d,L)=>new Date(d).toLocaleDateString(L,{month:'short',day:'nu
 export const fmtT=(d,L)=>new Date(d).toLocaleTimeString(L,{hour:'numeric',minute:'2-digit'});
 export const pickLevel=(QUIZ,day,lvl)=>{const pool=QUIZ.map((q,i)=>i).filter(i=>(QUIZ[i][5]||2)===lvl);const r=rng(day*9973+lvl*131);for(let i=pool.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}return pool.slice(0,5);};
 export const httpsify=u=>typeof u==='string'?u.replace(/^http:/,'https:'):u;
+
+// Inline banner frequency in the News and Launches feeds: one banner after every N cards.
+export const FEED_AD_EVERY = 3;

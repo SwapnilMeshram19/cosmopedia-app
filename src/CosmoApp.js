@@ -15,6 +15,7 @@ import COSMOS_QUIZ_I18N from './data/quiz-i18n.json';
 import {
   CATS, NF, ago, F, DAY, rng, pickLevel, LETTERS, LEVELS, RANKS, BADGES, PLANETS, PCOL, GRAV, ECLIPSES, WALL_THEMES,
   OTD_FALLBACK, SPACE_RE, DEF_LOC, LANGS, TX, hav, moonDisc, httpsify,
+  FEED_AD_EVERY,
 } from './constants';
 import { LS } from './storage';
 import { makeTheme } from './theme';
@@ -38,8 +39,8 @@ import MoreScreens from './screens/MoreScreens';
 
 // Your free key from https://api.nasa.gov, supplied at build time (EAS environment variable
 // EXPO_PUBLIC_NASA_KEY). DEMO_KEY is only a fallback for local runs (~30 requests/hour per IP).
-// News feed banners: after the 3rd story, then after every 6 more.
-const NEWS_AD_FIRST = 3, NEWS_AD_EVERY = 6;
+// Feed banners (News and Launches): one after every FEED_AD_EVERY cards (see constants.js).
+const NEWS_AD_FIRST = FEED_AD_EVERY, NEWS_AD_EVERY = FEED_AD_EVERY;
 
 export const NASA_API_KEY = process.env.EXPO_PUBLIC_NASA_KEY || 'DEMO_KEY';
 // Mirrors the web component's props
