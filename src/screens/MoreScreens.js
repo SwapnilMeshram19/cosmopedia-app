@@ -6,7 +6,7 @@ import { T, useT, Header, BackBtn, Kicker, Diamond, Toggle, Grid, StatGrid, Chip
 import { FONTS } from '../theme';
 import { ObjCard } from './ExploreScreen';
 import { NewsRow } from './NewsScreen';
-
+import PrivacyPolicyRow from '../components/PrivacyPolicyRow';
 function ListRow({ m, dot, last }) {
   const th = useT();
   return (

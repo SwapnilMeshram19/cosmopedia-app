@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // Same keys as the web app's localStorage. Loaded once at startup so reads stay synchronous.
 const KEYS = ['cosmo_theme', 'cosmo_quiz2', 'cosmo_newsalerts', 'cosmo_issalerts', 'cosmo_saved', 'cosmo_remind',
   'cosmo_streak', 'cosmo_stats', 'cosmo_lastseen', 'cosmo_loc', 'cosmo_lang', 'cosmo_kg', 'cosmo_notif_ids', 'cosmo_adtest',
-  'cosmo_apod', 'cosmo_launches', 'cosmo_notif_asked'];
+  'cosmo_apod', 'cosmo_launches', 'cosmo_notif_asked', 'cosmo_imgs'];
 const cache = {};
 
 export const LS = {

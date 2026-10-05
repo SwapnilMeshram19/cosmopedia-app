@@ -74,6 +74,12 @@ const getJSON = async (url) => {
   return r.json();
 };
 
+// NASA image search results per encyclopedia entry, cached so a cold start doesn't refetch them.
+const IMG_TTL = 7 * 864e5, IMG_CONCURRENCY = 4, IMG_KEEP = 10;
+const validImgs = (e) => !!e && Array.isArray(e.list) && e.list.every((g) => g && typeof g.src === 'string');
+// Network polling for the ISS: fast while Sky is open, slow while only proximity alerts need it.
+const ISS_SKY_MS = 10000, ISS_ALERT_MS = 60000;
+
 export default class CosmoApp extends React.Component {
   state = {
     tab: 'explore', sub: null, cat: 'All', q: '', imgs: {}, detail: null, lightbox: null, news: [], newsNext: null, newsLoading: false, newsErr: false, nf: 'Latest', article: null,
@@ -93,6 +99,7 @@ export default class CosmoApp extends React.Component {
     this.backSub = BackHandler.addEventListener('hardwareBackPress', () => this.onBack());
     this.appStateSub = AppState.addEventListener('change', (s) => {
       this.appState = s;
+      this.syncIssPoll();
       // The background news task may have advanced lastSeen while the app was away.
       if (s === 'active') LS.reload('cosmo_lastseen').then((v) => { if (typeof v === 'number' && v > this.state.lastSeen) this.setState({ lastSeen: v }); });
     });
@@ -117,15 +124,19 @@ export default class CosmoApp extends React.Component {
     }
     // Tapping an OS notification (also the one that cold-started the app) opens the right screen.
     this.tapSub = Notify.onTap((d) => this.onNotifTap(d));
-    OBJ.forEach((o) => this.loadImgs(o));
+    this.initImgs();
     this.loadNews(true); this.loadApod(); this.loadLaunches(); this.loadOtd();
-    this.pollIss(); this.issTimer = setInterval(() => this.pollIss(), 10000);
+    this.syncIssPoll();
+  }
+  componentDidUpdate(_, prev) {
+    if (prev.tab !== this.state.tab || prev.issAlerts !== this.state.issAlerts) this.syncIssPoll();
   }
   componentWillUnmount() {
     clearTimeout(this.askT);
     try { this.appearanceSub.remove(); this.backSub.remove(); this.appStateSub.remove(); this.tapSub && this.tapSub(); } catch (e) { }
     [this.timer, this.poll, this.issTimer].forEach(clearInterval);
-    [this.tt, this.pt, this.pt2].forEach(clearTimeout);
+    [this.tt, this.pt, this.pt2, this.imgFlushT].forEach(clearTimeout);
+    this.imgQ = [];
   }
 
   // Android back button: close the top-most layer first, like a native app.
@@ -142,12 +153,49 @@ export default class CosmoApp extends React.Component {
     return false;
   }
 
+  // Seeds images from the cache (stale entries too, so cards never start blank), then queues a
+  // refresh for missing/expired entries: today's featured object first, at most 4 requests at a time.
+  initImgs() {
+    const cache = LS.get('cosmo_imgs', {}) || {}, now = Date.now(), imgs = {};
+    this.imgCache = {};
+    Object.keys(cache).forEach((id) => { if (validImgs(cache[id])) { this.imgCache[id] = cache[id]; imgs[id] = cache[id].list; } });
+    if (Object.keys(imgs).length) this.setState({ imgs });
+    const due = OBJ.filter((o) => { const e = this.imgCache[o.id]; return !e || now - (e.at || 0) > IMG_TTL; });
+    const fi = OBJ.length ? Math.floor(Date.now() / 864e5) % OBJ.length : -1, feat = OBJ[fi];
+    this.imgQ = feat && due.includes(feat) ? [feat, ...due.filter((o) => o !== feat)] : due;
+    this.imgActive = 0; this.imgBuf = {};
+    this.pumpImgs();
+  }
+  // Opening a topic with no images yet moves it to the front of the queue.
+  prioritizeImgs(id) {
+    if (this.state.imgs[id] || !this.imgQ) return;
+    const i = this.imgQ.findIndex((o) => o.id === id);
+    if (i > 0) this.imgQ.unshift(this.imgQ.splice(i, 1)[0]);
+  }
+  pumpImgs() {
+    while (this.imgActive < IMG_CONCURRENCY && this.imgQ.length) {
+      const o = this.imgQ.shift(); this.imgActive++;
+      this.loadImgs(o).finally(() => { this.imgActive--; this.pumpImgs(); });
+    }
+  }
   async loadImgs(o) {
     try {
       const j = await getJSON('https://images-api.nasa.gov/search?media_type=image&q=' + encodeURIComponent(o.q));
-      const arr = (j.collection.items || []).filter((i) => i.links && i.links[0]).slice(0, 12).map((i) => ({ src: httpsify(i.links[0].href), title: (i.data && i.data[0] && i.data[0].title) || '' }));
-      this.setState((s) => ({ imgs: { ...s.imgs, [o.id]: arr } }));
+      const items = j && j.collection && Array.isArray(j.collection.items) ? j.collection.items : null;
+      if (!items) return; // unexpected body: keep the cached copy, retry next launch
+      const list = items.filter((i) => i && Array.isArray(i.links) && i.links[0] && typeof i.links[0].href === 'string').slice(0, IMG_KEEP)
+        .map((i) => ({ src: httpsify(i.links[0].href), title: (Array.isArray(i.data) && i.data[0] && typeof i.data[0].title === 'string' && i.data[0].title) || '' }));
+      this.imgBuf[o.id] = list; this.imgCache[o.id] = { at: Date.now(), list };
+      // One setState + one storage write per burst instead of one per topic.
+      if (!this.imgFlushT) this.imgFlushT = setTimeout(() => this.flushImgs(), 300);
     } catch (e) { }
+  }
+  flushImgs() {
+    this.imgFlushT = null;
+    const buf = this.imgBuf; this.imgBuf = {};
+    if (!Object.keys(buf).length) return;
+    this.setState((s) => ({ imgs: { ...s.imgs, ...buf } }));
+    LS.set('cosmo_imgs', this.imgCache);
   }
   async loadNews(reset) {
     const term = (NF.find((f) => f[0] === this.state.nf) || NF[0])[1];
@@ -218,10 +266,25 @@ export default class CosmoApp extends React.Component {
       if (ev.length) this.setState({ otd: ev }); else this.setState({ otd: OTD_FALLBACK, otdFallback: true });
     } catch (e) { this.setState({ otd: OTD_FALLBACK, otdFallback: true }); }
   }
+  // Runs the ISS poll only while something needs it and the app is in the foreground:
+  // every 10 s on the Sky tab, every 60 s when proximity alerts are on, otherwise not at all.
+  syncIssPoll() {
+    const active = (this.appState || AppState.currentState) === 'active';
+    const ms = !active ? 0 : this.state.tab === 'sky' ? ISS_SKY_MS : this.state.issAlerts ? ISS_ALERT_MS : 0;
+    if (ms === this.issMs) return;
+    clearInterval(this.issTimer); this.issTimer = null; this.issMs = ms;
+    if (!ms) return;
+    this.pollIss(); this.issTimer = setInterval(() => this.pollIss(), ms);
+  }
   async pollIss() {
     try {
-      const j = await getJSON('https://api.wheretheiss.at/v1/satellites/25544'); if (j.latitude == null) return;
-      this.setState({ iss: j });
+      const j = await getJSON('https://api.wheretheiss.at/v1/satellites/25544');
+      if (!j || typeof j.latitude !== 'number' || typeof j.longitude !== 'number') return;
+      // Position only goes into state (→ re-render) while Sky is showing it.
+      if (this.state.tab === 'sky') {
+        this.setState({ iss: j });
+        if (this.issBadgePending) { this.issBadgePending = false; this.bump({ iss: 1 }); }
+      }
       if (this.state.issAlerts) {
         const L = this.state.loc || DEF_LOC; const dist = hav(L.lat, L.lon, j.latitude, j.longitude);
         if (dist < 2000 && !this.state.issNear) { this.setState({ issNear: true }); this.pushNow({ title: 'The ISS is passing near you', body: 'It’s about ' + Math.round(dist).toLocaleString() + ' km away right now. Look up if it’s dark!', tab: 'sky' }); }
@@ -335,6 +398,7 @@ export default class CosmoApp extends React.Component {
     const every = PROPS.interstitialEvery ?? 4, ads = PROPS.showAds ?? true;
     const opens = this.state.opens + 1;
     this.setState({ detail: id, opens });
+    this.prioritizeImgs(id);
     const st = this.state.stats; if (!(st.read || []).includes(id)) { const n = { ...st, read: [...(st.read || []), id] }; this.setState({ stats: n }); LS.set('cosmo_stats', n); }
     if (this.detailRef.current) this.detailRef.current.scrollTo({ y: 0, animated: false });
     if (ads && every > 0 && opens % every === 0) {
@@ -452,7 +516,7 @@ export default class CosmoApp extends React.Component {
   // Sky now lives under More.
   openSky() {
     const s = this.state;
-    this.setTab('sky'); this.bump({ sky: 1, iss: s.iss ? 1 : 0 });
+    this.issBadgePending = true; this.setTab('sky'); this.bump({ sky: 1 });
     if (!s.loc && !this.askedLoc) { this.askedLoc = true; this.locate(); }
     else if (s.loc && !s.loc.placed) this.nameLocation(s.loc); // saved before place names existed
   }
@@ -553,16 +617,21 @@ export default class CosmoApp extends React.Component {
     const RN = tx.ranks || RANKS.map((r) => r[0]);
     const rank = { name: RN[ri], xp, badgeCount: badgeCount + '/' + BADGES.length, pct: nextR ? Math.round((xp - RANKS[ri][1]) / (nextR[1] - RANKS[ri][1]) * 100) + '%' : '100%', toNext: nextR ? F(tx.toNext, { n: nextR[1] - xp, r: RN[ri + 1] }) : tx.topRank };
 
-    // sky
+    // sky / moon / ISS / solar are only computed for the screen that shows them
+    const onSky = s.tab === 'sky', onMoon = s.tab === 'more' && s.sub === 'moon', onSolar = s.tab === 'more' && s.sub === 'solar';
     const loc = s.loc || DEF_LOC;
     let sky = { place: loc.name, fromGps: !!s.loc, coords: loc.lat.toFixed(2) + '°, ' + loc.lon.toFixed(2) + '°', lat: loc.lat.toFixed(3), lon: loc.lon.toFixed(3), locate: () => this.locate(), noDark: false, hasDark: false, planets: [], none: false };
     let moonNow = { name: '', illum: '', halfLeft: '50%', ellW: '0%', ellC: '#232733', nextFull: '', age: '' }, moonNext = [], moonDays = [];
-    if (A_) {
-      const t = this.skyCalc(loc);
+    if (A_ && (s.tab === 'today' || onMoon || onSky)) {
       const mp = A_.moonPhase(new Date());
       moonNow = { ...moonDisc(mp.frac), name: (tx.phases || {})[mp.name] || mp.name, illum: Math.round(mp.illum * 100) + '%', age: mp.age.toFixed(1), dayOf: F(tx.dayOf, { n: mp.age.toFixed(1) }), nextFull: fmtD(A_.nextPhase(new Date(), 14.77)) };
+    }
+    if (A_ && onMoon) {
       moonNext = [[tx.newMoon, 0], [tx.firstQ, 7.38], [tx.fullMoonCap, 14.77], [tx.lastQ, 22.15]].map(([label, ag]) => ({ label, t: A_.nextPhase(new Date(), ag) })).sort((a, b) => a.t - b.t).map((n) => ({ label: n.label, date: n.t.toLocaleDateString(LOCALE, { weekday: 'short', month: 'short', day: 'numeric' }) }));
       for (let i = 0; i < 30; i++) { const d = new Date(Date.now() + i * 864e5); const p = A_.moonPhase(d); moonDays.push({ ...moonDisc(p.frac), label: i === 0 ? tx.todayWord : d.toLocaleDateString(LOCALE, { month: 'numeric', day: 'numeric' }) }); }
+    }
+    if (A_ && onSky) {
+      const t = this.skyCalc(loc), mp = A_.moonPhase(new Date());
       const vis = t.bodies.filter((b) => b.id !== 'moon' && b.first).sort((a, b) => b.best - a.best);
       const whenOf = (b) => b.span > 0.75 ? tx.allNight : (b.first - t.darkStart < 36e5 ? tx.evening + ' ' + fmtT(b.first) + '–' + fmtT(b.last) : (t.darkEnd - b.last < 36e5 ? tx.beforeDawn + ' ' + fmtT(b.first) + '–' + fmtT(b.last) : fmtT(b.first) + '–' + fmtT(b.last)));
       sky = {
@@ -573,12 +642,12 @@ export default class CosmoApp extends React.Component {
       };
     }
     const I = s.iss;
-    const iss = I ? { pos: I.latitude.toFixed(1) + '°, ' + I.longitude.toFixed(1) + '°', alt: Math.round(I.altitude) + ' km', speed: Math.round(I.velocity).toLocaleString() + ' km/h', dist: Math.round(hav(loc.lat, loc.lon, I.latitude, I.longitude)).toLocaleString() + ' km', status: I.visibility === 'daylight' ? tx.issSun : tx.issShadow }
+    const iss = I && onSky ? { pos: I.latitude.toFixed(1) + '°, ' + I.longitude.toFixed(1) + '°', alt: Math.round(I.altitude) + ' km', speed: Math.round(I.velocity).toLocaleString() + ' km/h', dist: Math.round(hav(loc.lat, loc.lon, I.latitude, I.longitude)).toLocaleString() + ' km', status: I.visibility === 'daylight' ? tx.issSun : tx.issShadow }
       : { pos: '—', alt: '—', speed: '—', dist: '—', status: tx.issConnecting };
 
     // solar
     let solar = { orbits: s.solarView === 'orbits', sizes: s.solarView === 'sizes', rings: [], planets: [], sel: {}, offset: s.solarOff, onOffset: (v) => this.setState({ solarOff: Math.round(v) }), dateLabel: '', sizeList: [] };
-    if (A_) {
+    if (A_ && onSolar) {
       const date = new Date(Date.now() + s.solarOff * 864e5), J = A_.jd(date), E = A_.helio('earth', J);
       const ps = PLANETS.map(([id, name, color, rad, yr], i) => {
         const hp = A_.helio(id, J), lon = Math.atan2(hp.y, hp.x), r = 26 + i * 19, sel = id === s.solarSel;
